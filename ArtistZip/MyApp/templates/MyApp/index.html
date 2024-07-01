@@ -1,0 +1,9 @@
+<!-- MyApp/templates/MyApp/index.html -->
+
+{% extends 'MyApp/base.html' %} {% block title %}Home{% endblock %} {% block content %} {% load static %}
+<img src="{% static 'images/avocado.png' %}" alt="Avocado" />
+<img src="{% static 'images/sushi.png' %}" alt="Sushi" />
+<img src="{% static 'images/candy.png' %}" alt="Candy" />
+<h1>Artists Give More Smiles</h1>
+<button onclick="location.href='{% url 'artists' %}'">아티스트 보러가기</button>
+{% endblock %}
