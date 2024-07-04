@@ -29,7 +29,6 @@ body.modal-open {
 }
 
 .main-content {
-    /* margin-top: 10px; */
     padding: 20px;
 }
 
@@ -39,12 +38,6 @@ body.modal-open {
     border-radius: 25px;
     font-size: 16px;
     cursor: pointer;
-}
-
-.main-content img {
-    width: 100px;
-    height: auto;
-    margin: 20px;
 }
 
 /* 반응형 디자인을 위한 미디어 쿼리 */
@@ -230,4 +223,157 @@ body.modal-open {
 
 .modal-content button:hover {
     background-color: #eee; /* 호버 시 배경색을 약간 어두운 회색으로 변경 */
+}
+
+/* gallery_styles.css 내용을 추가 */
+.gallery-container {
+    padding: 20px;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.search-bar input {
+    width: 400px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+.search-bar button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.search-bar button img {
+    width: 20px;
+    height: 20px;
+}
+
+.gallery-header {
+    display: flex;
+    justify-content: center; /* 가로 정렬 */
+    align-items: center;
+    margin: 40px 0;
+}
+
+.header-item {
+    flex: 1;
+    text-align: center;
+}
+
+.header-item img {
+    width: 100%; /* 이미지를 100% 너비로 설정 */
+    max-width: 300px; /* 최대 너비 설정 */
+    height: auto;
+    object-fit: contain;
+}
+
+.gallery-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.gallery-item {
+    margin-bottom: 40px;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 300px;
+    background-color: #ddd;
+}
+
+.gallery-text {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: left;
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 768px) {
+    .gallery-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gallery-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .gallery-column {
+        width: 100%;
+    }
+
+    .gallery-item {
+        width: 100%;
+    }
+
+    .gallery-image {
+        height: auto;
+    }
+
+    .header-item img {
+        max-width: 100%;
+    }
+}
+.rectangle-37 img {
+    width: 395px;
+    height: 373px;
+}
+
+.rectangle-38 img {
+    width: 395px;
+    height: 330px;
+}
+
+.rectangle-39 img {
+    width: 395px;
+    height: 566px;
+}
+
+.rectangle-40 img {
+    width: 396px;
+    height: 518px;
+}
+
+.rectangle-41 img {
+    width: 396px;
+    height: 574px;
+}
+
+.rectangle-42 img {
+    width: 396px;
+    height: 288px;
+}
+
+.rectangle-44 img {
+    width: 396px;
+    height: 193px;
+}
+
+.rectangle-45 img {
+    width: 395px;
+    height: 356px;
+}
+
+.rectangle-46 img {
+    width: 395px;
+    height: 523px;
+}
+
+.bold {
+    font-weight: bold;
+    font-size: 16px;
 }
