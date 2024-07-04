@@ -1014,3 +1014,7 @@ form .signup-submit img {
         right: 10px; /* 현재 값 */
     }
 }
+
+.red {
+    color: rgb(255, 89, 0);
+}
