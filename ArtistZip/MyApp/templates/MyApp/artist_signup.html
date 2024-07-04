@@ -1,24 +1,52 @@
 <!-- MyApp/templates/MyApp/artist_signup.html -->
 
-{% extends 'MyApp/base.html' %} {% block title %}아티스트 회원가입{% endblock %} {% block content %}
-<div class="signup-container">
-    <h1>아티스트 회원가입</h1>
-    <form>
-        <!-- 회원가입 폼 내용 -->
-        <div class="form-group">
-            <label for="username">아이디</label>
-            <input type="text" id="username" name="username" />
-        </div>
-        <div class="form-group">
-            <label for="password">비밀번호</label>
-            <input type="password" id="password" name="password" />
-        </div>
-        <div class="form-group">
-            <label for="email">이메일</label>
-            <input type="email" id="email" name="email" />
-        </div>
-        <!-- 추가 폼 필드들 -->
-        <button type="submit">회원가입</button>
-    </form>
+{% extends 'MyApp/base.html' %} {% load static %} {% block title %}아티스트 회원가입{% endblock %} {% block content %}
+<div class="artist-signup-container">
+    <div class="artist-signup-left">
+        <img src="{% static 'images/login_image.png' %}" alt="Artist Signup Image" class="artist-signup-image" />
+    </div>
+    <div class="artist-signup-right">
+        <h2 class="artist-signup-title">회원가입</h2>
+        <form class="artist-signup-form">
+            <div class="artist-signup-form-group full-width">
+                <label for="artist-name" class="artist-signup-label">이름*</label>
+                <input type="text" id="artist-name" name="artist-name" class="artist-signup-input" required />
+            </div>
+            <!-- This div is for layout alignment -->
+            <div class="artist-signup-form-group full-width">
+                <label for="artist-username" class="artist-signup-label">아이디*</label>
+                <input type="text" id="artist-username" name="artist-username" class="artist-signup-input" required />
+            </div>
+            <div class="artist-signup-form-group full-width">
+                <label for="artist-password" class="artist-signup-label">비밀번호*</label>
+                <input
+                    type="password"
+                    id="artist-password"
+                    name="artist-password"
+                    class="artist-signup-input"
+                    required
+                />
+            </div>
+            <div class="artist-signup-form-group full-width">
+                <label for="artist-company" class="artist-signup-label">회사명</label>
+                <input type="text" id="artist-company" name="artist-company" class="artist-signup-input" />
+            </div>
+            <div class="artist-signup-form-group full-width">
+                <label for="artist-job" class="artist-signup-label">직책</label>
+                <input type="text" id="artist-job" name="artist-job" class="artist-signup-input" />
+            </div>
+            <div class="artist-signup-form-group full-width">
+                <label for="artist-email" class="artist-signup-label">이메일*</label>
+                <input type="email" id="artist-email" name="artist-email" class="artist-signup-input" required />
+            </div>
+            <div class="artist-signup-form-group full-width">
+                <label for="artist-phone" class="artist-signup-label">연락처*</label>
+                <input type="tel" id="artist-phone" name="artist-phone" class="artist-signup-input" required />
+            </div>
+            <button type="submit" class="artist-signup-submit">
+                <img src="{% static 'images/Arrow 4.png' %}" alt="Submit" class="artist-signup-submit-icon" />
+            </button>
+        </form>
+    </div>
 </div>
 {% endblock %}

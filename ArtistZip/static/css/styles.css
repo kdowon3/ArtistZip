@@ -2,7 +2,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: white; /* 배경색을 하얀색으로 변경 */
+    background-color: white;
     text-align: center;
     margin: 0;
     padding: 0;
@@ -38,34 +38,6 @@ body.modal-open {
     border-radius: 25px;
     font-size: 16px;
     cursor: pointer;
-}
-
-/* 반응형 디자인을 위한 미디어 쿼리 */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .navbar a {
-        margin: 10px 0;
-    }
-
-    .main-content {
-        margin-top: 50px;
-    }
-}
-
-@media (max-width: 480px) {
-    .main-content button {
-        font-size: 16px;
-        padding: 8px 16px;
-    }
-
-    .main-content img {
-        width: 80px;
-        margin: 10px;
-    }
 }
 
 .login-container {
@@ -190,7 +162,7 @@ body.modal-open {
 }
 
 .modal-content {
-    background-color: #f0f0f0; /* 배경색을 밝은 회색으로 변경 */
+    background-color: #f0f0f0;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -207,9 +179,9 @@ body.modal-open {
 .modal-content button {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #fff; /* 버튼 색상을 하얀색으로 변경 */
+    background-color: #fff;
     border: 1px solid #ccc;
-    border-radius: 20px; /* 버튼 테두리를 둥글게 변경 */
+    border-radius: 20px;
     font-size: 16px;
     cursor: pointer;
 }
@@ -222,10 +194,14 @@ body.modal-open {
 }
 
 .modal-content button:hover {
-    background-color: #eee; /* 호버 시 배경색을 약간 어두운 회색으로 변경 */
+    background-color: #eee;
 }
 
-/* gallery_styles.css 내용을 추가 */
+.modal-text {
+    margin-top: 30px;
+}
+
+/* Gallery styles */
 .gallery-container {
     padding: 20px;
 }
@@ -260,7 +236,7 @@ body.modal-open {
 
 .gallery-header {
     display: flex;
-    justify-content: center; /* 가로 정렬 */
+    justify-content: center;
     align-items: center;
     margin: 40px 0;
 }
@@ -271,8 +247,8 @@ body.modal-open {
 }
 
 .header-item img {
-    width: 100%; /* 이미지를 100% 너비로 설정 */
-    max-width: 300px; /* 최대 너비 설정 */
+    width: 100%;
+    max-width: 300px;
     height: auto;
     object-fit: contain;
 }
@@ -300,80 +276,741 @@ body.modal-open {
     text-align: left;
 }
 
-/* 반응형 디자인을 위한 미디어 쿼리 */
-@media (max-width: 768px) {
-    .gallery-header {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .gallery-content {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .gallery-column {
-        width: 100%;
-    }
-
-    .gallery-item {
-        width: 100%;
-    }
-
-    .gallery-image {
-        height: auto;
-    }
-
-    .header-item img {
-        max-width: 100%;
-    }
-}
-.rectangle-37 img {
-    width: 395px;
-    height: 373px;
-}
-
-.rectangle-38 img {
-    width: 395px;
-    height: 330px;
-}
-
-.rectangle-39 img {
-    width: 395px;
-    height: 566px;
-}
-
-.rectangle-40 img {
-    width: 396px;
-    height: 518px;
-}
-
-.rectangle-41 img {
-    width: 396px;
-    height: 574px;
-}
-
-.rectangle-42 img {
-    width: 396px;
-    height: 288px;
-}
-
-.rectangle-44 img {
-    width: 396px;
-    height: 193px;
-}
-
-.rectangle-45 img {
-    width: 395px;
-    height: 356px;
-}
-
+.rectangle-37 img,
+.rectangle-38 img,
+.rectangle-39 img,
+.rectangle-40 img,
+.rectangle-41 img,
+.rectangle-42 img,
+.rectangle-44 img,
+.rectangle-45 img,
 .rectangle-46 img {
     width: 395px;
-    height: 523px;
+    height: auto;
 }
 
 .bold {
     font-weight: bold;
     font-size: 16px;
+}
+
+/* Chat styles */
+.chat-container {
+    display: grid;
+    grid-template-columns: 120px 300px 1fr 300px;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.my-profile {
+    background-color: #f0f0f0;
+    border-right: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.my-profile .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.my-profile span {
+    font-size: 14px;
+    text-align: center;
+}
+
+.sidebar {
+    background-color: #ffffff;
+    border-right: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-list-header {
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #ffffff;
+}
+
+.chat-list-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.chat-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+.chat-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #ffffff;
+}
+
+.chat-item.active {
+    background-color: #f0f0f0;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.chat-info {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.chat-name {
+    font-weight: bold;
+    display: block;
+}
+
+.chat-preview,
+.chat-time {
+    font-size: 14px;
+    color: #666;
+}
+
+.unread-indicator {
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+.chat-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.chat-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.chat-actions {
+    display: flex;
+    align-items: center;
+}
+
+.more-options {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.message {
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.message.received {
+    justify-content: flex-start;
+}
+
+.message.sent {
+    justify-content: flex-end;
+}
+
+.message-content {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+}
+
+.message.sent .message-content {
+    background-color: #dcf8c6;
+}
+
+.chat-input {
+    display: flex;
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+.send-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.user-profile {
+    width: 300px;
+    background-color: #f5f5f5;
+    border-left: 1px solid #e0e0e0;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.large-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.profile-info {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.info-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.info-value {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.portfolio-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .chat-container {
+        grid-template-columns: 120px 250px 1fr;
+    }
+    .user-profile {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .chat-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
+    }
+    .my-profile {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+    }
+    .sidebar {
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    .chat-main {
+        height: calc(100vh - 160px);
+    }
+    .chat-list {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    .chat-item {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        min-width: 80px;
+    }
+    .chat-info {
+        text-align: center;
+        margin-right: 0;
+        margin-top: 5px;
+    }
+    .chat-preview,
+    .chat-time {
+        display: none;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+    .navbar a {
+        margin: 10px 0;
+    }
+    .main-content {
+        margin-top: 50px;
+    }
+    .gallery-header {
+        flex-direction: column;
+        align-items: center;
+    }
+    .gallery-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .gallery-column {
+        width: 100%;
+    }
+    .gallery-item {
+        width: 100%;
+    }
+    .gallery-image {
+        height: auto;
+    }
+    .header-item img {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-actions span {
+        display: none;
+    }
+    .message-content {
+        max-width: 90%;
+    }
+    .main-content button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+    .main-content img {
+        width: 80px;
+        margin: 10px;
+    }
+}
+
+/* artist_signup.css */
+
+.artist-signup-container {
+    display: flex;
+    height: 100vh;
+}
+
+.artist-signup-left {
+    flex: 1;
+    overflow: hidden;
+}
+
+.artist-signup-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artist-signup-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    background: rgb(45, 43, 43);
+}
+
+.artist-signup-title {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.artist-signup-subtitle {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+.artist-signup-form {
+    width: 100%;
+    max-width: 400px;
+}
+
+.artist-signup-form-group {
+    margin-bottom: 20px;
+}
+
+.artist-signup-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #ffffff;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.artist-signup-input:focus {
+    outline: none;
+    border-bottom-color: #00ffff;
+}
+
+.artist-signup-submit {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.artist-signup-submit-icon {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.artist-signup-submit:hover .artist-signup-submit-icon {
+    transform: translateX(10px);
+}
+
+@media (max-width: 768px) {
+    .artist-signup-container {
+        flex-direction: column;
+    }
+
+    .artist-signup-left {
+        display: none;
+    }
+
+    .artist-signup-right {
+        padding: 30px;
+    }
+}
+/* 추가된 스타일 */
+/* .signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.signup-container h2 {
+    color: white;
+}
+
+form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.half-width {
+    width: 50%;
+}
+
+.half-width {
+    width: calc(50% - 5px);
+}
+
+form .form-group label {
+    color: white;
+    margin-bottom: 5px;
+}
+
+form .form-group input {
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+    outline: none;
+}
+
+form .signup-submit {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+form .signup-submit img {
+    width: 30px;
+    height: 30px;
+} */
+/* artist_signup.css */
+
+.artist-signup-container {
+    display: flex;
+    height: 100vh;
+}
+
+.artist-signup-left {
+    flex: 1;
+    overflow: hidden;
+}
+
+.artist-signup-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artist-signup-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    background: rgb(45, 43, 43);
+}
+
+.artist-signup-title {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.artist-signup-subtitle {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+.artist-signup-form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.artist-signup-form-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.artist-signup-form-group.half-width {
+    width: calc(50% - 5px);
+}
+
+.artist-signup-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #ffffff;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 16px;
+    height: 5px;
+}
+
+.artist-signup-input:focus {
+    outline: none;
+    border-bottom-color: #00ffff;
+}
+
+.artist-signup-submit {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.artist-signup-submit-icon {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.artist-signup-submit:hover .artist-signup-submit-icon {
+    transform: translateX(10px);
+}
+
+@media (max-width: 768px) {
+    .artist-signup-container {
+        flex-direction: column;
+    }
+
+    .artist-signup-left {
+        display: none;
+    }
+
+    .artist-signup-right {
+        padding: 30px;
+    }
+}
+
+.artist-signup-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffffff;
+    text-align: left; /* 왼쪽 정렬 */
+}
+
+.artist-signup-form-group.half-width {
+    width: calc(50% - 10px);
+}
+.artist-signup-form-group.full-width {
+    width: 100%;
+}
+
+.artist-signup-form-group.half-width {
+    width: 48%;
+    display: inline-block;
+}
+
+.artist-signup-form-group.half-width:not(:last-of-type) {
+    margin-right: 4%;
+}
+
+.artist-signup-form-group.half-width:last-of-type {
+    margin-left: 4%; /* 추가된 부분 */
+}
+
+.artist-signup-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.artist-signup-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background-color: transparent;
+    font-size: 16px;
+    color: white;
+}
+
+.artist-signup-form-group.full-width {
+    width: 100%;
+}
+
+.artist-signup-form-group.half-width {
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.artist-signup-form-group.half-width:first-child {
+    margin-right: 4%;
+}
+
+.artist-signup-label {
+    display: block;
+}
+
+.artist-signup-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background-color: transparent;
+    font-size: 16px;
+    color: white;
+}
+.artist-signup-form-group.half-width {
+    width: 48%;
+}
+
+.artist-signup-form-group.full-width {
+    width: 100%;
+}
+
+.artist-signup-form-group.half-width:nth-child(3n + 1) {
+    margin-right: 4%;
+}
+
+.artist-signup-form-group label {
+    display: block;
+    color: #fff;
+}
+
+.artist-signup-input {
+    width: 100%;
+    padding: 0.5em;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.artist-signup-submit-icon {
+    width: 30px;
+    height: 30px;
+}
+.artist-signup-form {
+    position: relative;
+}
+
+.artist-signup-submit {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: absolute;
+    bottom: -50px;
+    right: -100px; /* 현재 값 */
+}
+
+@media (max-width: 768px) {
+    .artist-signup-submit {
+        bottom: 20px;
+        right: 10px; /* 현재 값 */
+    }
 }

@@ -31,10 +31,10 @@
 <div id="signup-modal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <p>아티스트이신가요?</p>
-        <button onclick="location.href='{% url 'artist_signup' %}'">아티스트 회원가입</button>
-        <p>기업 / 바이어 / 일반 고객이신가요?</p>
-        <button onclick="location.href='{% url 'normal_signup' %}'">일반 회원가입</button>
+        <div class="modal-text">아티스트이신가요?</div>
+        <button onclick="location.href='{% url 'artist_signup' %}'"><div class="bold">아티스트 회원가입</div></button>
+        <div class="modal-text">기업 / 바이어 / 일반 고객이신가요?</div>
+        <button onclick="location.href='{% url 'normal_signup' %}'"><div class="bold">일반 회원가입</div></button>
     </div>
 </div>
 
