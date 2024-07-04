@@ -1,0 +1,24 @@
+<!-- MyApp/templates/MyApp/artist_signup.html -->
+
+{% extends 'MyApp/base.html' %} {% block title %}아티스트 회원가입{% endblock %} {% block content %}
+<div class="signup-container">
+    <h1>아티스트 회원가입</h1>
+    <form>
+        <!-- 회원가입 폼 내용 -->
+        <div class="form-group">
+            <label for="username">아이디</label>
+            <input type="text" id="username" name="username" />
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" />
+        </div>
+        <div class="form-group">
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" />
+        </div>
+        <!-- 추가 폼 필드들 -->
+        <button type="submit">회원가입</button>
+    </form>
+</div>
+{% endblock %}

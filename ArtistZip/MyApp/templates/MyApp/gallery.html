@@ -1,6 +1,49 @@
 <!-- MyApp/templates/MyApp/gallery.html -->
 
-{% extends 'MyApp/base.html' %} {% block title %}갤러리{% endblock %} {% block content %} {% load static %}
-<h1>갤러리</h1>
-<p>여기에 갤러리 내용을 추가하세요.</p>
+{% extends 'MyApp/base.html' %} {% load static %} {% block title %}갤러리{% endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/gallery_styles.css' %}" />
+{% endblock %} {% block content %}
+<div class="gallery-container">
+    <div class="search-bar">
+        <input type="text" placeholder="국내 파인 아티스트 홍보 플랫폼, 아티스트집" />
+        <button type="button">
+            <img src="{% static 'images/search_icon.png' %}" alt="Search" />
+        </button>
+    </div>
+    <div class="gallery-header">
+        <div class="header-item">MEDIA ART</div>
+        <div class="header-item">CRAFT</div>
+        <div class="header-item">ILLUSTRATOR</div>
+    </div>
+    <div class="gallery-content">
+        <div class="gallery-item">
+            <div class="gallery-image"></div>
+            <div class="gallery-text">선을 긋는 행위<br />홍길동</div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-image"></div>
+            <div class="gallery-text">선을 긋는 행위<br />홍길동</div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-image"></div>
+            <div class="gallery-text">선을 긋는 행위<br />홍길동</div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-image"></div>
+            <div class="gallery-text">선을 긋는 행위<br />홍길동</div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-image"></div>
+            <div class="gallery-text">선을 긋는 행위<br />홍길동</div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-image"></div>
+            <div class="gallery-text">선을 긋는 행위<br />홍길동</div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-image"></div>
+            <div class="gallery-text">선을 긋는 행위<br />홍길동</div>
+        </div>
+    </div>
+</div>
 {% endblock %}

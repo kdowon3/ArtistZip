@@ -12,7 +12,9 @@
     <body>
         <div class="navbar">
             <div class="left">
-                <a href="{% url 'index' %}">Artist Zip</a>
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'images/home_button_black.png' %}" alt="Home" style="height: 50px" />
+                </a>
             </div>
             <div class="center">
                 <a href="{% url 'az' %}">AZ란?</a>
