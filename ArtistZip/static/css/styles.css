@@ -633,13 +633,6 @@ body.modal-open {
     }
 }
 
-/* artist_signup.css */
-
-.artist-signup-container {
-    display: flex;
-    height: 100vh;
-}
-
 .artist-signup-left {
     flex: 1;
     overflow: hidden;
@@ -714,81 +707,6 @@ body.modal-open {
 .artist-signup-submit:hover .artist-signup-submit-icon {
     transform: translateX(10px);
 }
-
-@media (max-width: 768px) {
-    .artist-signup-container {
-        flex-direction: column;
-    }
-
-    .artist-signup-left {
-        display: none;
-    }
-
-    .artist-signup-right {
-        padding: 30px;
-    }
-}
-/* 추가된 스타일 */
-/* .signup-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-.signup-container h2 {
-    color: white;
-}
-
-form {
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group.half-width {
-    width: 50%;
-}
-
-.half-width {
-    width: calc(50% - 5px);
-}
-
-form .form-group label {
-    color: white;
-    margin-bottom: 5px;
-}
-
-form .form-group input {
-    padding: 10px;
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid white;
-    color: white;
-    outline: none;
-}
-
-form .signup-submit {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-form .signup-submit img {
-    width: 30px;
-    height: 30px;
-} */
-/* artist_signup.css */
 
 .artist-signup-container {
     display: flex;
@@ -1017,4 +935,87 @@ form .signup-submit img {
 
 .red {
     color: rgb(255, 89, 0);
+}
+
+.artists-gallery img {
+    width: 200px; /* 이미지 너비를 줄임 */
+    height: 100%;
+    object-fit: cover;
+    scroll-snap-align: start;
+    transition: all 0.3s ease;
+    margin-right: 10px; /* 이미지 간 간격 추가 */
+}
+
+.artists-gallery img:hover {
+    width: 400px; /* 호버 시 확대 크기도 조정 */
+}
+
+.artist-image-container {
+    width: 200px;
+    height: 100%;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.artist-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.artist-image-container:hover img {
+    transform: scale(1.5);
+}
+
+.artists-gallery-container {
+    height: 300px; /* 갤러리 컨테이너의 높이 조절 */
+    overflow: hidden;
+}
+
+.artists-gallery {
+    display: flex;
+    height: 100%;
+}
+
+.artist-image-container {
+    width: 200px;
+    height: 100%;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.artists-gallery-container {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+.artists-gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative;
+}
+
+.artist-image-container {
+    position: absolute;
+    width: 200px;
+    height: 300px;
+    transition: all 0.5s ease;
+}
+
+.artist-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+.artist-image-container.center {
+    width: 300px;
+    height: 450px;
+    z-index: 10;
 }
