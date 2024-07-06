@@ -21,10 +21,10 @@
                 <a href="{% url 'artists' %}">아티스트</a>
                 <a href="{% url 'gallery' %}">갤러리</a>
                 <a href="{% url 'contact' %}">컨택트</a>
+                <a href="{% url 'myprofile' %}">마이프로필</a>
             </div>
             <div class="right">
-                <a href="{% url 'signup' %}">회원가입</a>
-                <a href="{% url 'login' %}">로그인</a>
+                <a href="{% url 'login' %}">회원가입 / 로그인</a>
             </div>
         </div>
         <div class="main-content">{% block content %} {% endblock %}</div>

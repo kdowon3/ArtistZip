@@ -14,4 +14,6 @@ urlpatterns = [
     path('artist_signup/', views.artist_signup, name='artist_signup'),
     path('normal_signup/', views.normal_signup, name='normal_signup'),
     path('profile/', views.profile, name='profile'),
+    path('myprofile/', views.myprofile, name='myprofile'),
+    path('template/', views.template, name='template'),
 ]

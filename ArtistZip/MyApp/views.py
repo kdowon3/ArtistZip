@@ -31,3 +31,9 @@ def normal_signup(request):
 
 def profile(request):  # profile 뷰 함수 추가
     return render(request, 'MyApp/profile.html')
+
+def myprofile(request):  # profile 뷰 함수 추가
+    return render(request, 'MyApp/myprofile.html')
+
+def template(request):  # profile 뷰 함수 추가
+    return render(request, 'MyApp/template.html')
