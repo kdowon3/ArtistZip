@@ -680,7 +680,7 @@ body.modal-open {
     padding: 10px;
     border: none;
     border-bottom: 2px solid #ffffff;
-    background-color: transparent;
+    background-color: transparent; /* 이 부분을 투명하게 설정합니다. */
     color: #ffffff;
     font-size: 16px;
 }
@@ -925,6 +925,7 @@ body.modal-open {
     bottom: -50px;
     right: -100px; /* 현재 값 */
 }
+
 
 @media (max-width: 768px) {
     .artist-signup-submit {

@@ -23,12 +23,6 @@ def signup(request):
 def login(request):
     return render(request, 'MyApp/login.html')
 
-def artist_signup(request):
-    return render(request, 'MyApp/artist_signup.html')
-
-def normal_signup(request):
-    return render(request, 'MyApp/normal_signup.html')
-
 def profile(request):  # profile 뷰 함수 추가
     return render(request, 'MyApp/profile.html')
 

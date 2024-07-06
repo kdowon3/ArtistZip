@@ -1,0 +1,51 @@
+{% extends 'MyApp/base.html' %}
+{% load static %}
+{% block title %}일반 회원가입{% endblock %}
+{% block content %}
+<div class="artist-signup-container">
+    <div class="artist-signup-left">
+        <img src="{% static 'images/login_image.png' %}" alt="General Signup Image" class="artist-signup-image" />
+    </div>
+    <div class="artist-signup-right">
+        <h2 class="artist-signup-title">회원가입</h2>
+        <form method="post" class="artist-signup-form">
+            {% csrf_token %}
+            <div class="artist-signup-form-group full-width">
+                <label for="id_username" class="artist-signup-label">이름 <span class="red">*</span></label>
+                {{ form.username }}
+            </div>
+            <div class="artist-signup-form-group full-width">
+                <label for="id_user_id" class="artist-signup-label">아이디 <span class="red">*</span></label>
+                {{ form.user_id }}
+            </div>
+            <div class="artist-signup-form-group full-width">
+                <label for="id_password1" class="artist-signup-label">비밀번호 <span class="red">*</span></label>
+                {{ form.password1 }}
+            </div>
+            <div class="artist-signup-form-group full-width">
+                <label for="id_password2" class="artist-signup-label">비밀번호 확인 <span class="red">*</span></label>
+                {{ form.password2 }}
+            </div>
+            <div class="artist-signup-form-group full-width">
+                <label for="id_company_name" class="artist-signup-label">회사명</label>
+                {{ form.company_name }}
+            </div>
+            <div class="artist-signup-form-group full-width">
+                <label for="id_position" class="artist-signup-label">직책</label>
+                {{ form.position }}
+            </div>
+            <div class="artist-signup-form-group full-width">
+                <label for="id_email" class="artist-signup-label">이메일 <span class="red">*</span></label>
+                {{ form.email }}
+            </div>
+            <div class="artist-signup-form-group full-width">
+                <label for="id_contact_number" class="artist-signup-label">연락처 <span class="red">*</span></label>
+                {{ form.contact_number }}
+            </div>
+            <button type="submit" class="artist-signup-submit">
+                <img src="{% static 'images/Arrow 4.png' %}" alt="Submit" class="artist-signup-submit-icon" />
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
