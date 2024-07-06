@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>회원가입</title>
+    <script>
+        function navigateToSignup(userType) {
+            if (userType === 'artist') {
+                window.location.href = "{% url 'artist_signup' %}";
+            } else {
+                window.location.href = "{% url 'general_signup' %}";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>회원가입</h2>
+    <button onclick="navigateToSignup('artist')">작가 회원가입</button>
+    <button onclick="navigateToSignup('general')">일반 회원가입</button>
+</body>
+</html>
