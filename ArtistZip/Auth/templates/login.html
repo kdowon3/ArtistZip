@@ -1,4 +1,6 @@
 {% extends 'MyApp/base.html' %}
+{% load account socialaccount %}
+{% providers_media_js %}
 {% load static %}
 {% block title %}로그인{% endblock %}
 {% block content %}
@@ -19,8 +21,12 @@
                 <input type="password" id="id_password" name="password" required>
             </div>
             <div class="login-icons">
+                <a href="{% provider_login_url 'kakao' %}">
                 <img src="{% static 'images/kakaotalk_icon.png' %}" alt="KakaoTalk" />
+                </a>
+                <a href="{% provider_login_url 'google' %}">
                 <img src="{% static 'images/google_icon.png' %}" alt="Google" />
+                </a>
             </div>
             <button type="submit" class="login-submit">
                 <img src="{% static 'images/Arrow 4.png' %}" alt="Submit" />

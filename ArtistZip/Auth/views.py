@@ -47,3 +47,4 @@ def general_signup(request):
 
 def signup(request):
     return render(request, 'login.html')
+
