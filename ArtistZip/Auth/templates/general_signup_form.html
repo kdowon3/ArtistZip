@@ -1,7 +1,4 @@
-{% extends 'MyApp/base.html' %}
-{% load static %}
-{% block title %}일반 회원가입{% endblock %}
-{% block content %}
+{% extends 'MyApp/base.html' %} {% load static %} {% block title %}일반 회원가입{% endblock %} {% block content %}
 <div class="artist-signup-container">
     <div class="artist-signup-left">
         <img src="{% static 'images/login_image.png' %}" alt="General Signup Image" class="artist-signup-image" />
@@ -19,12 +16,16 @@
                 {{ form.user_id }}
             </div>
             <div class="artist-signup-form-group full-width">
-                <label for="id_password1" class="artist-signup-label">비밀번호 <span class="red">*</span></label>
-                {{ form.password1 }}
+                <label for="id_password1" class="artist-signup-label">비밀번호 <span class="red">*</span></br>(영문+숫자 조합 8자리 이상)</label>
+                {{ form.password1 }} {% if form.password1.errors %}
+                <div class="error">{% for error in form.password1.errors %} {{ error }} {% endfor %}</div>
+                {% endif %}
             </div>
             <div class="artist-signup-form-group full-width">
                 <label for="id_password2" class="artist-signup-label">비밀번호 확인 <span class="red">*</span></label>
-                {{ form.password2 }}
+                {{ form.password2 }} {% if form.password2.errors %}
+                <div class="error">{% for error in form.password2.errors %} {{ error }} {% endfor %}</div>
+                {% endif %}
             </div>
             <div class="artist-signup-form-group full-width">
                 <label for="id_company_name" class="artist-signup-label">회사명</label>
@@ -40,7 +41,40 @@
             </div>
             <div class="artist-signup-form-group full-width">
                 <label for="id_contact_number" class="artist-signup-label">연락처 <span class="red">*</span></label>
-                {{ form.contact_number }}
+                <!-- 연락처 입력 필드에 자동으로 하이픈을 추가하고 삭제할 수 있도록 JavaScript 코드 추가 -->
+                <input type="text" id="id_contact_number" name="contact_number" class="artist-signup-input" pattern="\d{2,3}-\d{3,4}-\d{4}" placeholder="010-1234-5678" required>
+                <script>
+                    document.getElementById('id_contact_number').addEventListener('input', function (e) {
+                        let target = e.target;
+                        let input = target.value.replace(/-/g, '').replace(/\D/g, '');
+                        let formatted = '';
+
+                        if (input.length >= 4) {
+                            formatted += input.substr(0, 3) + '-';
+                            if (input.length >= 7) {
+                                formatted += input.substr(3, 4) + '-';
+                                formatted += input.substr(7, 4);
+                            } else {
+                                formatted += input.substr(3);
+                            }
+                        } else {
+                            formatted = input;
+                        }
+
+                        target.value = formatted;
+                    });
+
+                    // 사용자가 직접 하이픈을 삭제할 수 있도록 처리
+                    document.getElementById('id_contact_number').addEventListener('keydown', function (e) {
+                        let target = e.target;
+                        if (e.key === 'Backspace' && target.value.charAt(target.selectionStart - 1) === '-') {
+                            target.value = target.value.slice(0, target.selectionStart - 1) + target.value.slice(target.selectionStart);
+                        }
+                    });
+                </script>
+                {% if form.contact_number.errors %}
+                <div class="error">{{ form.contact_number.errors }}</div>
+                {% endif %}
             </div>
             <button type="submit" class="artist-signup-submit">
                 <img src="{% static 'images/Arrow 4.png' %}" alt="Submit" class="artist-signup-submit-icon" />

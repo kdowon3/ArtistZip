@@ -1,8 +1,9 @@
-# Auth/views.py
-
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import ArtistSignupForm, GeneralSignupForm
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 def login_view(request):
     if request.method == 'POST':
@@ -27,7 +28,8 @@ def artist_signup(request):
             user = form.save(commit=False)
             user.is_artist = True
             user.save()
-            login(request, user)
+            # 명시적으로 백엔드를 지정하여 로그인
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('index')
     else:
         form = ArtistSignupForm()
@@ -39,7 +41,8 @@ def general_signup(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
-            login(request, user)
+            # 명시적으로 백엔드를 지정하여 로그인
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('index')
     else:
         form = GeneralSignupForm()
@@ -47,4 +50,3 @@ def general_signup(request):
 
 def signup(request):
     return render(request, 'login.html')
-
