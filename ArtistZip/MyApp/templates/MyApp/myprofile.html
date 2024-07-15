@@ -1,0 +1,122 @@
+{% extends 'Myapp/base.html' %} {% load static %} {% block content %}
+<div class="myprofile-container">
+    <div class="myprofile-header">
+        <div class="myprofile-info">
+            <img src="{% static 'images/my-avatar.png' %}" alt="프로필 이미지" class="myprofile-image" />
+            <span class="myprofile-name">{{ user.username }}님</span>
+        </div>
+    </div>
+    {% if artworks %}
+    <div class="myprofile-gallery">
+        {% for artwork in artworks %}
+        <div class="myprofile-gallery-item">
+            <img
+                src="{{ artwork.artwork_image.url }}"
+                alt="{{ artwork.artwork_title }}"
+                class="myprofile-gallery-image"
+            />
+            <div class="myprofile-artwork-details">
+                <h3>{{ artwork.artwork_title }}</h3>
+                <p>{{ artwork.artwork_description }}</p>
+                <a href="{% url 'edit_artwork' artwork.id %}">
+                    <button class="myprofile-action-btn">편집</button>
+                </a>
+                <button class="myprofile-action-btn" onclick="confirmDelete('{{ artwork.id }}')">삭제</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>아직 포트폴리오가 생성되지 않았습니다.</p>
+    {% endif %}
+    <div class="myprofile-actions">
+        <button class="myprofile-action-btn" id="myprofileCreateBtn" onclick="openModal()">생성</button>
+    </div>
+</div>
+
+<!-- 모달 오버레이 -->
+<div id="modal-overlay" class="modal-overlay"></div>
+
+<!-- 모달 -->
+<div id="myprofile-modal" class="myprofile-modal">
+    <div class="myprofile-modal-content">
+        <span class="myprofile-close" onclick="closeModal()">&times;</span>
+        <div class="myprofile-modal-body">
+            <div class="template-container">
+                <div class="template-text-content">
+                    <p class="template-subtitle">움직임을 표현하고 싶은 아티스트라면,</p>
+                    <h1 class="template-title">예술적인 템플릿</h1>
+                    <a href="{% url 'template' user.id %}">
+                        <button class="template-select-btn">선택하기</button>
+                    </a>
+                </div>
+                <div class="template-image-content">
+                    <img
+                        src="{% static 'images/template_preview.png' %}"
+                        alt="Template Preview"
+                        class="template-preview-image"
+                        id="templateImage"
+                    />
+                </div>
+                <div class="template-navigation">
+                    <button class="template-nav-btn template-prev" id="templatePrevBtn" onclick="changeTemplate(-1)">
+                        <img src="{% static 'images/left_arrow.png' %}" alt="Previous" />
+                    </button>
+                    <button class="template-nav-btn template-next" id="templateNextBtn" onclick="changeTemplate(1)">
+                        <img src="{% static 'images/right_arrow.png' %}" alt="Next" />
+                    </button>
+                </div>
+                <div class="template-indicators">
+                    <span class="template-indicator active"></span>
+                    <span class="template-indicator"></span>
+                    <span class="template-indicator"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const templates = [
+        "{% static 'images/template_preview.png' %}",
+        "{% static 'images/template_preview.png' %}",
+        "{% static 'images/template_preview.png' %}",
+    ];
+    let currentTemplateIndex = 0;
+
+    function openModal() {
+        document.getElementById('modal-overlay').style.display = 'block';
+        document.getElementById('myprofile-modal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('modal-overlay').style.display = 'none';
+        document.getElementById('myprofile-modal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function confirmDelete(artworkId) {
+        if (confirm('해당 포트폴리오를 삭제하시겠습니까?')) {
+            window.location.href = "{% url 'delete_artwork' %}?id=" + artworkId;
+        }
+    }
+
+    function changeTemplate(direction) {
+        currentTemplateIndex = (currentTemplateIndex + direction + templates.length) % templates.length;
+        document.getElementById('templateImage').src = templates[currentTemplateIndex];
+        updateIndicators();
+    }
+
+    function updateIndicators() {
+        const indicators = document.querySelectorAll('.template-indicator');
+        indicators.forEach((indicator, index) => {
+            if (index === currentTemplateIndex) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+    }
+</script>
+{% endblock %}
