@@ -1,7 +1,9 @@
 # MyApp/urls.py
 
-from django.urls import path, include
+from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -11,6 +13,9 @@ urlpatterns = [
     path('gallery/', views.gallery, name='gallery'),
     path('contact/', views.contact, name='contact'),
     path('signup/', views.signup, name='signup'),
-    path('auth/', include('Auth.urls')),
-    
+    path('myprofile/<int:user_id>/', views.myprofile, name='myprofile'),
+    path('template/<int:user_id>/', views.template, name='template'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
