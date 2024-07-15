@@ -61,3 +61,27 @@ def template(request, user_id):
         'form': form,
     }
     return render(request, 'MyApp/template.html', context)
+
+def edit_artwork(request, artwork_id):
+    artwork = get_object_or_404(Artwork, id=artwork_id)
+    if request.method == 'POST':
+        form = ArtworkForm(request.POST, request.FILES, instance=artwork)
+        if form.is_valid():
+            form.save()
+            return redirect('myprofile', user_id=artwork.user.id)
+    else:
+        form = ArtworkForm(instance=artwork)
+    
+    context = {
+        'form': form
+    }
+    return render(request, 'MyApp/template.html', context)
+
+def delete_artwork(request):
+    if request.method == 'GET' and 'id' in request.GET:
+        artwork_id = request.GET['id']
+        artwork = get_object_or_404(Artwork, id=artwork_id)
+        user_id = artwork.user.id
+        artwork.delete()
+        return redirect('myprofile', user_id=user_id)
+    return redirect('myprofile')
