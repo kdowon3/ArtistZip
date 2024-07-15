@@ -5,8 +5,6 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'MyApp/index.html')
 
-def az(request):
-    return render(request, 'MyApp/az.html')
 
 def artists(request):
     return render(request, 'MyApp/artists.html')
@@ -23,11 +21,8 @@ def signup(request):
 def login(request):
     return render(request, 'MyApp/login.html')
 
-def profile(request):  # profile 뷰 함수 추가
+def profile(request):
     return render(request, 'MyApp/profile.html')
 
-def myprofile(request):  # profile 뷰 함수 추가
+def myprofile(request):
     return render(request, 'MyApp/myprofile.html')
-
-def template(request):  # profile 뷰 함수 추가
-    return render(request, 'MyApp/template.html')
