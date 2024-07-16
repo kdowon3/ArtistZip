@@ -1,0 +1,28 @@
+# Python 관련
+*.pyc
+__pycache__/
+
+# 환경 설정 파일
+.env
+
+# Django 관련
+db.sqlite3
+media/
+
+# Virtual environment
+venv/
+.virtualenvs/
+.env
+
+# 아이디어와 프로젝트 파일들
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# 특정 운영체제 파일들
+.DS_Store
+Thumbs.db
+
+# Git 관련
+.git/
