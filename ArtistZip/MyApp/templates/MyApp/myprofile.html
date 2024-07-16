@@ -4,6 +4,9 @@
         <div class="myprofile-info">
             <img src="{% static 'images/my-avatar.png' %}" alt="프로필 이미지" class="myprofile-image" />
             <span class="myprofile-name">{{ user.username }}님</span>
+            <a href="{% url 'edit_profile' %}">
+                <button class="myprofile-action-btn">내 정보 수정하기</button>
+            </a>
         </div>
     </div>
     {% if artworks %}

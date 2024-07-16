@@ -157,3 +157,5 @@ SOCIALACCOUNT_LOGIN_ON_GET = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+SOCIALACCOUNT_ADAPTER = 'Auth.adapter.CustomSocialAccountAdapter'
