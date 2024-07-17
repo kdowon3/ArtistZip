@@ -6,6 +6,7 @@ from django.contrib import messages
 from .models import Artwork
 from .forms import ArtworkForm
 from Auth.models import CustomUser 
+import random
 
 
 def index(request):
@@ -18,7 +19,9 @@ def artists(request):
     return render(request, 'MyApp/artists.html')
 
 def gallery(request):
-    return render(request, 'MyApp/gallery.html')
+    artworks = list(Artwork.objects.all())  # QuerySet을 리스트로 변환
+    random.shuffle(artworks)  # 리스트를 섞음
+    return render(request, 'MyApp/gallery.html', {'artworks': artworks})
 
 def contact(request):
     return render(request, 'MyApp/contact.html')
@@ -29,8 +32,10 @@ def signup(request):
 def login(request):
     return render(request, 'MyApp/login.html')
 
-def profile(request):  # profile 뷰 함수 추가
-    return render(request, 'MyApp/profile.html')
+def profile(request, user_id):
+    user = get_object_or_404(CustomUser, id=user_id)
+    artworks = Artwork.objects.filter(user=user)
+    return render(request, 'MyApp/profile.html', {'user': user, 'artworks': artworks})
 
 @login_required
 def myprofile(request, user_id):
