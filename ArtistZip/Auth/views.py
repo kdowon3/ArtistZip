@@ -81,9 +81,7 @@ def cancel_link(request):
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'failed'})
 
-@login_required
-def profile(request):
-    return render(request, 'profile.html', {'user': request.user})
+
 
 @login_required
 def edit_profile(request):

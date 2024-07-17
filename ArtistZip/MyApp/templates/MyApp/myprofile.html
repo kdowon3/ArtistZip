@@ -48,18 +48,32 @@
             <div class="template-container">
                 <div class="template-text-content">
                     <p class="template-subtitle">움직임을 표현하고 싶은 아티스트라면,</p>
-                    <h1 class="template-title">예술적인 템플릿</h1>
                     <a href="{% url 'template' user.id %}">
                         <button class="template-select-btn">선택하기</button>
                     </a>
                 </div>
                 <div class="template-image-content">
-                    <img
-                        src="{% static 'images/template_preview.png' %}"
-                        alt="Template Preview"
-                        class="template-preview-image"
-                        id="templateImage"
-                    />
+                    <h1>포트폴리오 템플릿을 선택하세요</h1>
+                    <div class="templates">
+                        <div class="template">
+                            <img src="template1.jpg" alt="템플릿 1" class="template-preview-image" id="templateImage" />
+                            <div>심플하게 표현하고 싶다면,</div>
+                            <h2>미니멀한 디자인</h2>
+                            <a href="template1">선택</a>
+                        </div>
+                        <div class="template">
+                            <img src="template2.jpg" alt="템플릿 2" class="template-preview-image" id="templateImage" />
+                            <div>매력적인 포트폴리오를 선보이고 싶다면,</div>
+                            <h2>트렌디한 디자인</h2>
+                            <a href="template2">선택</a>
+                        </div>
+                        <div class="template">
+                            <img src="template3.jpg" alt="템플릿 3" class="template-preview-image" id="templateImage" />
+                            <div>한국적인 감각을 넣고 싶다면,</div>
+                            <h2>한국적인 디자인</h2>
+                            <a href="template3">선택</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="template-navigation">
                     <button class="template-nav-btn template-prev" id="templatePrevBtn" onclick="changeTemplate(-1)">
