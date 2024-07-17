@@ -21,7 +21,7 @@ def login_view(request):
             login(request, user)
             return redirect('index')
         else:
-            messages.error(request, '아이디 또는 비밀번호가 잘못되었습니다.')
+            messages.error(request, '아이디 또는 비밀번호가 잘못되었습니다.', extra_tags='login')
     else:
         email = request.GET.get('email')
         contact_number = request.GET.get('contact_number')

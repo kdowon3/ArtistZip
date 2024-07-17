@@ -6,7 +6,6 @@ __pycache__/
 .env
 
 # Django 관련
-db.sqlite3
 media/
 
 # Virtual environment
