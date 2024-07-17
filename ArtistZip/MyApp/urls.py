@@ -19,6 +19,8 @@ urlpatterns = [
     path('template/<int:user_id>/<int:artwork_id>/', views.template, name='template'),
     path('edit_artwork/<int:artwork_id>/', views.edit_artwork, name='edit_artwork'),
     path('delete_artwork/', views.delete_artwork, name='delete_artwork'),
+    path('simple_template1/', views.simple_template1, name='simple_template1'),
+    
 ]
 
 if settings.DEBUG:

@@ -90,3 +90,6 @@ def delete_artwork(request):
         artwork.delete()
         return redirect('myprofile', user_id=user_id)
     return redirect('myprofile')
+
+def simple_template1(request):
+    return render(request, 'MyApp/simple_template1.html')
