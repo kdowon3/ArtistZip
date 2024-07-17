@@ -1,33 +1,23 @@
-<!DOCTYPE html>
-<html lang="ko">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{% block title %}Artist Zip{% endblock %}</title>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-    </head>
-    <body>
-        <div class="navbar">
-            <div class="left">
-                <a href="{% url 'index' %}">Artist Zip</a>
-            </div>
-            <div class="right">문희재 작가</div>
-        </div>
-        <div class="container">
-            <div class="name">HEEJAE</div>
-            <div class="main_pic">main_pic</div>
-            <div class="title_ex">이 시대 가장 주목 받는 예술인</div>
-            <div class="detail_ex">
-                이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인
-            </div>
-            <div class="detail_pic">detail_pic</div>
-            <div class="title_pic">title_pic</div>
-        </div>
-        <div class="contact">
-            <div class="insta">insta</div>
-            <div class="email">email</div>
-            <div class="homepage">homepage</div>
-        </div>
-    </body>
-</html>
+{% extends 'MyApp/base.html' %} {% load static %} {% block title %}Artist Zip{% endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+{% endblock %} {% block content %}
+<div class="tem_container">
+    <div class="name">HEEJAE MOON</div>
+    <div class="main_pic">
+        <img src="{% static 'images/main_pic.png' %}" alt="main_pic" />
+    </div>
+    <div class="title_ex">이 시대 가장 주목 받는 예술인</div>
+    <div class="detail_ex">이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인</div>
+    <div class="detail_pic">
+        <img src="{% static 'images/detail_pic1.png' %}" alt="detail_pic1" />
+        <img src="{% static 'images/detail_pic2.png' %}" alt="detail_pic2" />
+        <img src="{% static 'images/detail_pic3.png' %}" alt="detail_pic3" />
+    </div>
+    <div class="title_pic">HEAFSDKJFLJSAEEW</div>
+</div>
+<div class="contact">
+    <div class="contact-item insta">INSTA</div>
+    <div class="contact-item email">E-MAIL</div>
+    <div class="contact-item homepage">HOMEPAGE</div>
+</div>
+{% endblock %}
