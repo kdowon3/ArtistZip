@@ -294,6 +294,16 @@ body.modal-open {
     font-size: 16px;
 }
 
+.unstyled-link {
+    color: inherit;  /* 기존 색상 유지 */
+    text-decoration: none;  /* 밑줄 제거 */
+    font-weight: bold;  /* 볼드체 유지 */
+}
+
+.unstyled-link:hover, .unstyled-link:focus {
+    text-decoration: none;  /* 호버 및 포커스 시에도 밑줄 제거 */
+    color: inherit;  /* 호버 및 포커스 시에도 색상 유지 */
+}
 /* Chat styles */
 .chat-container {
     display: grid;
