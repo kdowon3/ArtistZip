@@ -1,0 +1,43 @@
+{% extends 'MyApp/base.html' %}
+{% block title %}프로필 수정{% endblock %}
+{% block content %}
+<div class="profile-edit-container">
+    <h1>프로필 수정</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="profile-edit-form-group">
+            <label class="profile-edit-label" for="username">이름</label>
+            <input class="profile-edit-input" type="text" id="username" name="username" value="{{ form.username.value }}">
+        </div>
+        <div class="profile-edit-form-group">
+            <label class="profile-edit-label" for="user_id">아이디</label>
+            <input class="profile-edit-input" type="text" id="user_id" name="user_id" value="{{ form.user_id.value }}">
+        </div>
+        <div class="profile-edit-form-group">
+            <label class="profile-edit-label" for="email">이메일</label>
+            <input class="profile-edit-input" type="email" id="email" name="email" value="{{ form.email.value }}">
+        </div>
+        <div class="profile-edit-form-group">
+            <label class="profile-edit-label" for="contact_number">연락처</label>
+            <input class="profile-edit-input" type="text" id="contact_number" name="contact_number" value="{{ form.contact_number.value }}">
+        </div>
+        <div class="profile-edit-form-group">
+            <label class="profile-edit-label" for="brand_name">브랜드명(작가명)</label>
+            <input class="profile-edit-input" type="text" id="brand_name" name="brand_name" value="{{ form.brand_name.value }}">
+        </div>
+        <div class="profile-edit-form-group">
+            <label class="profile-edit-label" for="company_name">회사명</label>
+            <input class="profile-edit-input" type="text" id="company_name" name="company_name" value="{{ form.company_name.value }}">
+        </div>
+        <div class="profile-edit-form-group">
+            <label class="profile-edit-label" for="position">직책</label>
+            <input class="profile-edit-input" type="text" id="position" name="position" value="{{ form.position.value }}">
+        </div>
+        <div class="profile-edit-form-group profile-edit-checkbox">
+            <input type="checkbox" id="is_artist" name="is_artist" {% if form.is_artist.value %}checked{% endif %}>
+            <label class="profile-edit-label" for="is_artist">작가 여부</label>
+        </div>
+        <button type="submit" class="profile-edit-submit">수정</button>
+    </form>
+</div>
+{% endblock %}

@@ -5,8 +5,16 @@ name = "pypi"
 
 [packages]
 django = "*"
+django-allauth = "*"
+requests = "*"
+pyjwt = "*"
+cryptography = "*"
+django-environ = "*"
+django-storages = "*"
+pillow = "*"
+boto3 = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "*"
