@@ -5,9 +5,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Artwork
 from .forms import ArtworkForm
-from Auth.models import CustomUser 
+from Auth.models import CustomUser
+from Chat.models import ChatRoom, Message
+from django.contrib.auth import get_user_model
 import random
 
+User = get_user_model()
 
 def index(request):
     return render(request, 'MyApp/index.html')
@@ -19,13 +22,37 @@ def artists(request):
     return render(request, 'MyApp/artists.html')
 
 def gallery(request):
-    artworks = list(Artwork.objects.all())  # QuerySet을 리스트로 변환
-    random.shuffle(artworks)  # 리스트를 섞음
+    artworks = list(Artwork.objects.all())
+    random.shuffle(artworks)
     return render(request, 'MyApp/gallery.html', {'artworks': artworks})
 
+@login_required
 def contact(request):
-    return render(request, 'MyApp/contact.html')
+    chatrooms = ChatRoom.objects.filter(participants=request.user)
+    active_chatroom = None
+    messages = None
+    other_user = None
+    chatroom_id = request.GET.get('chatroom_id')
+    
+    if chatroom_id:
+        active_chatroom = get_object_or_404(ChatRoom, id=chatroom_id, participants=request.user)
+        messages = Message.objects.filter(chat_room=active_chatroom).order_by('timestamp')
+        other_user = active_chatroom.participants.exclude(id=request.user.id).first()
+        
+        if request.method == "POST":
+            content = request.POST.get('content')
+            if content:
+                Message.objects.create(chat_room=active_chatroom, user=request.user, content=content)
+                return redirect(f'/contact/?chatroom_id={chatroom_id}')
+    
+    return render(request, 'MyApp/contact.html', {
+        'chatrooms': chatrooms,
+        'active_chatroom': active_chatroom,
+        'messages': messages,
+        'other_user': other_user,
+    })
 
+    
 def signup(request):
     return render(request, 'MyApp/signup.html')
 
@@ -33,13 +60,22 @@ def login(request):
     return render(request, 'MyApp/login.html')
 
 def profile(request, user_id):
-    user = get_object_or_404(CustomUser, id=user_id)
-    artworks = Artwork.objects.filter(user=user)
-    return render(request, 'MyApp/profile.html', {'user': user, 'artworks': artworks})
+    profile_user = get_object_or_404(CustomUser, id=user_id)
+    artworks = Artwork.objects.filter(user=profile_user)
+    # 기존에 이 두 사용자 간의 채팅방이 있는지 확인
+    chatroom = ChatRoom.objects.filter(participants__id=profile_user.id).filter(participants__id=request.user.id).first()
+    if not chatroom:
+        chatroom = ChatRoom.objects.create()
+        chatroom.participants.add(request.user, profile_user)
+    return render(request, 'MyApp/profile.html', {
+        'profile_user': profile_user,
+        'artworks': artworks,
+        'chatroom_id': chatroom.id
+    })
 
 @login_required
 def myprofile(request, user_id):
-    user = get_object_or_404(CustomUser, id=user_id)
+    user = get_object_or_404(User, id=user_id)
     artworks = Artwork.objects.filter(user=user)
     context = {
         'user': user,
@@ -49,7 +85,7 @@ def myprofile(request, user_id):
 
 @login_required
 def template(request, user_id):
-    user = get_object_or_404(CustomUser, id=user_id)
+    user = get_object_or_404(User, id=user_id)
     if request.method == 'POST':
         form = ArtworkForm(request.POST, request.FILES)
         if form.is_valid():
@@ -67,6 +103,7 @@ def template(request, user_id):
     }
     return render(request, 'MyApp/template.html', context)
 
+@login_required
 def edit_artwork(request, artwork_id):
     artwork = get_object_or_404(Artwork, id=artwork_id)
     if request.method == 'POST':
@@ -82,6 +119,7 @@ def edit_artwork(request, artwork_id):
     }
     return render(request, 'MyApp/template.html', context)
 
+@login_required
 def delete_artwork(request):
     if request.method == 'GET' and 'id' in request.GET:
         artwork_id = request.GET['id']

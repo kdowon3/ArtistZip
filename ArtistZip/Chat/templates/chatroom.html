@@ -1,0 +1,108 @@
+{% extends 'MyApp/base.html' %}
+{% load static %}
+{% block content %}
+<div class="chat-container">
+    <div class="chat-header">
+        <h2>Chat with {{ other_user.username }}</h2>
+    </div>
+    <div class="chat-messages">
+        {% for message in messages %}
+            <div class="message {% if message.user == request.user %}sent{% else %}received{% endif %}">
+                <div class="message-content">
+                    <p>{{ message.content }}</p>
+                    <span class="timestamp">{{ message.timestamp|date:"Y-m-d H:i:s" }}</span>
+                </div>
+                <div class="avatar">
+                    {% if message.user.profile_picture %}
+                        <img src="{{ message.user.profile_picture.url }}" alt="{{ message.user.username }}">
+                    {% else %}
+                        <img src="{% static 'images/default-avatar.png' %}" alt="{{ message.user.username }}">
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="chat-input">
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="content" placeholder="Type a message..." required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+<style>
+    .chat-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 800px;
+        margin: 0 auto;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .chat-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .chat-messages {
+        flex-grow: 1;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .message {
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 10px;
+    }
+    .message.sent {
+        flex-direction: row-reverse;
+        text-align: right;
+    }
+    .message-content {
+        max-width: 60%;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #f1f1f1;
+        margin: 0 10px;
+    }
+    .message.sent .message-content {
+        background-color: #d1ffd6;
+    }
+    .avatar {
+        width: 40px;
+        height: 40px;
+    }
+    .avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+    .timestamp {
+        display: block;
+        font-size: 0.8em;
+        color: #999;
+    }
+    .chat-input {
+        display: flex;
+    }
+    .chat-input input[type="text"] {
+        flex-grow: 1;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+    }
+    .chat-input button {
+        padding: 10px 20px;
+        margin-left: 10px;
+        border-radius: 10px;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+    }
+</style>

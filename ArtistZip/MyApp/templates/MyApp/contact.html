@@ -1,106 +1,105 @@
-{% extends 'MyApp/base.html' %} {% load static %} {% block content %}
+{% extends 'MyApp/base.html' %}
+{% load static %}
+{% block content %}
 <div class="chat-container">
     <div class="my-profile">
         <div class="logo">Artist Zip</div>
-        <img src="{% static 'images/my-avatar.png' %}" alt="홍길동" class="avatar" />
-        <span>홍길동 님</span>
+        {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}" class="avatar" />
+        {% else %}
+            <img src="{% static 'images/default-avatar.png' %}" alt="{{ user.username }}" class="avatar" />
+        {% endif %}
+        <span>{{ user.username }}님</span>
     </div>
     <div class="sidebar">
         <div class="chat-list-header">
             <h2>나의 메시지</h2>
         </div>
         <div class="chat-list">
-            <div class="chat-item">
-                <img src="{% static 'images/user-avatar.png' %}" alt="구은영" class="avatar" />
-                <div class="chat-info">
-                    <span class="chat-name">구은영 작가</span>
-                    <span class="chat-preview">나 : 안녕하세요! 너무 잘 보고 있습니다...</span>
-                </div>
-                <span class="chat-time">1:58 AM</span>
-            </div>
-            <div class="chat-item">
-                <img src="{% static 'images/user-avatar.png' %}" alt="최안녕" class="avatar" />
-                <div class="chat-info">
-                    <span class="chat-name">최안녕 작가</span>
-                    <span class="chat-preview">작품 구매문의는...</span>
-                </div>
-                <span class="chat-time">1:58 AM</span>
-                <span class="unread-indicator"></span>
-            </div>
-            <div class="chat-item active">
-                <img src="{% static 'images/user-avatar.png' %}" alt="김은영" class="avatar" />
-                <div class="chat-info">
-                    <span class="chat-name">김은영 작가</span>
-                    <span class="chat-preview">네! 언제든지 방문주시면 기다리고 있겠...</span>
-                </div>
-                <span class="chat-time">1:58 AM</span>
-                <span class="unread-indicator"></span>
-            </div>
+            {% for chatroom in chatrooms %}
+                {% for participant in chatroom.participants.all %}
+                    {% if participant != user %}
+                        <div class="chat-item">
+                            <a href="?chatroom_id={{ chatroom.id }}">
+                                {% if participant.profile_picture %}
+                                    <img src="{{ participant.profile_picture.url }}" alt="{{ participant.username }}" class="avatar" />
+                                {% else %}
+                                    <img src="{% static 'images/default-avatar.png' %}" alt="{{ participant.username }}" class="avatar" />
+                                {% endif %}
+                                <div class="chat-info">
+                                    <span class="chat-name">{{ participant.username }}</span>
+                                    <span class="chat-preview">{{ chatroom.last_message }}</span>
+                                </div>
+                                <span class="chat-time">{{ chatroom.last_message_time }}</span>
+                                {% if chatroom.unread %}
+                                    <span class="unread-indicator"></span>
+                                {% endif %}
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
         </div>
     </div>
     <div class="chat-main">
-        <div class="chat-header">
-            <div class="chat-title">김은영 작가</div>
-            <div class="chat-actions">
-                <span>010-2394-4782</span>
-                <button class="more-options">...</button>
+        {% if active_chatroom %}
+            <div class="chat-header">
+                <div class="chat-title">{{ other_user.username }}님과의 채팅</div>
             </div>
-        </div>
-        <div class="chat-messages">
-            <div class="message sent">
-                <div class="message-content">
-                    <p>작품 구매 문의드리고자 연락드립니다!</p>
-                </div>
-                <img src="{% static 'images/my-avatar.png' %}" alt="나" class="avatar" />
+            <div class="chat-messages">
+                {% for message in messages %}
+                    <div class="message {% if message.user == user %}sent{% else %}received{% endif %}">
+                        <div class="message-content">
+                            <p>{{ message.content }}</p>
+                        </div>
+                        <img src="{% if message.user.profile_picture %}{{ message.user.profile_picture.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" alt="{{ message.user.username }}" class="avatar" />
+                    </div>
+                {% endfor %}
             </div>
-            <div class="message received">
-                <img src="{% static 'images/user-avatar.png' %}" alt="김은영" class="avatar" />
-                <div class="message-content">
-                    <p>
-                        안녕하세요,<br />유리공예하고 있는 김은영입니다.<br />관심가져주셔서 감사합니다.<br />작품 구매
-                        문의는 여기로...
-                    </p>
-                </div>
+            <div class="chat-input">
+                <form method="post" action="?chatroom_id={{ active_chatroom.id }}">
+                    {% csrf_token %}
+                    <input type="text" name="content" placeholder="메세지를 입력하세요." required />
+                    <button type="submit" class="send-button">→</button>
+                </form>
             </div>
-            <div class="message sent">
-                <div class="message-content">
-                    <p>감사합니다 작가님.<br />하면...</p>
-                </div>
-                <img src="{% static 'images/my-avatar.png' %}" alt="나" class="avatar" />
-            </div>
-        </div>
-        <div class="chat-input">
-            <input type="text" placeholder="메세지를 입력하세요." />
-            <button class="send-button">→</button>
-        </div>
+        {% else %}
+            <p>채팅방을 선택해주세요.</p>
+        {% endif %}
     </div>
     <div class="user-profile">
-        <img src="{% static 'images/user-avatar.png' %}" alt="김은영" class="large-avatar" />
-        <h2>김은영 작가</h2>
-        <div class="profile-info">
-            <div class="info-item">
-                <img src="{% static 'images/contact_name.png' %}" alt="이름" class="info-icon" />
-                <div class="info-text">
-                    <span class="info-label">브랜드명(작가명)</span>
-                    <span class="info-value">김은영 작가</span>
+        {% if other_user %}
+            <img src="{% if other_user.profile_picture %}{{ other_user.profile_picture.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" alt="{{ other_user.username }}" class="large-avatar" />
+            <h2>{{ other_user.username }}</h2>
+            <div class="profile-info">
+                <div class="info-item">
+                    <img src="{% static 'images/contact_name.png' %}" alt="이름" class="info-icon" />
+                    <div class="info-text">
+                        <span class="info-label">브랜드명(작가명)</span>
+                        <span class="info-value">{{ other_user.brand_name }}</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <img src="{% static 'images/contact_phone.png' %}" alt="전화번호" class="info-icon" />
+                    <div class="info-text">
+                        <span class="info-label">연락처</span>
+                        <span class="info-value">{{ other_user.contact_number }}</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <img src="{% static 'images/contact_email.png' %}" alt="이메일" class="info-icon" />
+                    <div class="info-text">
+                        <span class="info-label">이메일</span>
+                        <span class="info-value">{{ other_user.email }}</span>
+                    </div>
                 </div>
             </div>
-            <div class="info-item">
-                <img src="{% static 'images/contact_phone.png' %}" alt="전화번호" class="info-icon" />
-                <div class="info-text">
-                    <span class="info-label">연락처</span>
-                    <span class="info-value">010-2340-2340</span>
-                </div>
-            </div>
-            <div class="info-item">
-                <img src="{% static 'images/contact_email.png' %}" alt="이메일" class="info-icon" />
-                <div class="info-text">
-                    <span class="info-label">이메일</span>
-                    <span class="info-value">vituar123@ieum.co</span>
-                </div>
-            </div>
-        </div>
-        <button class="portfolio-button">포트폴리오 보기</button>
+            <a href="{% url 'profile' other_user.id %}">
+                <button class="portfolio-button">포트폴리오 보기</button>
+            </a>
+        {% else %}
+            <p>채팅방을 선택해주세요.</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

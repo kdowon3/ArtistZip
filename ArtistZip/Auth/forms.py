@@ -109,10 +109,11 @@ class GeneralSignupForm(forms.ModelForm):
 class CustomUserChangeForm(forms.ModelForm):
     password1 = forms.CharField(label='비밀번호', widget=forms.PasswordInput(attrs={'required': True, 'class': 'artist-signup-input'}), required=False)
     password2 = forms.CharField(label='비밀번호 확인', widget=forms.PasswordInput(attrs={'required': True, 'class': 'artist-signup-input'}), required=False)
+    profile_picture = forms.ImageField(label='프로필 사진', required=False, widget=forms.FileInput(attrs={'class': 'profile-edit-input'}))
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'user_id', 'email', 'contact_number', 'brand_name', 'company_name', 'position', 'is_artist']
+        fields = ['username', 'user_id', 'email', 'contact_number', 'brand_name', 'company_name', 'position', 'is_artist', 'profile_picture']
 
     def clean_password1(self):
         password1 = self.cleaned_data.get("password1")
@@ -138,3 +139,7 @@ class CustomUserChangeForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+    
+    
+    
