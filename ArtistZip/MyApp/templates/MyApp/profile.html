@@ -1,0 +1,30 @@
+{% extends 'MyApp/base.html' %}
+{% load static %}
+{% block title %}{{ profile_user.username }}님의 프로필{% endblock %}
+{% block content %}
+<div class="profile-container">
+    <h1>{{ profile_user.username }}님의 프로필</h1>
+    <div class="chat-button">
+        <a href="{% url 'contact' %}?chatroom_id={{ chatroom_id }}" class='unstyled-link'>채팅하기</a>
+    </div>
+    <div class="profile-info">
+        <p><strong>이름:</strong> {{ profile_user.username }}</p>
+        <p><strong>이메일:</strong> {{ profile_user.email }}</p>
+        <!-- 프로필에 추가 정보가 있으면 여기에 표시 -->
+    </div>
+    <div class="profile-artworks">
+        <h2>작품 목록</h2>
+        <div class="artwork-list">
+            {% for artwork in artworks %}
+            <div class="artwork-item">
+                <img src="{{ artwork.artwork_image.url }}" alt="{{ artwork.artwork_title }}" class="artwork-image" />
+                <div class="artwork-info">
+                    <h3>{{ artwork.artwork_title }}</h3>
+                    <p>{{ artwork.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

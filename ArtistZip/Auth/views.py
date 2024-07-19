@@ -21,7 +21,7 @@ def login_view(request):
             login(request, user)
             return redirect('index')
         else:
-            messages.error(request, '아이디 또는 비밀번호가 잘못되었습니다.')
+            messages.error(request, '아이디 또는 비밀번호가 잘못되었습니다.', extra_tags='login')
     else:
         email = request.GET.get('email')
         contact_number = request.GET.get('contact_number')
@@ -81,22 +81,24 @@ def cancel_link(request):
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'failed'})
 
-@login_required
-def profile(request):
-    return render(request, 'profile.html', {'user': request.user})
+
 
 @login_required
 def edit_profile(request):
     user = request.user
     if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, instance=user)
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
+            if not form.cleaned_data['profile_picture']:
+                form.cleaned_data['profile_picture'] = user.profile_picture
             form.save()
-            messages.success(request, '프로필이 성공적으로 수정되었습니다.')
-            return redirect('myprofile', user_id=user.id)  # 수정 후 리다이렉션할 URL
+            return redirect('myprofile', user_id=user.id)
     else:
         form = CustomUserChangeForm(instance=user)
-    return render(request, 'edit_profile.html', {'form': form})
+
+    return render(request, 'edit_profile.html', {
+        'form': form
+    })
 
 def logout_view(request):
     logout(request)

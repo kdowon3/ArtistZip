@@ -69,6 +69,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.kakao',
     'allauth.socialaccount.providers.google',
     'storages',  # 추가
+    'channels',
+    'Chat',
 ]
 
 MIDDLEWARE = [
@@ -165,3 +167,27 @@ SITE_ID = 1
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
 SOCIALACCOUNT_ADAPTER = 'Auth.adapter.CustomSocialAccountAdapter'
+
+#chatsetting#
+ASGI_APPLICATION = 'ArtistZip.asgi.application'
+
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': f'redis://{env("REDIS_HOST")}:{env("REDIS_PORT")}/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [(env("REDIS_HOST"), env("REDIS_PORT"))],
+        },
+    },
+}

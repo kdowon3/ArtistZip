@@ -3,7 +3,7 @@
 {% block content %}
 <div class="profile-edit-container">
     <h1>프로필 수정</h1>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="profile-edit-form-group">
             <label class="profile-edit-label" for="username">이름</label>
@@ -36,6 +36,13 @@
         <div class="profile-edit-form-group profile-edit-checkbox">
             <input type="checkbox" id="is_artist" name="is_artist" {% if form.is_artist.value %}checked{% endif %}>
             <label class="profile-edit-label" for="is_artist">작가 여부</label>
+        </div>
+        <div class="profile-edit-form-group">
+            <label class="profile-edit-label" for="profile_picture">프로필 사진</label>
+            <input class="profile-edit-input" type="file" id="profile_picture" name="profile_picture">
+            {% if user.profile_picture %}
+                <img src="{{ user.profile_picture.url }}" alt="프로필 이미지" class="myprofile-image" />
+            {% endif %}
         </div>
         <button type="submit" class="profile-edit-submit">수정</button>
     </form>
