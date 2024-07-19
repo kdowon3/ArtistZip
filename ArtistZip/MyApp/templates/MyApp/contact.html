@@ -28,9 +28,9 @@
                                 {% endif %}
                                 <div class="chat-info">
                                     <span class="chat-name">{{ participant.username }}</span>
-                                    <span class="chat-preview">{{ chatroom.last_message }}</span>
+                                    <span class="chat-preview">{{ chatroom.last_message.content }}</span>
                                 </div>
-                                <span class="chat-time">{{ chatroom.last_message_time }}</span>
+                                <span class="chat-time">{{ chatroom.last_message_time|date:"h:i A" }}</span>
                                 {% if chatroom.unread %}
                                     <span class="unread-indicator"></span>
                                 {% endif %}
@@ -51,8 +51,15 @@
                     <div class="message {% if message.user == user %}sent{% else %}received{% endif %}">
                         <div class="message-content">
                             <p>{{ message.content }}</p>
+                            <span class="chat-time">{{ message.timestamp|date:"Y-m-d H:i" }}</span>
                         </div>
-                        <img src="{% if message.user.profile_picture %}{{ message.user.profile_picture.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" alt="{{ message.user.username }}" class="avatar" />
+                        <div class="avatar">
+                            {% if message.user.profile_picture %}
+                                <img src="{{ message.user.profile_picture.url }}" alt="{{ message.user.username }}" class="myprofile-image">
+                            {% else %}
+                                <img src="{% static 'images/default-avatar.png' %}" alt="{{ message.user.username }}" class="myprofile-image">
+                            {% endif %}
+                        </div>
                     </div>
                 {% endfor %}
             </div>

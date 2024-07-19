@@ -9,6 +9,7 @@ from Auth.models import CustomUser
 from Chat.models import ChatRoom, Message
 from django.contrib.auth import get_user_model
 import random
+from django.db.models import Q
 
 User = get_user_model()
 
@@ -29,28 +30,35 @@ def gallery(request):
 @login_required
 def contact(request):
     chatrooms = ChatRoom.objects.filter(participants=request.user)
+    for chatroom in chatrooms:
+        chatroom.last_message = chatroom.messages.last()
+        chatroom.last_message_time = chatroom.last_message.timestamp if chatroom.last_message else None
+        chatroom.unread = chatroom.messages.filter(is_read=False).exclude(user=request.user).exists()
+
     active_chatroom = None
     messages = None
     other_user = None
     chatroom_id = request.GET.get('chatroom_id')
-    
     if chatroom_id:
         active_chatroom = get_object_or_404(ChatRoom, id=chatroom_id, participants=request.user)
         messages = Message.objects.filter(chat_room=active_chatroom).order_by('timestamp')
-        other_user = active_chatroom.participants.exclude(id=request.user.id).first()
-        
-        if request.method == "POST":
-            content = request.POST.get('content')
-            if content:
-                Message.objects.create(chat_room=active_chatroom, user=request.user, content=content)
-                return redirect(f'/contact/?chatroom_id={chatroom_id}')
-    
+        # Update the 'is_read' field for messages not sent by the current user
+        Message.objects.filter(chat_room=active_chatroom).filter(~Q(user=request.user)).update(is_read=True)
+        other_user = active_chatroom.get_other_user(request.user)
+
+    if request.method == "POST":
+        content = request.POST.get('content')
+        if content:
+            Message.objects.create(chat_room=active_chatroom, user=request.user, content=content)
+            return redirect(f'/contact/?chatroom_id={chatroom_id}')
+
     return render(request, 'MyApp/contact.html', {
         'chatrooms': chatrooms,
         'active_chatroom': active_chatroom,
         'messages': messages,
-        'other_user': other_user,
+        'other_user': other_user
     })
+
 
     
 def signup(request):

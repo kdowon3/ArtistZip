@@ -85,16 +85,20 @@ def cancel_link(request):
 
 @login_required
 def edit_profile(request):
+    user = request.user
     if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
+            if not form.cleaned_data['profile_picture']:
+                form.cleaned_data['profile_picture'] = user.profile_picture
             form.save()
-            messages.success(request, '프로필이 성공적으로 수정되었습니다.')
-            return redirect('edit_profile')
+            return redirect('myprofile', user_id=user.id)
     else:
-        form = CustomUserChangeForm(instance=request.user)
-    
-    return render(request, 'edit_profile.html', {'form': form})
+        form = CustomUserChangeForm(instance=user)
+
+    return render(request, 'edit_profile.html', {
+        'form': form
+    })
 
 def logout_view(request):
     logout(request)

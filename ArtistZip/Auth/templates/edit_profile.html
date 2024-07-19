@@ -40,6 +40,9 @@
         <div class="profile-edit-form-group">
             <label class="profile-edit-label" for="profile_picture">프로필 사진</label>
             <input class="profile-edit-input" type="file" id="profile_picture" name="profile_picture">
+            {% if user.profile_picture %}
+                <img src="{{ user.profile_picture.url }}" alt="프로필 이미지" class="myprofile-image" />
+            {% endif %}
         </div>
         <button type="submit" class="profile-edit-submit">수정</button>
     </form>
