@@ -85,3 +85,21 @@ def delete_artwork(request):
         artwork.delete()
         return redirect('myprofile', user_id=user_id)
     return redirect('myprofile')
+
+def portfolio1(request):
+    return render(request, 'MyApp/portfolio1.html')
+
+def portfolio2(request):
+    return render(request, 'MyApp/portfolio2.html')
+
+def portfolio3(request):
+    return render(request, 'MyApp/portfolio3.html')
+
+def portfolio4(request):
+    return render(request, 'MyApp/portfolio4.html')
+
+def portfolio5(request):
+    return render(request, 'MyApp/portfolio5.html')
+
+def portfolio6(request):
+    return render(request, 'MyApp/portfolio6.html')

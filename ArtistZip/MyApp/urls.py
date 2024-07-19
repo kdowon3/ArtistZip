@@ -18,6 +18,12 @@ urlpatterns = [
     path('template/<int:user_id>/<int:artwork_id>/', views.template, name='template'),
     path('edit_artwork/<int:artwork_id>/', views.edit_artwork, name='edit_artwork'),
     path('delete_artwork/', views.delete_artwork, name='delete_artwork'),
+    path('portfolio1/', views.portfolio1, name='portfolio1'),
+    path('portfolio2/', views.portfolio2, name='portfolio2'),
+    path('portfolio3/', views.portfolio3, name='portfolio3'),
+    path('portfolio4/', views.portfolio4, name='portfolio4'),
+    path('portfolio5/', views.portfolio5, name='portfolio5'),
+    path('portfolio6/', views.portfolio6, name='portfolio6'),
 ]
 
 if settings.DEBUG:

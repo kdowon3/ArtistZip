@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Portfolio Template</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "Inter", sans-serif;
+                background: black;
+            }
+
+            .container {
+                width: 1920px;
+                height: 10677px;
+                position: relative;
+                background: black;
+            }
+
+            .image {
+                position: absolute;
+            }
+
+            .image1 {
+                width: 1146px;
+                height: 906px;
+                left: 864px;
+                top: 6622px;
+                transform: rotate(-90deg);
+                transform-origin: 0 0;
+            }
+
+            .image2 {
+                width: 1033px;
+                height: 692px;
+                left: 125px;
+                top: 4448px;
+            }
+
+            .image3 {
+                width: 1033px;
+                height: 692px;
+                left: 125px;
+                top: 7056px;
+            }
+
+            .text {
+                position: absolute;
+                color: white;
+                font-family: Inter;
+                font-weight: 700;
+                word-wrap: break-word;
+            }
+
+            .text1 {
+                left: 125px;
+                top: 5179px;
+                font-size: 40px;
+            }
+
+            .text2 {
+                left: 125px;
+                top: 7787px;
+                font-size: 40px;
+            }
+
+            .text3 {
+                left: 864px;
+                top: 6672px;
+                font-size: 40px;
+            }
+
+            .author-name {
+                left: 285px;
+                top: 218px;
+                position: absolute;
+                text-align: center;
+                color: white;
+                font-size: 350px;
+                font-weight: 600;
+                word-wrap: break-word;
+            }
+
+            .image4 {
+                width: 526px;
+                height: 351px;
+                left: 783px;
+                top: 994px;
+                transform: rotate(-90deg);
+                transform-origin: 0 0;
+                border-radius: 10px;
+            }
+
+            .image5 {
+                width: 574px;
+                height: 370px;
+                left: 673px;
+                top: 1055px;
+                border-radius: 10px;
+            }
+
+            .image6 {
+                width: 855px;
+                height: 473px;
+                left: 1424px;
+                top: 3302px;
+                transform: rotate(-90deg);
+                transform-origin: 0 0;
+                border-radius: 20px;
+            }
+
+            .image7 {
+                width: 934px;
+                height: 649px;
+                left: 19px;
+                top: 2447px;
+                border-radius: 20px;
+            }
+
+            .image8 {
+                width: 431px;
+                height: 468px;
+                left: 973px;
+                top: 2447px;
+                border-radius: 20px;
+            }
+
+            .image9 {
+                width: 536px;
+                height: 668px;
+                left: 709px;
+                top: 3120px;
+                border-radius: 20px;
+            }
+
+            .project-name {
+                position: absolute;
+                text-align: right;
+                color: white;
+                font-size: 18px;
+                font-weight: 500;
+                word-wrap: break-word;
+            }
+
+            .project-name1 {
+                left: 1424px;
+                top: 3320px;
+            }
+
+            .project-name2 {
+                left: 1260px;
+                top: 3805px;
+            }
+
+            .project-name3 {
+                left: 709px;
+                top: 3805px;
+            }
+
+            .project-name4 {
+                left: 19px;
+                top: 3120px;
+            }
+
+            .project-name5 {
+                left: 973px;
+                top: 2938px;
+            }
+
+            .title {
+                position: absolute;
+                text-align: center;
+                color: white;
+                font-size: 350px;
+                font-weight: 600;
+                word-wrap: break-word;
+            }
+
+            .title1 {
+                left: 400px;
+                top: 665px;
+            }
+
+            .site-title {
+                left: 87px;
+                top: 47px;
+                position: absolute;
+                color: white;
+                font-size: 30px;
+                font-family: "Knewave", cursive;
+                font-weight: 400;
+                word-wrap: break-word;
+            }
+
+            .author-info {
+                left: 1759px;
+                top: 65px;
+                position: absolute;
+                text-align: right;
+                color: white;
+                font-size: 20px;
+                font-weight: 500;
+                word-wrap: break-word;
+            }
+
+            .line {
+                position: absolute;
+                border: 1px white solid;
+            }
+
+            .line1 {
+                width: 420px;
+                height: 0;
+                left: 1298px;
+                top: 77px;
+            }
+
+            .intro-text {
+                width: 835px;
+                left: 76px;
+                top: 1797px;
+                position: absolute;
+                color: white;
+                font-size: 20px;
+                font-weight: 500;
+                word-wrap: break-word;
+            }
+
+            .intro-title {
+                left: 76px;
+                top: 1615px;
+                position: absolute;
+                color: white;
+                font-size: 100px;
+                font-weight: 700;
+                word-wrap: break-word;
+            }
+
+            .contact-container {
+                width: 1597px;
+                height: 742px;
+                left: 148px;
+                top: 9246px;
+                position: absolute;
+            }
+
+            .contact-line {
+                position: absolute;
+                border: 3px white solid;
+            }
+
+            .contact-line1 {
+                width: 1597px;
+                height: 0;
+                left: 0;
+                top: 394px;
+            }
+
+            .contact-line2 {
+                width: 1597px;
+                height: 0;
+                left: 0;
+                top: 568px;
+            }
+
+            .contact-line3 {
+                width: 1597px;
+                height: 0;
+                left: 0;
+                top: 742px;
+            }
+
+            .contact-title {
+                left: 0;
+                top: 0;
+                position: absolute;
+                color: white;
+                font-size: 120px;
+                font-weight: 700;
+                word-wrap: break-word;
+            }
+
+            .contact-info {
+                left: 0;
+                position: absolute;
+                color: white;
+                font-size: 80px;
+                font-weight: 600;
+                word-wrap: break-word;
+            }
+
+            .contact-info1 {
+                top: 272px;
+            }
+
+            .contact-info2 {
+                top: 446px;
+            }
+
+            .contact-info3 {
+                top: 620px;
+            }
+
+            .image10 {
+                width: 637px;
+                height: 403px;
+                left: 1260px;
+                top: 3385px;
+                position: absolute;
+                border-radius: 20px;
+            }
+
+            .footer {
+                width: 1920px;
+                height: 357px;
+                left: 1px;
+                top: 10320px;
+                position: absolute;
+            }
+
+            .footer-bg {
+                width: 1920px;
+                height: 357px;
+                left: 0;
+                top: 0;
+                position: absolute;
+                background: #5b5b5b;
+            }
+
+            .footer-text {
+                position: absolute;
+                color: white;
+                font-size: 25px;
+                font-weight: 400;
+                word-wrap: break-word;
+            }
+
+            .footer-text1 {
+                left: 703px;
+                top: 268px;
+            }
+
+            .footer-text2 {
+                left: 867px;
+                top: 268px;
+            }
+
+            .footer-text3 {
+                left: 1055px;
+                top: 268px;
+            }
+
+            .footer-text4 {
+                left: 552px;
+                top: 268px;
+            }
+
+            .footer-text5 {
+                left: 1542px;
+                top: 276px;
+                font-size: 18px;
+            }
+
+            .footer-text6 {
+                left: 1637px;
+                top: 276px;
+                font-size: 18px;
+            }
+
+            .footer-line {
+                width: 22px;
+                height: 0;
+                left: 1614px;
+                top: 276px;
+                position: absolute;
+                transform: rotate(90deg);
+                transform-origin: 0 0;
+                border: 1px white solid;
+            }
+
+            .footer-title {
+                left: 73px;
+                top: 179px;
+                position: absolute;
+                color: white;
+                font-size: 80px;
+                font-family: "Knewave", cursive;
+                font-weight: 400;
+                word-wrap: break-word;
+            }
+
+            .footer-img {
+                width: 1342px;
+                height: 243px;
+                left: 535px;
+                top: 0;
+                position: absolute;
+            }
+
+            .scroll-bar {
+                position: absolute;
+                border-radius: 30px;
+            }
+
+            .scroll-bar1 {
+                width: 24px;
+                height: 140px;
+                left: 1845px;
+                top: 595px;
+                background: rgba(236, 236, 236, 0.5);
+            }
+
+            .scroll-bar2,
+            .scroll-bar3,
+            .scroll-bar4 {
+                width: 24px;
+                height: 24px;
+                left: 1845px;
+                background: #c3c3c3;
+                border-radius: 9999px;
+            }
+
+            .scroll-bar2 {
+                top: 595px;
+            }
+
+            .scroll-bar3 {
+                top: 653px;
+            }
+
+            .scroll-bar4 {
+                top: 711px;
+            }
+
+            .cta {
+                width: 468px;
+                height: 72px;
+                left: 727px;
+                top: 10118px;
+                position: absolute;
+            }
+
+            .cta-bg {
+                width: 468px;
+                height: 72px;
+                left: 0;
+                top: 0;
+                position: absolute;
+                background: white;
+                border-radius: 50px;
+            }
+
+            .cta-text {
+                left: 53px;
+                top: 18px;
+                position: absolute;
+                text-align: center;
+                color: black;
+                font-size: 30px;
+                font-weight: 600;
+                word-wrap: break-word;
+            }
+
+            .cta-line {
+                width: 22px;
+                height: 0;
+                left: 395px;
+                top: 36px;
+                position: absolute;
+                border: 2px black solid;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <img class="image image1" src="https://via.placeholder.com/1146x906" alt="Image 1" />
+            <img class="image image2" src="https://via.placeholder.com/1033x692" alt="Image 2" />
+            <img class="image image3" src="https://via.placeholder.com/1033x692" alt="Image 3" />
+            <div class="text text1">HEAFSDKJFLJSAEEW</div>
+            <div class="text text2">HEAFSDKJFLJSAEEW</div>
+            <div class="text text3">SDFJLASJREIWEIRWER</div>
+            <div class="author-name">HEEJAE</div>
+            <img class="image image4" src="https://via.placeholder.com/526x351" alt="Image 4" />
+            <img class="image image5" src="https://via.placeholder.com/574x370" alt="Image 5" />
+            <img class="image image6" src="https://via.placeholder.com/855x473" alt="Image 6" />
+            <img class="image image7" src="https://via.placeholder.com/934x649" alt="Image 7" />
+            <img class="image image8" src="https://via.placeholder.com/431x468" alt="Image 8" />
+            <img class="image image9" src="https://via.placeholder.com/536x668" alt="Image 9" />
+            <div class="project-name project-name1">project name</div>
+            <div class="project-name project-name2">project name</div>
+            <div class="project-name project-name3">project name</div>
+            <div class="project-name project-name4">project name</div>
+            <div class="project-name project-name5">project name</div>
+            <div class="title title1">MOON</div>
+            <div class="site-title">Artist Zip</div>
+            <div class="author-info">문희재 작가</div>
+            <div class="line line1"></div>
+            <div class="intro-text">
+                이 시대 가장 주목 받는 예술인 이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인이 시대 가장
+                주목 받는 예술인이 시대 가장 주목 받는 예술인<br /><br />이 시대 가장 주목 받는 예술인 이 시대 가장 주목
+                받는 예술인이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인이
+                시대 가장 주목 받는 예술인 이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인이 시대 가장 주목
+                받는 예술인이 시대 가장 주목 받는 예술인
+            </div>
+            <div class="intro-title">이 시대 가장 주목 받는 예술인</div>
+            <div class="contact-container">
+                <div class="contact-line contact-line1"></div>
+                <div class="contact-line contact-line2"></div>
+                <div class="contact-line contact-line3"></div>
+                <div class="contact-title">CONTACT</div>
+                <div class="contact-info contact-info1">INSTA</div>
+                <div class="contact-info contact-info2">E-MAIL</div>
+                <div class="contact-info contact-info3">HOMEPAGE</div>
+            </div>
+            <img class="image image10" src="https://via.placeholder.com/637x403" alt="Image 10" />
+            <div class="footer">
+                <div class="footer-bg"></div>
+                <div class="footer-text footer-text1">Gallery</div>
+                <div class="footer-text footer-text2">Message</div>
+                <div class="footer-text footer-text3">My page</div>
+                <div class="footer-text footer-text4">Home</div>
+                <div class="footer-text footer-text5">e-mail</div>
+                <div class="footer-text footer-text6">moon3453@naver.com</div>
+                <div class="footer-line"></div>
+                <div class="footer-title">Artist Zip</div>
+                <img class="footer-img" src="https://via.placeholder.com/1342x243" alt="Footer Image" />
+            </div>
+            <div class="scroll-bar scroll-bar1"></div>
+            <div class="scroll-bar scroll-bar2"></div>
+            <div class="scroll-bar scroll-bar3"></div>
+            <div class="scroll-bar scroll-bar4"></div>
+            <div class="cta">
+                <div class="cta-bg"></div>
+                <div class="cta-text">아티스트집이 궁금하다면?</div>
+                <div class="cta-line"></div>
+            </div>
+        </div>
+    </body>
+</html>
