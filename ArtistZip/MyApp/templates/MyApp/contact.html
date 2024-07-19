@@ -7,7 +7,7 @@
         {% if user.profile_picture %}
             <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}" class="avatar" />
         {% else %}
-            <img src="{% static 'images/default-avatar.png' %}" alt="{{ user.username }}" class="avatar" />
+            <div class="avatar avatar-placeholder"></div>
         {% endif %}
         <span>{{ user.username }}님</span>
     </div>
@@ -20,17 +20,15 @@
                 {% for participant in chatroom.participants.all %}
                     {% if participant != user %}
                         <div class="chat-item">
-                            <a href="?chatroom_id={{ chatroom.id }}">
+                            <a href="?chatroom_id={{ chatroom.id }}" class="unstyled-link">
                                 {% if participant.profile_picture %}
                                     <img src="{{ participant.profile_picture.url }}" alt="{{ participant.username }}" class="avatar" />
                                 {% else %}
-                                    <img src="{% static 'images/default-avatar.png' %}" alt="{{ participant.username }}" class="avatar" />
+                                    <div class="avatar avatar-placeholder"></div>
                                 {% endif %}
                                 <div class="chat-info">
                                     <span class="chat-name">{{ participant.username }}</span>
-                                    <span class="chat-preview">{{ chatroom.last_message.content }}</span>
                                 </div>
-                                <span class="chat-time">{{ chatroom.last_message_time|date:"h:i A" }}</span>
                                 {% if chatroom.unread %}
                                     <span class="unread-indicator"></span>
                                 {% endif %}
@@ -57,7 +55,7 @@
                             {% if message.user.profile_picture %}
                                 <img src="{{ message.user.profile_picture.url }}" alt="{{ message.user.username }}" class="myprofile-image">
                             {% else %}
-                                <img src="{% static 'images/default-avatar.png' %}" alt="{{ message.user.username }}" class="myprofile-image">
+                                <div class="avatar avatar-placeholder"></div>
                             {% endif %}
                         </div>
                     </div>
@@ -76,7 +74,11 @@
     </div>
     <div class="user-profile">
         {% if other_user %}
-            <img src="{% if other_user.profile_picture %}{{ other_user.profile_picture.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" alt="{{ other_user.username }}" class="large-avatar" />
+            {% if other_user.profile_picture %}
+                <img src="{{ other_user.profile_picture.url }}" alt="{{ other_user.username }}" class="large-avatar" />
+            {% else %}
+                <div class="large-avatar avatar-placeholder"></div>
+            {% endif %}
             <h2>{{ other_user.username }}</h2>
             <div class="profile-info">
                 <div class="info-item">
@@ -110,3 +112,16 @@
     </div>
 </div>
 {% endblock %}
+
+<style>
+    .avatar-placeholder {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: black;
+    }
+    .large-avatar.avatar-placeholder {
+        width: 100px;
+        height: 100px;
+    }
+</style>

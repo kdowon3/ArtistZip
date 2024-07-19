@@ -7,7 +7,7 @@
             {% if user.profile_picture %}
                 <img src="{{ user.profile_picture.url }}" alt="프로필 이미지" class="myprofile-image" />
             {% else %}
-                <img src="{% static 'images/default-avatar.png' %}" alt="기본 프로필 이미지" class="myprofile-image" />
+                <div class="myprofile-image avatar-placeholder"></div>
             {% endif %}
             <span class="myprofile-name">{{ user.username }}님</span>
             <a href="{% url 'edit_profile' %}">
@@ -19,11 +19,7 @@
     <div class="myprofile-gallery">
         {% for artwork in artworks %}
         <div class="myprofile-gallery-item">
-            <img
-                src="{{ artwork.artwork_image.url }}"
-                alt="{{ artwork.artwork_title }}"
-                class="myprofile-gallery-image"
-            />
+            <img src="{{ artwork.artwork_image.url }}" alt="{{ artwork.artwork_title }}" class="myprofile-gallery-image" />
             <div class="myprofile-artwork-details">
                 <h3>{{ artwork.artwork_title }}</h3>
                 <p>{{ artwork.artwork_description }}</p>
