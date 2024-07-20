@@ -13,6 +13,8 @@ django-environ = "*"
 django-storages = "*"
 pillow = "*"
 boto3 = "*"
+channels = "*"
+django-redis = "*"
 
 [dev-packages]
 

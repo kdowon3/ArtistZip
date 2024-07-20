@@ -171,7 +171,9 @@ SOCIALACCOUNT_ADAPTER = 'Auth.adapter.CustomSocialAccountAdapter'
 #chatsetting#
 ASGI_APPLICATION = 'ArtistZip.asgi.application'
 
-
+#상현임시
+REDIS_HOST = env('REDIS_HOST', default='localhost')
+REDIS_PORT = env('REDIS_PORT', default='6379')
 
 CACHES = {
     'default': {
