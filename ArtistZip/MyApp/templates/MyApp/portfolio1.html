@@ -5,10 +5,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Artist Template</title>
         <style>
+            .editable {
+                border: 1px solid #ccc;
+                padding: 5px;
+                min-height: 20px; /* 최소 높이 설정 */
+                font-size: 24px;
+                color: black;
+                cursor: text;
+            }
+            .placeholder {
+                color: #aaa;
+            }
             body {
                 margin: 0;
                 padding: 0;
-                font-family: "Inter", sans-serif;
+                font-family: 'Inter', sans-serif;
                 background: white;
             }
 
@@ -50,7 +61,24 @@
                 position: absolute;
                 border-radius: 10px;
             }
-
+            .image-preview {
+                position: absolute;
+                cursor: pointer;
+                overflow: hidden;
+                background-color: #f0f0f0; /* placeholder 배경색 */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .image-preview img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .placeholder-text {
+                font-size: 24px;
+                color: #888;
+            }
             .image1 {
                 width: 734px;
                 height: 547px;
@@ -96,7 +124,6 @@
                 left: 87px;
                 top: 4241px;
             }
-
             .author-name {
                 left: 87px;
                 top: 229px;
@@ -150,7 +177,7 @@
                 position: absolute;
                 color: black;
                 font-size: 30px;
-                font-family: "Knewave", cursive;
+                font-family: 'Knewave', cursive;
                 font-weight: 400;
                 word-wrap: break-word;
             }
@@ -325,47 +352,294 @@
                 top: 1788px;
             }
         </style>
+        <script>
+            function enableEditing(element) {
+                element.contentEditable = 'true';
+                element.classList.add('editable');
+                element.focus(); // 편집 모드로 전환 시 포커스를 줍니다.
+            }
+
+            function disableEditing(element) {
+                element.contentEditable = 'false';
+                element.classList.remove('editable');
+            }
+            function handleFileSelect(event, previewId) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const preview = document.getElementById(previewId);
+                        if (preview) {
+                            const img = preview.querySelector('img');
+                            if (img) {
+                                img.src = e.target.result;
+                                img.style.display = 'block';
+                            }
+                            const placeholderText = preview.querySelector('.placeholder-text');
+                            if (placeholderText) {
+                                placeholderText.style.display = 'none';
+                            }
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+            window.onload = function () {
+                const imagePreviewIds = [
+                    'image1Preview',
+                    'image2Preview',
+                    'image3Preview',
+                    'image4Preview',
+                    'image5Preview',
+                    'image6Preview',
+                ];
+                imagePreviewIds.forEach((id) => {
+                    const preview = document.getElementById(id);
+                    if (preview) {
+                        const img = preview.querySelector('img');
+                        const placeholderText = preview.querySelector('.placeholder-text');
+
+                        if (img && img.src && img.src !== window.location.href) {
+                            img.style.display = 'block';
+                            if (placeholderText) {
+                                placeholderText.style.display = 'none';
+                            }
+                        } else if (img) {
+                            img.style.display = 'none';
+                            if (placeholderText) {
+                                placeholderText.style.display = 'block';
+                            }
+                        }
+                    }
+                });
+            };
+
+            function triggerFileInput(inputId) {
+                const input = document.getElementById(inputId);
+                if (input) {
+                    input.click();
+                }
+            }
+            function openLink(type) {
+                let url;
+                switch (type) {
+                    case 'instagram':
+                        url = '{{ contact_info.instagram }}';
+                        break;
+                    case 'email':
+                        url = 'mailto:{{ contact_info.email }}';
+                        break;
+                    case 'homepage':
+                        url = '{{ contact_info.homepage }}';
+                        break;
+                }
+                if (url) {
+                    window.open(url, '_blank');
+                } else {
+                    alert('URL이 설정되지 않았습니다.');
+                }
+            }
+            function saveChanges() {
+                const authorName = document.getElementById('author-name').innerText;
+                const artworkTitle = document.getElementById('art-title').innerText;
+                const artworkDescription = document.getElementById('intro-text').innerText;
+
+                // Create a form and submit it
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.enctype = 'multipart/form-data';
+
+                const csrfToken = document.createElement('input');
+                csrfToken.type = 'hidden';
+                csrfToken.name = 'csrfmiddlewaretoken';
+                csrfToken.value = '{{ csrf_token }}';
+                form.appendChild(csrfToken);
+
+                const authorNameInput = document.createElement('input');
+                authorNameInput.type = 'hidden';
+                authorNameInput.name = 'author_name';
+                authorNameInput.value = authorName;
+                form.appendChild(authorNameInput);
+
+                const artworkTitleInput = document.createElement('input');
+                artworkTitleInput.type = 'hidden';
+                artworkTitleInput.name = 'art_title';
+                artworkTitleInput.value = artworkTitle;
+                form.appendChild(artworkTitleInput);
+
+                const artworkDescriptionInput = document.createElement('input');
+                artworkDescriptionInput.type = 'hidden';
+                artworkDescriptionInput.name = 'art_description';
+                artworkDescriptionInput.value = artworkDescription;
+                form.appendChild(artworkDescriptionInput);
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+        </script>
     </head>
     <body>
         <div class="container">
             <div class="box box1"></div>
             <div class="box box2"></div>
             <div class="box box3"></div>
-            <img class="image image1" src="https://via.placeholder.com/734x547" alt="Image 1" />
-            <img class="image image2" src="https://via.placeholder.com/734x1744" alt="Image 2" />
-            <div class="author-name">문희재</div>
+            <div id="image1Preview" class="image-preview image1" ondblclick="triggerFileInput('fileInput1')">
+                <img class="image image1" src="" alt="Image 1" />
+                <div class="placeholder-text">547 x 734</div>
+            </div>
+            <input
+                type="file"
+                id="fileInput1"
+                style="display: none"
+                accept="image/*"
+                onchange="handleFileSelect(event, 'image1Preview')"
+            />
+
+            <div id="image2Preview" class="image-preview image2" ondblclick="triggerFileInput('fileInput2')">
+                <img class="image image2" src="" alt="Image 2" />
+                <div class="placeholder-text">1744 x 734</div>
+            </div>
+            <input
+                type="file"
+                id="fileInput2"
+                style="display: none"
+                accept="image/*"
+                onchange="handleFileSelect(event, 'image2Preview')"
+            />
+            <div id="author-name" class="author-name" ondblclick="enableEditing(this)" onblur="disableEditing(this)">
+                Name
+            </div>
             <div class="author-title">작가</div>
             <div class="view-representative-works">대표 작품 보기</div>
             <div class="author-intro">작가 소개</div>
             <div class="art-gallery">작품 갤러리</div>
             <div class="site-title">Artist Zip</div>
-            <div class="author-info">문희재 작가</div>
+            <div id="author-info" class="author-info" ondblclick="enableEditing(this)" onblur="disableEditing(this)">
+                Name 작가
+            </div>
+
             <div class="line line1"></div>
-            <img class="image image3" src="https://via.placeholder.com/546x734" alt="Image 3" />
-            <img class="image image4" src="https://via.placeholder.com/1744x734" alt="Image 4" />
-            <img class="image image5" src="https://via.placeholder.com/547x734" alt="Image 5" />
-            <img class="image image6" src="https://via.placeholder.com/1744x734" alt="Image 6" />
-            <div class="intro-text">
-                이 시대 가장 주목 받는 예술인 이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인이 시대 가장
-                주목 받는 예술인이 시대 가장 주목 받는 예술인
+            <div id="image3Preview" class="image-preview image3" ondblclick="triggerFileInput('fileInput3')">
+                <img class="image image3" src="" alt="Image 3" />
+                <div class="placeholder-text">547 x 734</div>
+            </div>
+            <input
+                type="file"
+                id="fileInput3"
+                style="display: none"
+                accept="image/*"
+                onchange="handleFileSelect(event, 'image3Preview')"
+            />
+            <div id="image4Preview" class="image-preview image4" ondblclick="triggerFileInput('fileInput4')">
+                <img class="image image4" src="" alt="Image 4" />
+                <div class="placeholder-text">1744 x 734</div>
+            </div>
+            <input
+                type="file"
+                id="fileInput4"
+                style="display: none"
+                accept="image/*"
+                onchange="handleFileSelect(event, 'image4Preview')"
+            />
+            <div id="image5Preview" class="image-preview image5" ondblclick="triggerFileInput('fileInput5')">
+                <img class="image image5" src="" alt="Image 5" />
+                <div class="placeholder-text">547 x 734</div>
+            </div>
+            <input
+                type="file"
+                id="fileInput5"
+                style="display: none"
+                accept="image/*"
+                onchange="handleFileSelect(event, 'image5Preview')"
+            />
+            <div id="image6Preview" class="image-preview image6" ondblclick="triggerFileInput('fileInput6')">
+                <img class="image image6" src="" alt="Image 6" />
+                <div class="placeholder-text">1744 x 734</div>
+            </div>
+            <input
+                type="file"
+                id="fileInput6"
+                style="display: none"
+                accept="image/*"
+                onchange="handleFileSelect(event, 'image6Preview')"
+            />
+            <div id="intro-text" class="intro-text" ondblclick="enableEditing(this)" onblur="disableEditing(this)">
+                career
             </div>
             <div class="line line2"></div>
             <div class="line line3"></div>
             <div class="line line4"></div>
-            <div class="art-title art-title1">HEAFSDKJFLJSAEEW</div>
-            <div class="art-title art-title2">HEAFSDKJFLJSAEEW</div>
-            <div class="art-title art-title3">HEAFSDKJFLJSAEEW</div>
+            <div
+                id="art-title1"
+                class="art-title art-title1"
+                ondblclick="enableEditing(this)"
+                onblur="disableEditing(this)"
+            >
+                project name
+            </div>
+            <div
+                id="art-title2"
+                class="art-title art-title2"
+                ondblclick="enableEditing(this)"
+                onblur="disableEditing(this)"
+            >
+                project name
+            </div>
+            <div
+                id="art-title3"
+                class="art-title art-title3"
+                ondblclick="enableEditing(this)"
+                onblur="disableEditing(this)"
+            >
+                project name
+            </div>
             <div class="thick-line thick-line1"></div>
             <div class="thick-line thick-line2"></div>
             <div class="thick-line thick-line3"></div>
             <div class="contact-title">컨택트</div>
-            <div class="contact-info instagram">인스타그램</div>
-            <div class="contact-info email">이메일</div>
-            <div class="contact-info homepage">홈페이지</div>
-            <div class="main-title">이 시대 가장 주목 받는 예술인</div>
-            <div class="project-name project-name1">project name</div>
-            <div class="project-name project-name2">project name</div>
-            <div class="project-name project-name3">project name</div>
+            <div class="contact-info instagram" onclick="openLink('instagram')">인스타그램</div>
+            <div class="contact-info email" onclick="openLink('email')">이메일</div>
+            <div class="contact-info homepage onclick="openLink('homepage')"">홈페이지</div>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">저장</button>
+            </form>
+            <div id="main-title" class="main-title" ondblclick="enableEditing(this)" onblur="disableEditing(this)">
+                Appealing-Description
+            </div>
+            <div
+                id="project-name1"
+                class="project-name project-name1"
+                ondblclick="enableEditing(this)"
+                onblur="disableEditing(this)"
+            >
+                project name
+            </div>
+            <div
+                id="project-name2"
+                class="project-name project-name2"
+                ondblclick="enableEditing(this)"
+                onblur="disableEditing(this)"
+            >
+                project name
+            </div>
+            <div
+                id="project-name3"
+                class="project-name project-name3"
+                ondblclick="enableEditing(this)"
+                onblur="disableEditing(this)"
+            >
+                project name
+            </div>
+            {% for artwork in artworks %}
+            <div>
+                <img src="{{ artwork.artwork_image.url }}" alt="{{ artwork.artwork_title }}" style="max-width: 200px" />
+                <h3>{{ artwork.artwork_title }}</h3>
+                <p>{{ artwork.artwork_description }}</p>
+            </div>
+            {% endfor %}
         </div>
     </body>
 </html>

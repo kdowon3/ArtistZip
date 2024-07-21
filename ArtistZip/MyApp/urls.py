@@ -25,6 +25,7 @@ urlpatterns = [
     path('portfolio4/', views.portfolio4, name='portfolio4'),
     path('portfolio5/', views.portfolio5, name='portfolio5'),
     path('portfolio6/', views.portfolio6, name='portfolio6'),
+    path('edit-contact-info/', views.edit_contact_info, name='edit_contact_info'),
 ]
 
 if settings.DEBUG:

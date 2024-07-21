@@ -7,6 +7,10 @@ from .models import Artwork
 from .forms import ArtworkForm
 from Auth.models import CustomUser 
 import random
+from .models import Portfolio
+from django.views.decorators.csrf import csrf_exempt
+from .forms import ContactInfoForm
+from .models import ContactInfo
 
 
 def index(request):
@@ -91,8 +95,43 @@ def delete_artwork(request):
         return redirect('myprofile', user_id=user_id)
     return redirect('myprofile')
 
+@login_required
+def edit_contact_info(request):
+    contact_info, created = ContactInfo.objects.get_or_create(user=request.user)
+    
+    if request.method == 'POST':
+        form = ContactInfoForm(request.POST, instance=contact_info)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')  # Assume you have a profile page
+    else:
+        form = ContactInfoForm(instance=contact_info)
+    
+    return render(request, 'edit_contact_info.html', {'form': form})
+
+@csrf_exempt
 def portfolio1(request):
-    return render(request, 'MyApp/portfolio1.html')
+    if request.method == 'POST':
+        author_name = request.POST.get('author_name')
+        art_title = request.POST.get('art_title')
+        art_description = request.POST.get('art_description')
+
+        portfolio = Portfolio.objects.first()  # assuming there's only one portfolio object
+        if not portfolio:
+            portfolio = Portfolio()
+        portfolio.author_name = author_name
+        portfolio.art_title = art_title
+        portfolio.art_description = art_description
+        portfolio.save()
+
+        return redirect('portfolio1')
+
+    portfolio = Portfolio.objects.first()
+    context = {
+        'portfolio': portfolio,
+    }
+    return render(request, 'MyApp/portfolio1.html', context)
+
 
 def portfolio2(request):
     return render(request, 'MyApp/portfolio2.html')
@@ -108,3 +147,4 @@ def portfolio5(request):
 
 def portfolio6(request):
     return render(request, 'MyApp/portfolio6.html')
+

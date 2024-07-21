@@ -9,3 +9,18 @@ class Artwork(models.Model):
 
     def __str__(self):
         return self.artwork_title
+
+class Portfolio(models.Model):
+    author_name = models.CharField(max_length=255)
+    art_title = models.CharField(max_length=255)
+    art_description = models.TextField()
+    
+    
+class ContactInfo(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    instagram = models.URLField(blank=True)
+    email = models.EmailField(blank=True)
+    homepage = models.URLField(blank=True)
+
+    def __str__(self):
+        return f"{self.user.username}'s Contact Info"
