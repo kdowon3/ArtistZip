@@ -1372,6 +1372,7 @@ canvas {
     flex-direction: row;
     height: 50%;
     .top {
+        font-weight: 800;
         height: 50px;
         width: 100%;
         display: flex;
