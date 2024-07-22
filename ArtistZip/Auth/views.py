@@ -8,7 +8,8 @@ from .models import CustomUser
 from allauth.socialaccount.models import SocialAccount
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-
+from django.shortcuts import get_object_or_404
+from django.views.decorators.http import require_POST
 
 User = get_user_model()
 
@@ -133,3 +134,18 @@ def general_signup(request):
 
 def signup(request):
     return render(request, 'login.html')
+
+
+@login_required
+@require_POST
+def subscribe(request):
+    user_id = request.POST.get('user_id')
+    action = request.POST.get('action')
+    user = get_object_or_404(CustomUser, pk=user_id)
+    
+    if action == 'subscribe':
+        request.user.following.add(user)
+    elif action == 'unsubscribe':
+        request.user.following.remove(user)
+    
+    return JsonResponse({'status': 'ok'})

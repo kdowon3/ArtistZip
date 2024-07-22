@@ -1,82 +1,37 @@
-<!-- MyApp/templates/MyApp/gallery.html -->
-{% extends 'MyApp/base.html' %} {% load static %} {% block title %}갤러리{% endblock %} {% block extra_css %}
+{% extends 'MyApp/base.html' %}
+{% load static %}
+
+{% block title %}아티스트 갤러리{% endblock %}
+
+{% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 <div class="gallery-container">
     <div class="search-bar">
-        <input type="text" placeholder="국내 최대 아티스트 홍보 플랫폼, 아티스트집" />
-        <button type="button">
-            <img src="{% static 'images/search_icon.png' %}" alt="Search" />
-        </button>
+        <input type="text" id="search-input" placeholder="작가명으로 검색하세요" value="{{ search_query }}">
+        <button type="button" onclick="searchArtist()">검색</button>
     </div>
-    <div class="gallery-header">
-        <div class="header-item">
-            <img src="{% static 'images/MEDIA ART.png' %}" alt="MEDIA ART" />
-        </div>
-        <div class="header-item">
-            <img src="{% static 'images/CRAFT.png' %}" alt="CRAFT" />
-        </div>
-        <div class="header-item">
-            <img src="{% static 'images/ILLUSTRATOR.png' %}" alt="ILLUSTRATOR" />
-        </div>
-    </div>
-</div>
-<div class="artists-gallery-container">
     <div class="artists-gallery">
-        <div class="artist-image-container"><img src="{% static 'images/artist1.png' %}" alt="Artist 1" /></div>
-        <div class="artist-image-container"><img src="{% static 'images/artist2.png' %}" alt="Artist 2" /></div>
-        <div class="artist-image-container"><img src="{% static 'images/artist3.png' %}" alt="Artist 3" /></div>
-        <div class="artist-image-container"><img src="{% static 'images/artist4.png' %}" alt="Artist 4" /></div>
-        <div class="artist-image-container"><img src="{% static 'images/artist5.png' %}" alt="Artist 5" /></div>
-        <div class="artist-image-container"><img src="{% static 'images/artist6.png' %}" alt="Artist 6" /></div>
-        <div class="artist-image-container"><img src="{% static 'images/artist7.png' %}" alt="Artist 7" /></div>
-        <!-- 나머지 이미지들도 같은 방식으로 감싸줍니다 -->
+        {% for artist in artists %}
+        <div class="artist-card">
+            {% if artist.profile_picture %}
+            <img src="{{ artist.profile_picture.url }}" alt="{{ artist.username }}">
+            {% else %}
+            <img src="{% static 'images/default_profile.png' %}" alt="{{ artist.username }}">
+            {% endif %}
+            <div class="artist-name">{{ artist.username }}</div>
+            <a href="#" class="unstyled-link portfolio-button">포트폴리오 보기</a>
+        </div>
+        {% endfor %}
     </div>
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const artistsGallery = document.querySelector(".artists-gallery");
-        const artistContainers = Array.from(artistsGallery.querySelectorAll(".artist-image-container"));
-        const containerWidth = 300; // 기본 컨테이너 너비 + 간격
-        let currentIndex = 0;
-
-        function updateGallery() {
-            artistContainers.forEach((container, index) => {
-                let offset = (index - currentIndex + artistContainers.length) % artistContainers.length;
-                offset = offset > 2 ? offset - artistContainers.length : offset;
-
-                if (Math.abs(offset) <= 2) {
-                    const xPosition = offset * containerWidth;
-                    container.style.transform = `translateX(${xPosition}px)`;
-                    container.style.zIndex = offset === 0 ? 10 : 5;
-                    container.style.opacity = 1;
-
-                    if (offset === 0) {
-                        container.classList.add("center");
-                    } else {
-                        container.classList.remove("center");
-                    }
-                } else {
-                    container.style.opacity = 0;
-                    container.classList.remove("center");
-                }
-            });
-        }
-
-        function shiftGallery(direction) {
-            currentIndex = (currentIndex - direction + artistContainers.length) % artistContainers.length;
-            updateGallery();
-        }
-
-        artistsGallery.addEventListener("wheel", (e) => {
-            e.preventDefault();
-            const direction = e.deltaY > 0 ? 1 : -1;
-            shiftGallery(direction);
-        });
-
-        // 초기 갤러리 설정
-        updateGallery();
-    });
+    function searchArtist() {
+        const input = document.getElementById("search-input").value.toLowerCase();
+        window.location.href = `?search=${input}`;
+    }
 </script>
 {% endblock %}

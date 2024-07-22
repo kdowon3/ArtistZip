@@ -1,0 +1,188 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Portfolio Template</title>
+        <link rel="stylesheet" href="{% static 'css/portfolio5.css' %}" />
+    </head>
+    <body>
+        <script src="{% static 'js/portfolio.js' %}" defer></script>
+
+        <div class="container">
+            <form
+                id="portfolio-form"
+                method="post"
+                enctype="multipart/form-data"
+                action="{% url 'portfolio5' user.id %}"
+            >
+                {% csrf_token %}
+
+                <div id="image1-preview" class="image-preview image1" ondblclick="triggerFileInput('fileInput1')">
+                    <img class="image" src="https://via.placeholder.com/1766x659" alt="Image 1" />
+                    <div class="placeholder-text" style="display: none">1766 x 659</div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput1"
+                    name="image1"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image1-preview')"
+                />
+
+                <div id="image2-preview" class="image-preview image2" ondblclick="triggerFileInput('fileInput2')">
+                    <img class="image" src="https://via.placeholder.com/1920x1010" alt="Image 2" />
+                    <div class="placeholder-text" style="display: none">1920 x 1010</div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput2"
+                    name="image2"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image2-preview')"
+                />
+
+                <div id="image3-preview" class="image-preview image3" ondblclick="triggerFileInput('fileInput3')">
+                    <img class="image" src="https://via.placeholder.com/1920x1010" alt="Image 3" />
+                    <div class="placeholder-text" style="display: none">1920 x 1010</div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput3"
+                    name="image3"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image3-preview')"
+                />
+
+                <div id="image4-preview" class="image-preview image4" ondblclick="triggerFileInput('fileInput4')">
+                    <img class="image" src="https://via.placeholder.com/1920x1010" alt="Image 4" />
+                    <div class="placeholder-text" style="display: none">1920 x 1010</div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput4"
+                    name="image4"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image4-preview')"
+                />
+
+                <div class="site-title">Artist Zip</div>
+                <div
+                    id="author-info"
+                    class="author-info"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="author-info-input"
+                >
+                    NAME 작가
+                </div>
+                <input type="hidden" id="author-info-input" name="author_info" value="문희재 작가" />
+
+                <div class="line line1"></div>
+
+                <div
+                    id="author-name"
+                    class="author-name"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="author-name-input"
+                >
+                    NAME
+                </div>
+                <input type="hidden" id="author-name-input" name="author_name" value="HEEJAE" />
+
+                <div
+                    id="text1"
+                    class="text text1"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="text1-input"
+                >
+                    project name
+                </div>
+                <input type="hidden" id="text1-input" name="text1" value="프로젝트 이름 1" />
+
+                <div
+                    id="text2"
+                    class="text text2"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="text2-input"
+                >
+                    project name
+                </div>
+                <input type="hidden" id="text2-input" name="text2" value="프로젝트 이름 2" />
+
+                <div
+                    id="text3"
+                    class="text text3"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="text3-input"
+                >
+                    project name
+                </div>
+                <input type="hidden" id="text3-input" name="text3" value="프로젝트 이름 3" />
+
+                <div
+                    id="intro-title"
+                    class="intro-title"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="intro-title-input"
+                >
+                    Appealing Description
+                </div>
+                <input type="hidden" id="intro-title-input" name="intro_title" value="이 시대 가장 주목 받는 예술인" />
+
+                <div
+                    id="intro-text"
+                    class="intro-text"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="intro-text-input"
+                >
+                    CAREER
+                </div>
+                <input
+                    type="hidden"
+                    id="intro-text-input"
+                    name="intro_text"
+                    value="이 시대 가장 주목 받는 예술인 이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인"
+                />
+
+                <div class="contact-section contact-section1"></div>
+                <div class="contact-section contact-section2"></div>
+                <div class="contact-section contact-section3"></div>
+                <div class="contact-title">CONTACT</div>
+                <div class="contact-info contact-info1">INSTA</div>
+                <div class="contact-info contact-info2">E-MAIL</div>
+                <div class="contact-info contact-info3">HOMEPAGE</div>
+                <div class="footer">
+                    <div class="footer-bg"></div>
+                    <div class="footer-text footer-text1">Gallery</div>
+                    <div class="footer-text footer-text2">Message</div>
+                    <div class="footer-text footer-text3">My page</div>
+                    <div class="footer-text footer-text4">Home</div>
+                    <div class="footer-text footer-text5">e-mail</div>
+                    <div class="footer-text footer-text6">moon3453@naver.com</div>
+                    <div class="footer-line"></div>
+                    <img class="footer-img" src="https://via.placeholder.com/1342x243" alt="Footer Image" />
+                    <div class="footer-title">Artist Zip</div>
+                </div>
+                <div class="cta">
+                    <div class="cta-bg"></div>
+                    <div class="cta-text">아티스트집이 궁금하다면?</div>
+                    <div class="cta-line"></div>
+                </div>
+                <button type="button" onclick="saveChanges()">저장</button>
+            </form>
+        </div>
+    </body>
+</html>
