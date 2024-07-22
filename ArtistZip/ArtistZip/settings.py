@@ -39,7 +39,13 @@ SECRET_KEY = 'django-insecure-u96s&vv^sixanjm+l5&+t)v=aet(cpugd%wr7-8o+&=nhjwfh5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'artistzip.com',
+    'www.artistzip.com',
+    'localhost',
+    '127.0.0.1',
+    '.ap-northeast-2.compute.amazonaws.com',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
