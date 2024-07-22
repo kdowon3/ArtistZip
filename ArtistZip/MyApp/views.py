@@ -1,17 +1,11 @@
-# MyApp/views.py
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Artwork
-from .forms import ArtworkForm
-from Auth.models import CustomUser 
-import random
-from .models import Portfolio
+from .models import Artwork, Portfolio, ContactInfo
+from .forms import ArtworkForm, PortfolioForm, ContactInfoForm
+from Auth.models import CustomUser
 from django.views.decorators.csrf import csrf_exempt
-from .forms import ContactInfoForm
-from .models import ContactInfo
-
+import random
 
 def index(request):
     return render(request, 'MyApp/index.html')
@@ -103,48 +97,79 @@ def edit_contact_info(request):
         form = ContactInfoForm(request.POST, instance=contact_info)
         if form.is_valid():
             form.save()
-            return redirect('profile')  # Assume you have a profile page
+            return redirect('profile', user_id=request.user.id)  # Redirect to profile page
     else:
         form = ContactInfoForm(instance=contact_info)
     
     return render(request, 'edit_contact_info.html', {'form': form})
 
+@login_required
 @csrf_exempt
-def portfolio1(request):
+def handle_portfolio(request, user_id=None, id=None, template_name='MyApp/portfolio1.html'):
+    if id:
+        portfolio = get_object_or_404(Portfolio, id=id)
+    else:
+        portfolio = Portfolio()
+
     if request.method == 'POST':
-        author_name = request.POST.get('author_name')
-        art_title = request.POST.get('art_title')
-        art_description = request.POST.get('art_description')
+        form = PortfolioForm(request.POST, instance=portfolio)
+        if form.is_valid():
+            form.save()
 
-        portfolio = Portfolio.objects.first()  # assuming there's only one portfolio object
-        if not portfolio:
-            portfolio = Portfolio()
-        portfolio.author_name = author_name
-        portfolio.art_title = art_title
-        portfolio.art_description = art_description
-        portfolio.save()
+            # Handle ContactInfo
+            contact_info, created = ContactInfo.objects.get_or_create(user=request.user)
+            contact_form = ContactInfoForm(request.POST, instance=contact_info)
+            if contact_form.is_valid():
+                contact_form.save()
 
-        return redirect('portfolio1')
+            # Handle Artwork uploads
+            for i in range(1, 7):
+                image_file = request.FILES.get(f'image{i}')
+                if image_file:
+                    artwork = Artwork(
+                        user=request.user,
+                        artwork_image=image_file,
+                        artwork_title=f'Artwork {i}',  # Placeholder title
+                        artwork_description=f'Description for artwork {i}'  # Placeholder description
+                    )
+                    artwork.save()
 
-    portfolio = Portfolio.objects.first()
+            return redirect('myprofile', user_id=user_id)
+    else:
+        form = PortfolioForm(instance=portfolio)
+
+    contact_info = ContactInfo.objects.filter(user=request.user).first()
+    artworks = Artwork.objects.filter(user=request.user)
+
     context = {
-        'portfolio': portfolio,
+        'form': form,
+        'contact_info': contact_info,
+        'artworks': artworks,
     }
-    return render(request, 'MyApp/portfolio1.html', context)
+    return render(request, template_name, context)
 
+# Define the portfolio views to use the `handle_portfolio` function
+@login_required
+def portfolio1(request, user_id=None, id=None):
+    return handle_portfolio(request, user_id, id, 'MyApp/portfolio1.html')
 
-def portfolio2(request):
-    return render(request, 'MyApp/portfolio2.html')
+@login_required
+def portfolio2(request, user_id=None, id=None):
+    return handle_portfolio(request, user_id, id, 'MyApp/portfolio2.html')
 
-def portfolio3(request):
-    return render(request, 'MyApp/portfolio3.html')
+@login_required
+def portfolio3(request, user_id=None, id=None):
+    return handle_portfolio(request, user_id, id, 'MyApp/portfolio3.html')
 
-def portfolio4(request):
-    return render(request, 'MyApp/portfolio4.html')
+@login_required
+def portfolio4(request, user_id=None, id=None):
+    return handle_portfolio(request, user_id, id, 'MyApp/portfolio4.html')
 
-def portfolio5(request):
-    return render(request, 'MyApp/portfolio5.html')
+@login_required
+def portfolio5(request, user_id=None, id=None):
+    return handle_portfolio(request, user_id, id, 'MyApp/portfolio5.html')
 
-def portfolio6(request):
-    return render(request, 'MyApp/portfolio6.html')
+@login_required
+def portfolio6(request, user_id=None, id=None):
+    return handle_portfolio(request, user_id, id, 'MyApp/portfolio6.html')
 

@@ -1,645 +1,303 @@
+{% load static%}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Artist Template</title>
-        <style>
-            .editable {
-                border: 1px solid #ccc;
-                padding: 5px;
-                min-height: 20px; /* 최소 높이 설정 */
-                font-size: 24px;
-                color: black;
-                cursor: text;
-            }
-            .placeholder {
-                color: #aaa;
-            }
-            body {
-                margin: 0;
-                padding: 0;
-                font-family: 'Inter', sans-serif;
-                background: white;
-            }
-
-            .container {
-                width: 1920px;
-                height: 8359px;
-                position: relative;
-                background: white;
-            }
-
-            .box {
-                position: absolute;
-                background: rgba(255, 233.77, 218.39, 0.5);
-                border: 1px black solid;
-            }
-
-            .box1 {
-                width: 195px;
-                height: 579px;
-                left: 1278px;
-                top: 198px;
-            }
-
-            .box2 {
-                width: 181px;
-                height: 579px;
-                left: 1464px;
-                top: 198px;
-            }
-
-            .box3 {
-                width: 195px;
-                height: 579px;
-                left: 1636px;
-                top: 198px;
-            }
-
-            .image {
-                position: absolute;
-                border-radius: 10px;
-            }
-            .image-preview {
-                position: absolute;
-                cursor: pointer;
-                overflow: hidden;
-                background-color: #f0f0f0; /* placeholder 배경색 */
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .image-preview img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-            .placeholder-text {
-                font-size: 24px;
-                color: #888;
-            }
-            .image1 {
-                width: 734px;
-                height: 547px;
-                left: 87px;
-                top: 1765px;
-                transform: rotate(-90deg);
-                transform-origin: 0 0;
-            }
-
-            .image2 {
-                width: 734px;
-                height: 1744px;
-                left: 87px;
-                top: 2676px;
-                transform: rotate(-90deg);
-                transform-origin: 0 0;
-            }
-
-            .image3 {
-                width: 546px;
-                height: 734px;
-                left: 686px;
-                top: 1031px;
-            }
-
-            .image4 {
-                width: 1744px;
-                height: 734px;
-                left: 87px;
-                top: 3092px;
-            }
-
-            .image5 {
-                width: 547px;
-                height: 734px;
-                left: 1284px;
-                top: 1031px;
-            }
-
-            .image6 {
-                width: 1744px;
-                height: 734px;
-                left: 87px;
-                top: 4241px;
-            }
-            .author-name {
-                left: 87px;
-                top: 229px;
-                position: absolute;
-                color: black;
-                font-size: 150px;
-                font-weight: 600;
-                word-wrap: break-word;
-            }
-
-            .author-title {
-                left: 532px;
-                top: 342px;
-                position: absolute;
-                color: black;
-                font-size: 40px;
-                font-weight: 600;
-                word-wrap: break-word;
-            }
-
-            .view-representative-works,
-            .author-intro,
-            .art-gallery {
-                position: absolute;
-                transform: rotate(-90deg);
-                transform-origin: 0 0;
-                color: black;
-                font-size: 70px;
-                font-weight: 600;
-                word-wrap: break-word;
-            }
-
-            .view-representative-works {
-                left: 1513px;
-                top: 728px;
-            }
-
-            .author-intro {
-                left: 1333px;
-                top: 728px;
-            }
-
-            .art-gallery {
-                left: 1693px;
-                top: 728px;
-            }
-
-            .site-title {
-                left: 87px;
-                top: 47px;
-                position: absolute;
-                color: black;
-                font-size: 30px;
-                font-family: 'Knewave', cursive;
-                font-weight: 400;
-                word-wrap: break-word;
-            }
-
-            .author-info {
-                left: 1759px;
-                top: 65px;
-                position: absolute;
-                text-align: right;
-                color: black;
-                font-size: 20px;
-                font-weight: 500;
-                word-wrap: break-word;
-            }
-
-            .line {
-                position: absolute;
-                border: 1px black solid;
-            }
-
-            .line1 {
-                width: 420px;
-                height: 0;
-                left: 1298px;
-                top: 77px;
-            }
-
-            .line2 {
-                width: 871px;
-                height: 0;
-                left: 960px;
-                top: 2714px;
-            }
-
-            .line3 {
-                width: 871px;
-                height: 0;
-                left: 960px;
-                top: 3864px;
-            }
-
-            .line4 {
-                width: 871px;
-                height: 0;
-                left: 960px;
-                top: 5013px;
-            }
-
-            .intro-text {
-                width: 674px;
-                left: 87px;
-                top: 727px;
-                position: absolute;
-                color: black;
-                font-size: 20px;
-                font-weight: 500;
-                word-wrap: break-word;
-            }
-
-            .art-title {
-                position: absolute;
-                text-align: right;
-                color: black;
-                font-size: 40px;
-                font-weight: 700;
-                word-wrap: break-word;
-            }
-
-            .art-title1 {
-                left: 1402px;
-                top: 2732px;
-            }
-
-            .art-title2 {
-                left: 1402px;
-                top: 3882px;
-            }
-
-            .art-title3 {
-                left: 1402px;
-                top: 5031px;
-            }
-
-            .thick-line {
-                position: absolute;
-                border: 3px black solid;
-            }
-
-            .thick-line1 {
-                width: 1597px;
-                height: 0;
-                left: 148px;
-                top: 7673px;
-            }
-
-            .thick-line2 {
-                width: 1597px;
-                height: 0;
-                left: 148px;
-                top: 7847px;
-            }
-
-            .thick-line3 {
-                width: 1597px;
-                height: 0;
-                left: 148px;
-                top: 8021px;
-            }
-
-            .contact-title {
-                left: 148px;
-                top: 7279px;
-                position: absolute;
-                color: black;
-                font-size: 120px;
-                font-weight: 700;
-                word-wrap: break-word;
-            }
-
-            .contact-info {
-                left: 148px;
-                position: absolute;
-                color: black;
-                font-size: 80px;
-                font-weight: 600;
-                word-wrap: break-word;
-            }
-
-            .instagram {
-                top: 7551px;
-            }
-
-            .email {
-                top: 7725px;
-            }
-
-            .homepage {
-                top: 7899px;
-            }
-
-            .main-title {
-                left: 87px;
-                top: 647px;
-                position: absolute;
-                color: black;
-                font-size: 50px;
-                font-weight: 700;
-                word-wrap: break-word;
-            }
-
-            .project-name {
-                position: absolute;
-                text-align: right;
-                color: black;
-                font-size: 18px;
-                font-weight: 500;
-                word-wrap: break-word;
-            }
-
-            .project-name1 {
-                left: 87px;
-                top: 1788px;
-            }
-
-            .project-name2 {
-                left: 686px;
-                top: 1788px;
-            }
-
-            .project-name3 {
-                left: 1284px;
-                top: 1788px;
-            }
-        </style>
-        <script>
-            function enableEditing(element) {
-                element.contentEditable = 'true';
-                element.classList.add('editable');
-                element.focus(); // 편집 모드로 전환 시 포커스를 줍니다.
-            }
-
-            function disableEditing(element) {
-                element.contentEditable = 'false';
-                element.classList.remove('editable');
-            }
-            function handleFileSelect(event, previewId) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        const preview = document.getElementById(previewId);
-                        if (preview) {
-                            const img = preview.querySelector('img');
-                            if (img) {
-                                img.src = e.target.result;
-                                img.style.display = 'block';
-                            }
-                            const placeholderText = preview.querySelector('.placeholder-text');
-                            if (placeholderText) {
-                                placeholderText.style.display = 'none';
-                            }
-                        }
-                    };
-                    reader.readAsDataURL(file);
-                }
-            }
-
-            window.onload = function () {
-                const imagePreviewIds = [
-                    'image1Preview',
-                    'image2Preview',
-                    'image3Preview',
-                    'image4Preview',
-                    'image5Preview',
-                    'image6Preview',
-                ];
-                imagePreviewIds.forEach((id) => {
-                    const preview = document.getElementById(id);
-                    if (preview) {
-                        const img = preview.querySelector('img');
-                        const placeholderText = preview.querySelector('.placeholder-text');
-
-                        if (img && img.src && img.src !== window.location.href) {
-                            img.style.display = 'block';
-                            if (placeholderText) {
-                                placeholderText.style.display = 'none';
-                            }
-                        } else if (img) {
-                            img.style.display = 'none';
-                            if (placeholderText) {
-                                placeholderText.style.display = 'block';
-                            }
-                        }
-                    }
-                });
-            };
-
-            function triggerFileInput(inputId) {
-                const input = document.getElementById(inputId);
-                if (input) {
-                    input.click();
-                }
-            }
-            function openLink(type) {
-                let url;
-                switch (type) {
-                    case 'instagram':
-                        url = '{{ contact_info.instagram }}';
-                        break;
-                    case 'email':
-                        url = 'mailto:{{ contact_info.email }}';
-                        break;
-                    case 'homepage':
-                        url = '{{ contact_info.homepage }}';
-                        break;
-                }
-                if (url) {
-                    window.open(url, '_blank');
-                } else {
-                    alert('URL이 설정되지 않았습니다.');
-                }
-            }
-            function saveChanges() {
-                const authorName = document.getElementById('author-name').innerText;
-                const artworkTitle = document.getElementById('art-title').innerText;
-                const artworkDescription = document.getElementById('intro-text').innerText;
-
-                // Create a form and submit it
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.enctype = 'multipart/form-data';
-
-                const csrfToken = document.createElement('input');
-                csrfToken.type = 'hidden';
-                csrfToken.name = 'csrfmiddlewaretoken';
-                csrfToken.value = '{{ csrf_token }}';
-                form.appendChild(csrfToken);
-
-                const authorNameInput = document.createElement('input');
-                authorNameInput.type = 'hidden';
-                authorNameInput.name = 'author_name';
-                authorNameInput.value = authorName;
-                form.appendChild(authorNameInput);
-
-                const artworkTitleInput = document.createElement('input');
-                artworkTitleInput.type = 'hidden';
-                artworkTitleInput.name = 'art_title';
-                artworkTitleInput.value = artworkTitle;
-                form.appendChild(artworkTitleInput);
-
-                const artworkDescriptionInput = document.createElement('input');
-                artworkDescriptionInput.type = 'hidden';
-                artworkDescriptionInput.name = 'art_description';
-                artworkDescriptionInput.value = artworkDescription;
-                form.appendChild(artworkDescriptionInput);
-
-                document.body.appendChild(form);
-                form.submit();
-            }
-        </script>
+        <link rel="stylesheet" href="{% static 'css/portfolio1.css' %}" />
     </head>
     <body>
+        <script src="{% static 'js/portfolio.js' %}" defer></script>
         <div class="container">
-            <div class="box box1"></div>
-            <div class="box box2"></div>
-            <div class="box box3"></div>
-            <div id="image1Preview" class="image-preview image1" ondblclick="triggerFileInput('fileInput1')">
-                <img class="image image1" src="" alt="Image 1" />
-                <div class="placeholder-text">547 x 734</div>
-            </div>
-            <input
-                type="file"
-                id="fileInput1"
-                style="display: none"
-                accept="image/*"
-                onchange="handleFileSelect(event, 'image1Preview')"
-            />
-
-            <div id="image2Preview" class="image-preview image2" ondblclick="triggerFileInput('fileInput2')">
-                <img class="image image2" src="" alt="Image 2" />
-                <div class="placeholder-text">1744 x 734</div>
-            </div>
-            <input
-                type="file"
-                id="fileInput2"
-                style="display: none"
-                accept="image/*"
-                onchange="handleFileSelect(event, 'image2Preview')"
-            />
-            <div id="author-name" class="author-name" ondblclick="enableEditing(this)" onblur="disableEditing(this)">
-                Name
-            </div>
-            <div class="author-title">작가</div>
-            <div class="view-representative-works">대표 작품 보기</div>
-            <div class="author-intro">작가 소개</div>
-            <div class="art-gallery">작품 갤러리</div>
-            <div class="site-title">Artist Zip</div>
-            <div id="author-info" class="author-info" ondblclick="enableEditing(this)" onblur="disableEditing(this)">
-                Name 작가
-            </div>
-
-            <div class="line line1"></div>
-            <div id="image3Preview" class="image-preview image3" ondblclick="triggerFileInput('fileInput3')">
-                <img class="image image3" src="" alt="Image 3" />
-                <div class="placeholder-text">547 x 734</div>
-            </div>
-            <input
-                type="file"
-                id="fileInput3"
-                style="display: none"
-                accept="image/*"
-                onchange="handleFileSelect(event, 'image3Preview')"
-            />
-            <div id="image4Preview" class="image-preview image4" ondblclick="triggerFileInput('fileInput4')">
-                <img class="image image4" src="" alt="Image 4" />
-                <div class="placeholder-text">1744 x 734</div>
-            </div>
-            <input
-                type="file"
-                id="fileInput4"
-                style="display: none"
-                accept="image/*"
-                onchange="handleFileSelect(event, 'image4Preview')"
-            />
-            <div id="image5Preview" class="image-preview image5" ondblclick="triggerFileInput('fileInput5')">
-                <img class="image image5" src="" alt="Image 5" />
-                <div class="placeholder-text">547 x 734</div>
-            </div>
-            <input
-                type="file"
-                id="fileInput5"
-                style="display: none"
-                accept="image/*"
-                onchange="handleFileSelect(event, 'image5Preview')"
-            />
-            <div id="image6Preview" class="image-preview image6" ondblclick="triggerFileInput('fileInput6')">
-                <img class="image image6" src="" alt="Image 6" />
-                <div class="placeholder-text">1744 x 734</div>
-            </div>
-            <input
-                type="file"
-                id="fileInput6"
-                style="display: none"
-                accept="image/*"
-                onchange="handleFileSelect(event, 'image6Preview')"
-            />
-            <div id="intro-text" class="intro-text" ondblclick="enableEditing(this)" onblur="disableEditing(this)">
-                career
-            </div>
-            <div class="line line2"></div>
-            <div class="line line3"></div>
-            <div class="line line4"></div>
-            <div
-                id="art-title1"
-                class="art-title art-title1"
-                ondblclick="enableEditing(this)"
-                onblur="disableEditing(this)"
+            <form
+                id="portfolio-form"
+                method="post"
+                enctype="multipart/form-data"
+                action="{% url 'portfolio1' user.id %}"
             >
-                project name
-            </div>
-            <div
-                id="art-title2"
-                class="art-title art-title2"
-                ondblclick="enableEditing(this)"
-                onblur="disableEditing(this)"
-            >
-                project name
-            </div>
-            <div
-                id="art-title3"
-                class="art-title art-title3"
-                ondblclick="enableEditing(this)"
-                onblur="disableEditing(this)"
-            >
-                project name
-            </div>
-            <div class="thick-line thick-line1"></div>
-            <div class="thick-line thick-line2"></div>
-            <div class="thick-line thick-line3"></div>
-            <div class="contact-title">컨택트</div>
-            <div class="contact-info instagram" onclick="openLink('instagram')">인스타그램</div>
-            <div class="contact-info email" onclick="openLink('email')">이메일</div>
-            <div class="contact-info homepage onclick="openLink('homepage')"">홈페이지</div>
-            <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">저장</button>
+                <div class="box box1"></div>
+                <div class="box box2"></div>
+                <div class="box box3"></div>
+                <div id="image1Preview" class="image-preview image1" ondblclick="triggerFileInput('fileInput1')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image1_url %}{{ portfolio.image1_url }}{% endif %}"
+                        alt="Image 1"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image1_url %}display: none{% endif %}"
+                    >
+                        547 x 734
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput1"
+                    name="image1"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image1Preview')"
+                />
+
+                <div id="image2Preview" class="image-preview image2" ondblclick="triggerFileInput('fileInput2')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image2_url %}{{ portfolio.image2_url }}{% endif %}"
+                        alt="Image 2"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image2_url %}display: none{% endif %}"
+                    >
+                        1744 x 734
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput2"
+                    name="image2"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image2Preview')"
+                />
+
+                <div
+                    id="author-name"
+                    class="author-name"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="author-name-input"
+                >
+                    {% if portfolio %}{{ portfolio.author_name }}{% else %}Name{% endif %}
+                </div>
+                <input
+                    type="hidden"
+                    id="author-name-input"
+                    name="author_name"
+                    value="{% if portfolio %}{{ portfolio.author_name }}{% else %}Name{% endif %}"
+                />
+
+                <div class="author-title">작가</div>
+                <div class="view-representative-works">대표 작품 보기</div>
+                <div class="author-intro">작가 소개</div>
+                <div class="art-gallery">작품 갤러리</div>
+                <div class="site-title">Artist Zip</div>
+                <div
+                    id="author-info"
+                    class="author-info"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="author-info-input"
+                >
+                    {% if portfolio %}{{ portfolio.author_info }}{% else %}Name 작가{% endif %}
+                </div>
+                <input
+                    type="hidden"
+                    id="author-info-input"
+                    name="author_info"
+                    value="{% if portfolio %}{{ portfolio.author_info }}{% else %}Name 작가{% endif %}"
+                />
+
+                <div class="line line1"></div>
+                <div id="image3Preview" class="image-preview image3" ondblclick="triggerFileInput('fileInput3')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image3_url %}{{ portfolio.image3_url }}{% endif %}"
+                        alt="Image 3"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image3_url %}display: none{% endif %}"
+                    >
+                        547 x 734
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput3"
+                    name="image3"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image3Preview')"
+                />
+                <div id="image4Preview" class="image-preview image4" ondblclick="triggerFileInput('fileInput4')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image4_url %}{{ portfolio.image4_url }}{% endif %}"
+                        alt="Image 4"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image4_url %}display: none{% endif %}"
+                    >
+                        1744 x 734
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput4"
+                    name="image4"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image4Preview')"
+                />
+                <div id="image5Preview" class="image-preview image5" ondblclick="triggerFileInput('fileInput5')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image5_url %}{{ portfolio.image5_url }}{% endif %}"
+                        alt="Image 5"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image5_url %}display: none{% endif %}"
+                    >
+                        547 x 734
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput5"
+                    name="image5"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image5Preview')"
+                />
+                <div id="image6Preview" class="image-preview image6" ondblclick="triggerFileInput('fileInput6')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image6_url %}{{ portfolio.image6_url }}{% endif %}"
+                        alt="Image 6"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image6_url %}display: none{% endif %}"
+                    >
+                        1744 x 734
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput6"
+                    name="image6"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image6Preview')"
+                />
+                <div
+                    id="intro-text"
+                    class="intro-text"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="intro-text-input"
+                >
+                    {% if portfolio %}{{ portfolio.art_description }}{% else %}career{% endif %}
+                </div>
+                <input
+                    type="hidden"
+                    id="intro-text-input"
+                    name="art_description"
+                    value="{% if portfolio %}{{ portfolio.art_description }}{% else %}career{% endif %}"
+                />
+
+                <div class="line line2"></div>
+                <div class="line line3"></div>
+                <div class="line line4"></div>
+                <div
+                    id="art-title1"
+                    class="art-title art-title1"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="art-title-input"
+                >
+                    {% if portfolio %}{{ portfolio.art_title }}{% else %}project name{% endif %}
+                </div>
+                <input
+                    type="hidden"
+                    id="art-title-input"
+                    name="art_title"
+                    value="{% if portfolio %}{{ portfolio.art_title }}{% else %}project name{% endif %}"
+                />
+                <div
+                    id="art-title2"
+                    class="art-title art-title2"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="art-title-input"
+                >
+                    project name
+                </div>
+                <div
+                    id="art-title3"
+                    class="art-title art-title3"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="art-title-input"
+                >
+                    project name
+                </div>
+                <div class="thick-line thick-line1"></div>
+                <div class="thick-line thick-line2"></div>
+                <div class="thick-line thick-line3"></div>
+                <div class="contact-title">컨택트</div>
+                <div class="contact-info instagram" onclick="openLink('instagram')">인스타그램</div>
+                <input
+                    type="hidden"
+                    id="instagram-input"
+                    name="instagram"
+                    value="{% if contact_info %}{{ contact_info.instagram }}{% endif %}"
+                />
+                <div class="contact-info email" onclick="openLink('email')">이메일</div>
+                <input
+                    type="hidden"
+                    id="email-input"
+                    name="email"
+                    value="{% if contact_info %}{{ contact_info.email }}{% endif %}"
+                />
+                <div class="contact-info homepage" onclick="openLink('homepage')">홈페이지</div>
+                <input
+                    type="hidden"
+                    id="homepage-input"
+                    name="homepage"
+                    value="{% if contact_info %}{{ contact_info.homepage }}{% endif %}"
+                />
+                <div
+                    id="main-title"
+                    class="main-title"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="main-title-input"
+                >
+                    Appealing-Description
+                </div>
+                <div
+                    id="project-name1"
+                    class="project-name project-name1"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                >
+                    project name
+                </div>
+                <div
+                    id="project-name2"
+                    class="project-name project-name2"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                >
+                    project name
+                </div>
+                <div
+                    id="project-name3"
+                    class="project-name project-name3"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                >
+                    project name
+                </div>
+                <button type="button" onclick="saveChanges()">저장</button>
             </form>
-            <div id="main-title" class="main-title" ondblclick="enableEditing(this)" onblur="disableEditing(this)">
-                Appealing-Description
-            </div>
-            <div
-                id="project-name1"
-                class="project-name project-name1"
-                ondblclick="enableEditing(this)"
-                onblur="disableEditing(this)"
-            >
-                project name
-            </div>
-            <div
-                id="project-name2"
-                class="project-name project-name2"
-                ondblclick="enableEditing(this)"
-                onblur="disableEditing(this)"
-            >
-                project name
-            </div>
-            <div
-                id="project-name3"
-                class="project-name project-name3"
-                ondblclick="enableEditing(this)"
-                onblur="disableEditing(this)"
-            >
-                project name
-            </div>
-            {% for artwork in artworks %}
-            <div>
-                <img src="{{ artwork.artwork_image.url }}" alt="{{ artwork.artwork_title }}" style="max-width: 200px" />
-                <h3>{{ artwork.artwork_title }}</h3>
-                <p>{{ artwork.artwork_description }}</p>
-            </div>
-            {% endfor %}
         </div>
     </body>
 </html>

@@ -5,392 +5,116 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Portfolio Template</title>
-        <style>
-            body {
-                margin: 0;
-                padding: 0;
-                font-family: "Inter", sans-serif;
-                background: black;
-            }
-
-            .container {
-                width: 1920px;
-                height: 9183px;
-                position: relative;
-                background: black;
-            }
-
-            .image {
-                position: absolute;
-            }
-
-            .image1 {
-                width: 1920px;
-                height: 1080px;
-                left: 0;
-                top: 0;
-            }
-
-            .image2 {
-                width: 977px;
-                height: 724px;
-                left: 1017px;
-                top: 5213px;
-                transform: rotate(-90deg);
-                transform-origin: 0 0;
-            }
-
-            .image3 {
-                width: 724px;
-                height: 976px;
-                left: 1017px;
-                top: 3119px;
-            }
-
-            .image4 {
-                width: 723px;
-                height: 976px;
-                left: 1018px;
-                top: 5354px;
-            }
-
-            .image5 {
-                width: 976px;
-                height: 724px;
-                left: 178px;
-                top: 4095px;
-                transform: rotate(-90deg);
-                transform-origin: 0 0;
-            }
-
-            .image6 {
-                width: 976px;
-                height: 723px;
-                left: 178px;
-                top: 6330px;
-                transform: rotate(-90deg);
-                transform-origin: 0 0;
-            }
-
-            .image7 {
-                width: 724px;
-                height: 977px;
-                left: 178px;
-                top: 4236px;
-            }
-
-            .site-title {
-                left: 87px;
-                top: 47px;
-                position: absolute;
-                color: black;
-                font-size: 30px;
-                font-family: "Knewave", cursive;
-                font-weight: 400;
-                word-wrap: break-word;
-            }
-
-            .author-info {
-                left: 1759px;
-                top: 65px;
-                position: absolute;
-                text-align: right;
-                color: black;
-                font-size: 20px;
-                font-weight: 500;
-                word-wrap: break-word;
-            }
-
-            .line {
-                position: absolute;
-                border: 1px black solid;
-            }
-
-            .line1 {
-                width: 420px;
-                height: 0;
-                left: 1298px;
-                top: 77px;
-            }
-
-            .author-name {
-                position: absolute;
-                text-align: center;
-                color: white;
-                font-size: 350px;
-                font-weight: 600;
-                word-wrap: break-word;
-            }
-
-            .author-name1 {
-                left: 125px;
-                top: 1348px;
-            }
-
-            .author-name2 {
-                left: 759px;
-                top: 1646px;
-            }
-
-            .intro-text {
-                width: 1215px;
-                left: 152px;
-                top: 2418px;
-                position: absolute;
-                color: white;
-                font-size: 20px;
-                font-weight: 500;
-                word-wrap: break-word;
-            }
-
-            .intro-title {
-                left: 150px;
-                top: 2317px;
-                position: absolute;
-                color: white;
-                font-size: 60px;
-                font-weight: 700;
-                word-wrap: break-word;
-            }
-
-            .contact-section {
-                position: absolute;
-                background: #d9d9d9;
-                border-radius: 30px;
-            }
-
-            .contact-section1 {
-                width: 609px;
-                height: 427px;
-                left: 758px;
-                top: 7505px;
-            }
-
-            .contact-section2 {
-                width: 609px;
-                height: 989px;
-                left: 125px;
-                top: 7505px;
-            }
-
-            .contact-section3 {
-                width: 1012px;
-                height: 540px;
-                left: 758px;
-                top: 7954px;
-            }
-
-            .contact-title {
-                left: 148px;
-                top: 7266px;
-                position: absolute;
-                color: white;
-                font-size: 120px;
-                font-weight: 700;
-                word-wrap: break-word;
-            }
-
-            .contact-info {
-                position: absolute;
-                color: white;
-                font-size: 80px;
-                font-weight: 600;
-                word-wrap: break-word;
-            }
-
-            .contact-info1 {
-                left: 172px;
-                top: 7536px;
-            }
-
-            .contact-info2 {
-                left: 809px;
-                top: 7536px;
-            }
-
-            .contact-info3 {
-                left: 809px;
-                top: 7990px;
-            }
-
-            .footer {
-                width: 1920px;
-                height: 357px;
-                left: 0;
-                top: 8826px;
-                position: absolute;
-            }
-
-            .footer-bg {
-                width: 1920px;
-                height: 357px;
-                left: 0;
-                top: 0;
-                position: absolute;
-                background: #5b5b5b;
-            }
-
-            .footer-text {
-                position: absolute;
-                color: white;
-                font-size: 25px;
-                font-weight: 400;
-                word-wrap: break-word;
-            }
-
-            .footer-text1 {
-                left: 703px;
-                top: 268px;
-            }
-
-            .footer-text2 {
-                left: 867px;
-                top: 268px;
-            }
-
-            .footer-text3 {
-                left: 1055px;
-                top: 268px;
-            }
-
-            .footer-text4 {
-                left: 552px;
-                top: 268px;
-            }
-
-            .footer-text5 {
-                left: 1542px;
-                top: 276px;
-                font-size: 18px;
-            }
-
-            .footer-text6 {
-                left: 1637px;
-                top: 276px;
-                font-size: 18px;
-            }
-
-            .footer-line {
-                width: 22px;
-                height: 0;
-                left: 1614px;
-                top: 276px;
-                position: absolute;
-                transform: rotate(90deg);
-                transform-origin: 0 0;
-                border: 1px white solid;
-            }
-
-            .footer-img {
-                width: 1342px;
-                height: 243px;
-                left: 535px;
-                top: 0;
-                position: absolute;
-            }
-
-            .footer-title {
-                left: 73px;
-                top: 179px;
-                position: absolute;
-                color: white;
-                font-size: 80px;
-                font-family: "Knewave", cursive;
-                font-weight: 400;
-                word-wrap: break-word;
-            }
-
-            .cta {
-                width: 468px;
-                height: 72px;
-                left: 726px;
-                top: 8624px;
-                position: absolute;
-            }
-
-            .cta-bg {
-                width: 468px;
-                height: 72px;
-                left: 0;
-                top: 0;
-                position: absolute;
-                background: white;
-                border-radius: 50px;
-            }
-
-            .cta-text {
-                left: 53px;
-                top: 18px;
-                position: absolute;
-                text-align: center;
-                color: black;
-                font-size: 30px;
-                font-weight: 600;
-                word-wrap: break-word;
-            }
-
-            .cta-line {
-                width: 22px;
-                height: 0;
-                left: 395px;
-                top: 36px;
-                position: absolute;
-                border: 2px black solid;
-            }
-        </style>
+        <link rel="stylesheet" href="{% static 'css/portfolio6.css' %}" />
     </head>
     <body>
+        <script src="{% static 'js/portfolio.js' %}" defer></script>
+
         <div class="container">
-            <img class="image image1" src="https://via.placeholder.com/1920x1080" alt="Image 1" />
-            <img class="image image2" src="https://via.placeholder.com/977x724" alt="Image 2" />
-            <img class="image image3" src="https://via.placeholder.com/724x976" alt="Image 3" />
-            <img class="image image4" src="https://via.placeholder.com/723x976" alt="Image 4" />
-            <img class="image image5" src="https://via.placeholder.com/976x724" alt="Image 5" />
-            <img class="image image6" src="https://via.placeholder.com/976x723" alt="Image 6" />
-            <img class="image image7" src="https://via.placeholder.com/724x977" alt="Image 7" />
-            <div class="site-title">Artist Zip</div>
-            <div class="author-info">문희재 작가</div>
-            <div class="line line1"></div>
-            <div class="author-name author-name1">HEEJAE</div>
-            <div class="author-name author-name2">MOON</div>
-            <div class="intro-title">이 시대 가장 주목 받는 예술인</div>
-            <div class="intro-text">
-                문희재 작가는 어쩌구 저쩌구 잘한다 잫한다 문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구
-                저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다
-                잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는
-                어쩌구 저쩌구 잘한다 잫한다 문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다
-                잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫<br /><br />한다문희재 작가는 어쩌구 저쩌구 잘한다
-                잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는
-                어쩌구 저쩌구 잘한다 잫한다 문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다
-                잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는
-                어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다
-                잫한다<br /><br />
-                문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재
-            </div>
-            <div class="contact-section contact-section1"></div>
-            <div class="contact-section contact-section2"></div>
-            <div class="contact-section contact-section3"></div>
-            <div class="contact-title">CONTACT</div>
-            <div class="contact-info contact-info1">INSTA</div>
-            <div class="contact-info contact-info2">E-MAIL</div>
-            <div class="contact-info contact-info3">HOMEPAGE</div>
-            <div class="footer">
-                <div class="footer-bg"></div>
-                <div class="footer-text footer-text1">Gallery</div>
-                <div class="footer-text footer-text2">Message</div>
-                <div class="footer-text footer-text3">My page</div>
-                <div class="footer-text footer-text4">Home</div>
-                <div class="footer-text footer-text5">e-mail</div>
-                <div class="footer-text footer-text6">moon3453@naver.com</div>
-                <div class="footer-line"></div>
-                <img class="footer-img" src="https://via.placeholder.com/1342x243" alt="Footer Image" />
-                <div class="footer-title">Artist Zip</div>
-            </div>
-            <div class="cta">
-                <div class="cta-bg"></div>
-                <div class="cta-text">아티스트집이 궁금하다면?</div>
-                <div class="cta-line"></div>
-            </div>
+            <form
+                id="portfolio-form"
+                method="post"
+                enctype="multipart/form-data"
+                action="{% url 'portfolio3' user.id %}"
+            >
+                {% csrf_token %}
+
+                <img class="image image1" src="https://via.placeholder.com/1920x1080" alt="Image 1" />
+                <img class="image image2" src="https://via.placeholder.com/977x724" alt="Image 2" />
+                <img class="image image3" src="https://via.placeholder.com/724x976" alt="Image 3" />
+                <img class="image image4" src="https://via.placeholder.com/723x976" alt="Image 4" />
+                <img class="image image5" src="https://via.placeholder.com/976x724" alt="Image 5" />
+                <img class="image image6" src="https://via.placeholder.com/976x723" alt="Image 6" />
+                <img class="image image7" src="https://via.placeholder.com/724x977" alt="Image 7" />
+                <div class="site-title">Artist Zip</div>
+                <div
+                    id="author-info"
+                    class="author-info"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="author-info-input"
+                >
+                    NAME 작가
+                </div>
+                <input type="hidden" id="author-info-input" name="author_info" value="문희재 작가" />
+
+                <div class="line line1"></div>
+
+                <div
+                    id="author-name1"
+                    class="author-name author-name1"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="author-name1-input"
+                >
+                    NAME
+                </div>
+                <input type="hidden" id="author-name1-input" name="author_name1" value="HEEJAE" />
+
+                <div
+                    id="author-name2"
+                    class="author-name author-name2"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="author-name2-input"
+                >
+                    NAME
+                </div>
+                <input type="hidden" id="author-name2-input" name="author_name2" value="MOON" />
+
+                <div
+                    id="intro-title"
+                    class="intro-title"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="intro-title-input"
+                >
+                    Appealing Description
+                </div>
+                <input type="hidden" id="intro-title-input" name="intro_title" value="이 시대 가장 주목 받는 예술인" />
+
+                <div
+                    id="intro-text"
+                    class="intro-text"
+                    ondblclick="enableEditing(this)"
+                    onblur="disableEditing(this)"
+                    data-input-id="intro-text-input"
+                >
+                    CAREER
+                </div>
+                <input
+                    type="hidden"
+                    id="intro-text-input"
+                    name="intro_text"
+                    value="문희재 작가는 어쩌구 저쩌구 잘한다 잫한다 문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다 문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫한다문희재 작가는 어쩌구 저쩌구 잘한다 잫다"
+                />
+
+                <div class="contact-section contact-section1"></div>
+                <div class="contact-section contact-section2"></div>
+                <div class="contact-section contact-section3"></div>
+                <div class="contact-title">CONTACT</div>
+                <div class="contact-info contact-info1">INSTA</div>
+                <div class="contact-info contact-info2">E-MAIL</div>
+                <div class="contact-info contact-info3">HOMEPAGE</div>
+                <div class="footer">
+                    <div class="footer-bg"></div>
+                    <div class="footer-text footer-text1">Gallery</div>
+                    <div class="footer-text footer-text2">Message</div>
+                    <div class="footer-text footer-text3">My page</div>
+                    <div class="footer-text footer-text4">Home</div>
+                    <div class="footer-text footer-text5">e-mail</div>
+                    <div class="footer-text footer-text6">moon3453@naver.com</div>
+                    <div class="footer-line"></div>
+                    <img class="footer-img" src="https://via.placeholder.com/1342x243" alt="Footer Image" />
+                    <div class="footer-title">Artist Zip</div>
+                </div>
+                <div class="cta">
+                    <div class="cta-bg"></div>
+                    <div class="cta-text">아티스트집이 궁금하다면?</div>
+                    <div class="cta-line"></div>
+                </div>
+                <button type="button" onclick="saveChanges()">저장</button>
+            </form>
         </div>
     </body>
 </html>
