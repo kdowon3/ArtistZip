@@ -17,9 +17,11 @@
         {% for artist in artists %}
         <div class="artist-card">
             {% if artist.profile_picture %}
-            <img src="{{ artist.profile_picture.url }}" alt="{{ artist.username }}">
+            <img src="{{ artist.profile_picture.url }}" alt="{{ artist.username }}" class="myprofile-image">
             {% else %}
-            <img src="{% static 'images/default_profile.png' %}" alt="{{ artist.username }}">
+            <div class="myprofile-image avatar-placeholder">
+                <span>{{ artist.username|slice:":1" }}</span> <!-- 첫 글자를 표시 -->
+            </div>
             {% endif %}
             <div class="artist-name">{{ artist.username }}</div>
             <a href="#" class="unstyled-link portfolio-button">포트폴리오 보기</a>
