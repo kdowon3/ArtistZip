@@ -80,9 +80,23 @@
     }
 
     function closeModal() {
-        document.getElementById("merge-modal").style.display = "none";
-        document.getElementById("signup-modal").style.display = "none";
+        const mergeModal = document.getElementById("merge-modal");
+        const signupModal = document.getElementById("signup-modal");
+        if (mergeModal) {
+            mergeModal.style.display = "none";
+        }
+        if (signupModal) {
+            signupModal.style.display = "none";
+        }
         document.body.classList.remove("modal-open");
     }
+
+    // 모달 닫기 버튼에 이벤트 리스너 추가
+    document.addEventListener('DOMContentLoaded', function() {
+        const closeButtons = document.querySelectorAll('.modal .close');
+        closeButtons.forEach(button => {
+            button.addEventListener('click', closeModal);
+        });
+    });
 </script>
 {% endblock %}

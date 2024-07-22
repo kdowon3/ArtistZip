@@ -1,0 +1,412 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: white;
+}
+
+.container {
+    width: 1920px;
+    height: 9183px;
+    position: relative;
+    background: white;
+}
+
+.site-title {
+    left: 87px;
+    top: 47px;
+    position: absolute;
+    color: black;
+    font-size: 30px;
+    font-family: 'Knewave', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.author-info {
+    left: 1759px;
+    top: 65px;
+    position: absolute;
+    text-align: right;
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.line {
+    position: absolute;
+    border: 1px black solid;
+}
+
+.line1 {
+    width: 420px;
+    height: 0;
+    left: 1298px;
+    top: 77px;
+}
+
+.image {
+    border-radius: 10px;
+    display: none; /* 이미지가 업로드되기 전에는 숨깁니다 */
+}
+
+.image-preview {
+    position: absolute;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #d9d9d9; /* placeholder 배경색 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none; /* 업로드 전에는 이미지 숨김 */
+}
+.thumbnail {
+    position: relative;
+    display: inline-block;
+}
+
+.thumbnail img {
+    border-radius: 10px;
+    display: none; /* 이미지가 업로드되기 전에는 숨깁니다 */
+}
+
+.thumbnail .image-preview {
+    position: absolute;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #f0f0f0; /* placeholder 배경색 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thumbnail .placeholder-text {
+    font-size: 16px; /* 필요에 따라 조절 */
+    color: #888;
+}
+
+.thumbnail .image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none; /* 업로드 전에는 이미지 숨김 */
+}
+
+.thumbnail .placeholder-text {
+    font-size: 16px; /* 필요에 따라 조절 */
+    color: #888;
+}
+
+.thumbnail1 .image-preview {
+    width: 136px;
+    height: 117px;
+}
+
+.thumbnail2 .image-preview {
+    width: 117px;
+    height: 143px;
+}
+
+.image1 {
+    width: 952px;
+    height: 823px;
+    left: 985px;
+    top: 1127px;
+    transform: rotate(-90deg);
+    transform-origin: 0 0;
+}
+
+.author-name {
+    position: absolute;
+    color: black;
+    font-size: 200px;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.author-name1 {
+    left: 87px;
+    top: 131px;
+}
+
+.author-name2 {
+    left: 87px;
+    top: 325px;
+}
+
+.intro-title {
+    left: 87px;
+    top: 843px;
+    position: absolute;
+    color: black;
+    font-size: 60px;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.intro-text {
+    width: 674px;
+    left: 87px;
+    top: 944px;
+    position: absolute;
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.thumbnail {
+    position: absolute;
+}
+
+.thumbnail1 {
+    width: 136px;
+    height: 117px;
+    left: 90px;
+    top: 1562px;
+    transform: rotate(-90deg);
+    transform-origin: 0 0;
+}
+
+.thumbnail2 {
+    width: 117px;
+    height: 143px;
+    left: 90px;
+    top: 1599px;
+}
+
+.image2 {
+    width: 1513px;
+    height: 955px;
+    left: 295px;
+    top: 1389px;
+}
+
+.image3 {
+    width: 1513px;
+    height: 955px;
+    left: 295px;
+    top: 2906px;
+}
+
+.image4 {
+    width: 1513px;
+    height: 955px;
+    left: 295px;
+    top: 4499px;
+}
+
+.text {
+    position: absolute;
+    color: black;
+    font-size: 40px;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.text1 {
+    left: 295px;
+    top: 2372px;
+}
+
+.text2 {
+    left: 295px;
+    top: 3889px;
+}
+
+.text3 {
+    left: 295px;
+    top: 5482px;
+}
+
+.contact-section {
+    position: absolute;
+    background: #d9d9d9;
+    border-radius: 30px;
+}
+
+.contact-section1 {
+    width: 609px;
+    height: 427px;
+    left: 758px;
+    top: 7505px;
+}
+
+.contact-section2 {
+    width: 609px;
+    height: 989px;
+    left: 125px;
+    top: 7505px;
+}
+
+.contact-section3 {
+    width: 1012px;
+    height: 540px;
+    left: 758px;
+    top: 7954px;
+}
+
+.contact-title {
+    left: 148px;
+    top: 7266px;
+    position: absolute;
+    color: black;
+    font-size: 120px;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.contact-info {
+    position: absolute;
+    color: white;
+    font-size: 80px;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.contact-info1 {
+    left: 172px;
+    top: 7536px;
+}
+
+.contact-info2 {
+    left: 809px;
+    top: 7536px;
+}
+
+.contact-info3 {
+    left: 809px;
+    top: 7990px;
+}
+
+.footer {
+    width: 1920px;
+    height: 357px;
+    left: 0;
+    top: 8826px;
+    position: absolute;
+}
+
+.footer-bg {
+    width: 1920px;
+    height: 357px;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: #5b5b5b;
+}
+
+.footer-text {
+    position: absolute;
+    color: white;
+    font-size: 25px;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.footer-text1 {
+    left: 703px;
+    top: 268px;
+}
+
+.footer-text2 {
+    left: 867px;
+    top: 268px;
+}
+
+.footer-text3 {
+    left: 1055px;
+    top: 268px;
+}
+
+.footer-text4 {
+    left: 552px;
+    top: 268px;
+}
+
+.footer-text5 {
+    left: 1542px;
+    top: 276px;
+    font-size: 18px;
+}
+
+.footer-text6 {
+    left: 1637px;
+    top: 276px;
+    font-size: 18px;
+}
+
+.footer-line {
+    width: 22px;
+    height: 0;
+    left: 1614px;
+    top: 276px;
+    position: absolute;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+    border: 1px white solid;
+}
+
+.footer-img {
+    width: 1342px;
+    height: 243px;
+    left: 535px;
+    top: 0;
+    position: absolute;
+}
+
+.footer-title {
+    left: 73px;
+    top: 179px;
+    position: absolute;
+    color: white;
+    font-size: 80px;
+    font-family: 'Knewave', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.cta {
+    width: 468px;
+    height: 72px;
+    left: 821px;
+    top: 8624px;
+    position: absolute;
+}
+
+.cta-bg {
+    width: 468px;
+    height: 72px;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: black;
+    border-radius: 50px;
+}
+
+.cta-text {
+    left: 53px;
+    top: 18px;
+    position: absolute;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.cta-line {
+    width: 22px;
+    height: 0;
+    left: 395px;
+    top: 36px;
+    position: absolute;
+    border: 2px white solid;
+}

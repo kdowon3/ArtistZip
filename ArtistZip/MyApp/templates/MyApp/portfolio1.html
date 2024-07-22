@@ -1,0 +1,307 @@
+<portfolio1.html>
+
+    {% load static%}
+    
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Artist Template</title>
+            <link rel="stylesheet" href="{% static 'css/portfolio1.css' %}" />
+        </head>
+        <body>
+            <script src="{% static 'js/portfolio.js' %}" defer></script>
+            <div class="container">
+                <form
+                    id="portfolio-form"
+                    method="post"
+                    enctype="multipart/form-data"
+                    action="{% url 'portfolio1' user.id %}"
+                >
+                    {% csrf_token %}
+                    <div class="box box1"></div>
+                    <div class="box box2"></div>
+                    <div class="box box3"></div>
+                    <div id="image1Preview" class="image-preview image1" ondblclick="triggerFileInput('fileInput1')">
+                        <img
+                            class="image"
+                            src="{% if portfolio and portfolio.image1_url %}{{ portfolio.image1_url }}{% endif %}"
+                            alt="Image 1"
+                        />
+                        <div
+                            class="placeholder-text"
+                            style="{% if portfolio and portfolio.image1_url %}display: none{% endif %}"
+                        >
+                            547 x 734
+                        </div>
+                    </div>
+                    <input
+                        type="file"
+                        id="fileInput1"
+                        name="image1"
+                        style="display: none"
+                        accept="image/*"
+                        onchange="handleFileSelect(event, 'image1Preview')"
+                    />
+    
+                    <div id="image2Preview" class="image-preview image2" ondblclick="triggerFileInput('fileInput2')">
+                        <img
+                            class="image"
+                            src="{% if portfolio and portfolio.image2_url %}{{ portfolio.image2_url }}{% endif %}"
+                            alt="Image 2"
+                        />
+                        <div
+                            class="placeholder-text"
+                            style="{% if portfolio and portfolio.image2_url %}display: none{% endif %}"
+                        >
+                            1744 x 734
+                        </div>
+                    </div>
+                    <input
+                        type="file"
+                        id="fileInput2"
+                        name="image2"
+                        style="display: none"
+                        accept="image/*"
+                        onchange="handleFileSelect(event, 'image2Preview')"
+                    />
+    
+                    <div
+                        id="author-name"
+                        class="author-name"
+                        ondblclick="enableEditing(this)"
+                        onblur="disableEditing(this)"
+                        data-input-id="author-name-input"
+                    >
+                        {% if portfolio %}{{ portfolio.author_name }}{% else %}Name{% endif %}
+                    </div>
+                    <input
+                        type="hidden"
+                        id="author-name-input"
+                        name="author_name"
+                        value="{% if portfolio %}{{ portfolio.author_name }}{% else %}Name{% endif %}"
+                    />
+    
+                    <div class="author-title">작가</div>
+                    <div class="view-representative-works">대표 작품 보기</div>
+                    <div class="author-intro">작가 소개</div>
+                    <div class="art-gallery">작품 갤러리</div>
+                    <div class="site-title">Artist Zip</div>
+                    <div
+                        id="author-info"
+                        class="author-info"
+                        ondblclick="enableEditing(this)"
+                        onblur="disableEditing(this)"
+                        data-input-id="author-info-input"
+                    >
+                        {% if portfolio %}{{ portfolio.author_info }}{% else %}Name 작가{% endif %}
+                    </div>
+                    <input
+                        type="hidden"
+                        id="author-info-input"
+                        name="author_info"
+                        value="{% if portfolio %}{{ portfolio.author_info }}{% else %}Name 작가{% endif %}"
+                    />
+    
+                    <div class="line line1"></div>
+                    <div id="image3Preview" class="image-preview image3" ondblclick="triggerFileInput('fileInput3')">
+                        <img
+                            class="image"
+                            src="{% if portfolio and portfolio.image3_url %}{{ portfolio.image3_url }}{% endif %}"
+                            alt="Image 3"
+                        />
+                        <div
+                            class="placeholder-text"
+                            style="{% if portfolio and portfolio.image3_url %}display: none{% endif %}"
+                        >
+                            547 x 734
+                        </div>
+                    </div>
+                    <input
+                        type="file"
+                        id="fileInput3"
+                        name="image3"
+                        style="display: none"
+                        accept="image/*"
+                        onchange="handleFileSelect(event, 'image3Preview')"
+                    />
+                    <div id="image4Preview" class="image-preview image4" ondblclick="triggerFileInput('fileInput4')">
+                        <img
+                            class="image"
+                            src="{% if portfolio and portfolio.image4_url %}{{ portfolio.image4_url }}{% endif %}"
+                            alt="Image 4"
+                        />
+                        <div
+                            class="placeholder-text"
+                            style="{% if portfolio and portfolio.image4_url %}display: none{% endif %}"
+                        >
+                            1744 x 734
+                        </div>
+                    </div>
+                    <input
+                        type="file"
+                        id="fileInput4"
+                        name="image4"
+                        style="display: none"
+                        accept="image/*"
+                        onchange="handleFileSelect(event, 'image4Preview')"
+                    />
+                    <div id="image5Preview" class="image-preview image5" ondblclick="triggerFileInput('fileInput5')">
+                        <img
+                            class="image"
+                            src="{% if portfolio and portfolio.image5_url %}{{ portfolio.image5_url }}{% endif %}"
+                            alt="Image 5"
+                        />
+                        <div
+                            class="placeholder-text"
+                            style="{% if portfolio and portfolio.image5_url %}display: none{% endif %}"
+                        >
+                            547 x 734
+                        </div>
+                    </div>
+                    <input
+                        type="file"
+                        id="fileInput5"
+                        name="image5"
+                        style="display: none"
+                        accept="image/*"
+                        onchange="handleFileSelect(event, 'image5Preview')"
+                    />
+                    <div id="image6Preview" class="image-preview image6" ondblclick="triggerFileInput('fileInput6')">
+                        <img
+                            class="image"
+                            src="{% if portfolio and portfolio.image6_url %}{{ portfolio.image6_url }}{% endif %}"
+                            alt="Image 6"
+                        />
+                        <div
+                            class="placeholder-text"
+                            style="{% if portfolio and portfolio.image6_url %}display: none{% endif %}"
+                        >
+                            1744 x 734
+                        </div>
+                    </div>
+                    <input
+                        type="file"
+                        id="fileInput6"
+                        name="image6"
+                        style="display: none"
+                        accept="image/*"
+                        onchange="handleFileSelect(event, 'image6Preview')"
+                    />
+                    <div
+                        id="intro-text"
+                        class="intro-text"
+                        ondblclick="enableEditing(this)"
+                        onblur="disableEditing(this)"
+                        data-input-id="intro-text-input"
+                    >
+                        {% if portfolio %}{{ portfolio.art_description }}{% else %}career{% endif %}
+                    </div>
+                    <input
+                        type="hidden"
+                        id="intro-text-input"
+                        name="art_description"
+                        value="{% if portfolio %}{{ portfolio.art_description }}{% else %}career{% endif %}"
+                    />
+    
+                    <div class="line line2"></div>
+                    <div class="line line3"></div>
+                    <div class="line line4"></div>
+                    <div
+                        id="art-title1"
+                        class="art-title art-title1"
+                        ondblclick="enableEditing(this)"
+                        onblur="disableEditing(this)"
+                        data-input-id="art-title-input"
+                    >
+                        {% if portfolio %}{{ portfolio.art_title }}{% else %}project name{% endif %}
+                    </div>
+                    <input
+                        type="hidden"
+                        id="art-title-input"
+                        name="art_title"
+                        value="{% if portfolio %}{{ portfolio.art_title }}{% else %}project name{% endif %}"
+                    />
+                    <div
+                        id="art-title2"
+                        class="art-title art-title2"
+                        ondblclick="enableEditing(this)"
+                        onblur="disableEditing(this)"
+                        data-input-id="art-title-input"
+                    >
+                        project name
+                    </div>
+                    <div
+                        id="art-title3"
+                        class="art-title art-title3"
+                        ondblclick="enableEditing(this)"
+                        onblur="disableEditing(this)"
+                        data-input-id="art-title-input"
+                    >
+                        project name
+                    </div>
+                    <div class="thick-line thick-line1"></div>
+                    <div class="thick-line thick-line2"></div>
+                    <div class="thick-line thick-line3"></div>
+                    <div class="contact-title">컨택트</div>
+                    <div class="contact-info instagram" onclick="openLink('instagram')">인스타그램</div>
+                    <input
+                        type="hidden"
+                        id="instagram-input"
+                        name="instagram"
+                        value="{% if contact_info %}{{ contact_info.instagram }}{% endif %}"
+                    />
+                    <div class="contact-info email" onclick="openLink('email')">이메일</div>
+                    <input
+                        type="hidden"
+                        id="email-input"
+                        name="email"
+                        value="{% if contact_info %}{{ contact_info.email }}{% endif %}"
+                    />
+                    <div class="contact-info homepage" onclick="openLink('homepage')">홈페이지</div>
+                    <input
+                        type="hidden"
+                        id="homepage-input"
+                        name="homepage"
+                        value="{% if contact_info %}{{ contact_info.homepage }}{% endif %}"
+                    />
+                    <div
+                        id="main-title"
+                        class="main-title"
+                        ondblclick="enableEditing(this)"
+                        onblur="disableEditing(this)"
+                        data-input-id="main-title-input"
+                    >
+                        Appealing-Description
+                    </div>
+                    <div
+                        id="project-name1"
+                        class="project-name project-name1"
+                        ondblclick="enableEditing(this)"
+                        onblur="disableEditing(this)"
+                    >
+                        project name
+                    </div>
+                    <div
+                        id="project-name2"
+                        class="project-name project-name2"
+                        ondblclick="enableEditing(this)"
+                        onblur="disableEditing(this)"
+                    >
+                        project name
+                    </div>
+                    <div
+                        id="project-name3"
+                        class="project-name project-name3"
+                        ondblclick="enableEditing(this)"
+                        onblur="disableEditing(this)"
+                    >
+                        project name
+                    </div>
+                    <button type="button" onclick="saveChanges()">저장</button>
+                </form>
+            </div>
+        </body>
+    </html>
+    

@@ -10,6 +10,7 @@ class CustomUser(AbstractUser):
     contact_number = models.CharField(max_length=15, verbose_name='연락처')  # 연락처
     is_artist = models.BooleanField(default=False, verbose_name='작가 여부')
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+    following = models.ManyToManyField('self', symmetrical=False, related_name='followers', blank=True)
 
     USERNAME_FIELD = 'user_id'  # 로그인을 user_id로
     REQUIRED_FIELDS = ['username', 'email', 'contact_number', 'brand_name']

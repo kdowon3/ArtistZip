@@ -7,10 +7,12 @@
 {% block content %}
 <div class="gallery-container">
     <div class="search-bar">
-        <input type="text" placeholder="국내 최대 아티스트 홍보 플랫폼, 아티스트집" />
-        <button type="button">
-            <img src="{% static 'images/search_icon.png' %}" alt="Search" />
-        </button>
+        <form method="get" action="{% url 'gallery' %}">
+            <input type="text" name="search" placeholder="국내 최대 아티스트 홍보 플랫폼, 아티스트집" value="{{ search_query }}" />
+            <button type="submit">
+                <img src="{% static 'images/search_icon.png' %}" alt="Search" />
+            </button>
+        </form>
     </div>
     <div class="gallery-header">
         <div class="header-item">

@@ -1,188 +1,227 @@
 <!-- MyApp/templates/MyApp/index.html -->
 
-{% extends 'MyApp/base.html' %} {% block title %}Home{% endblock %} {% block content %} {% load static %}
+{% extends 'MyApp/base.html' %}
+<head>
+    {% block title %}Home{% endblock %} {% load static %}
+</head>
 
-<div id="p5-container">
-    <img src="{% static 'images/logo.png' %}" alt="Logo" />
-    <div class="sphere">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-        <script>
-            let theta = 0;
-            let phi = 0;
-            let zoom = 1;
-            let housePosition = { x: Math.PI / 4, y: Math.PI / 4 }; // 집의 위치 (위도, 경도)
-            let prevMouseX, prevMouseY;
-            let mouseSpeedX = 0;
-            let mouseSpeedY = 0;
-            let targetTheta = 0;
-            let targetPhi = 0;
-            let rotationSpeed = 0.02;
-            let zoomingIn = false;
-            let zoomMax = 50;
+{% block content %}
+<div class="home-body">
+    <div id="p5-container">
+        <img src="{% static 'images/logo.png' %}" alt="Logo" />
+        <div class="sphere">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+            <script>
+                let theta = 0;
+                let phi = 0;
+                let zoom = 1;
+                let housePosition = { x: Math.PI / 4, y: Math.PI / 4 }; // 집의 위치 (위도, 경도)
+                let prevMouseX, prevMouseY;
+                let mouseSpeedX = 0;
+                let mouseSpeedY = 0;
+                let targetTheta = 0;
+                let targetPhi = 0;
+                let rotationSpeed = 0.02;
+                let zoomingIn = false;
+                let zoomMax = 50;
+                let originWidth = window.innerWidth - 50;
+                let originHeight = window.innerHeight;
+                let whratio = originHeight / originWidth
+                console.log(whratio)
 
-            function setup() {
-                let canvas = createCanvas(windowWidth, windowHeight, WEBGL);
-                canvas.parent('p5-container');
-                prevMouseX = mouseX;
-                prevMouseY = mouseY;
-            }
-
-            function draw() {
-                if (zoomingIn) {
-                    zoom += 0.5;
-                    if (zoom >= zoomMax) {
-                        background(GRAY);
-                        noLoop();
-                        return;
-                    }
-                } else {
-                    clear();
-                    lights();
-
-
-                    // Update targetTheta and targetPhi based on mouse movement direction
-                    let deltaX = (mouseX - prevMouseX) * 0.005; // Adjust sensitivity as needed
-                    let deltaY = (mouseY - prevMouseY) * 0.005;
-
-                    targetTheta += deltaX;
-                    targetPhi += deltaY;
-
-                    // 현재 회전값에 목표 회전값 반영
-                    theta += (targetTheta - theta) * rotationSpeed;
-                    phi += (targetPhi - phi) * rotationSpeed;
-
+                function setup() {
+                    let canvas = createCanvas(windowWidth-50, windowHeight, WEBGL);
+                    canvas.parent('p5-container');
                     prevMouseX = mouseX;
                     prevMouseY = mouseY;
+                }
 
-                    rotateY(theta);
-                    rotateX(phi);
+                function draw() {
+                    // canvas.width = window.innerWidth
+                    // window.addEventListener('resize', () => {
+                    //     canvas.width = window.innerWidth
+                    // })
+                    canvas.style.width = `${window.innerWidth - 50}px`;
+                    canvas.style.height = `${whratio * (window.innerWidth - 50)}px`;
 
-                    // 구체 그리기
-                    noStroke();
-                    specularMaterial(20);
-                    fill(200);
-                    sphere(200);
+                    if (zoomingIn) {
+                        zoom += 0.5;
+                        if (zoom >= zoomMax) {
+                            background(GRAY);
+                            noLoop();
+                            return;
+                        }
+                    } else {
+                        clear();
+                        lights();
 
-                    // 집 그리기
-                    push();
+
+                        // Update targetTheta and targetPhi based on mouse movement direction
+                        let deltaX = (mouseX - prevMouseX) * 0.005; // Adjust sensitivity as needed
+                        let deltaY = (mouseY - prevMouseY) * 0.005;
+
+                        targetTheta += deltaX;
+                        targetPhi += deltaY;
+
+                        // 현재 회전값에 목표 회전값 반영
+                        theta += (targetTheta - theta) * rotationSpeed;
+                        phi += (targetPhi - phi) * rotationSpeed;
+
+                        prevMouseX = mouseX;
+                        prevMouseY = mouseY;
+
+                        rotateY(theta);
+                        rotateX(phi);
+
+                        // 구체 그리기
+                        push();
+                        var w = window.innerWidth - 50;
+                        noStroke();
+                        specularMaterial(20);
+                        fill(200);
+                        translate(0,0,0);
+                        sphere(w/10);
+                        pop();
+                        // 집 그리기
+                        push();
+                        let housePos = sphericalToCartesian(housePosition.x, housePosition.y, w/10);
+                        translate(housePos.x, housePos.y, housePos.z);
+                        let normal = p5.Vector.normalize(housePos).mult(-1); // 법선 방향 반대로
+                        let rotationAxis = createVector(0, 1, 0).cross(normal);
+                        let rotationAngle = acos(createVector(0, 1, 0).dot(normal));
+                        rotate(rotationAngle, rotationAxis);
+                        drawHouse();
+                        pop();
+                    }
+                }
+
+
+
+                {% comment %} function mousePressed() {
+                    let clickedTheta = map(mouseX, 0, width, -Math.PI, Math.PI);
+                    let clickedPhi = map(mouseY, 0, height, -Math.PI, Math.PI);
                     let housePos = sphericalToCartesian(housePosition.x, housePosition.y, 200);
-                    translate(housePos.x, housePos.y, housePos.z);
-                    let normal = p5.Vector.normalize(housePos).mult(-1); // 법선 방향 반대로
-                    let rotationAxis = createVector(0, 1, 0).cross(normal);
-                    let rotationAngle = acos(createVector(0, 1, 0).dot(normal));
-                    rotate(rotationAngle, rotationAxis);
-                    drawHouse();
-                    pop();
+                    let mousePos = sphericalToCartesian(clickedTheta, clickedPhi, 200);
+                    if (dist(mousePos.x, mousePos.y, housePos.x, housePos.y) < 30) {
+                        zoomingIn = true;
+                    }
                 }
-            }
 
+                function mouseWheel(event) {
+                    if (!zoomingIn && event.delta > 0) {
+                        zoomingIn = true;
+                    }
+                } {% endcomment %}
 
-
-            {% comment %} function mousePressed() {
-                let clickedTheta = map(mouseX, 0, width, -Math.PI, Math.PI);
-                let clickedPhi = map(mouseY, 0, height, -Math.PI, Math.PI);
-                let housePos = sphericalToCartesian(housePosition.x, housePosition.y, 200);
-                let mousePos = sphericalToCartesian(clickedTheta, clickedPhi, 200);
-                if (dist(mousePos.x, mousePos.y, housePos.x, housePos.y) < 30) {
-                    zoomingIn = true;
+                function sphericalToCartesian(theta, phi, radius) {
+                    let x = radius * sin(phi) * cos(theta);
+                    let y = radius * sin(phi) * sin(theta);
+                    let z = radius * cos(phi);
+                    return createVector(x, y, z);
                 }
-            }
 
-            function mouseWheel(event) {
-                if (!zoomingIn && event.delta > 0) {
-                    zoomingIn = true;
+                function drawHouse() {
+                    fill('#C6B38E');
+                    beginShape();
+                    // 밑면
+                    vertex(-20, 0, -20);
+                    vertex(20, 0, -20);
+                    vertex(20, 0, 20);
+                    vertex(-20, 0, 20);
+                    endShape(CLOSE);
+
+                    fill('#3D0814');
+                    beginShape();
+                    // 앞면
+                    vertex(-20, 0, 20);
+                    vertex(20, 0, 20);
+                    vertex(20, -40, 20);
+                    vertex(-20, -40, 20);
+                    endShape(CLOSE);
+
+                    fill('#3D0814');
+                    beginShape();
+                    // 뒷면
+                    vertex(-20, 0, -20);
+                    vertex(20, 0, -20);
+                    vertex(20, -40, -20);
+                    vertex(-20, -40, -20);
+                    endShape(CLOSE);
+
+                    fill('#9A9B73');
+                    beginShape();
+                    // 좌측면
+                    vertex(-20, 0, -20);
+                    vertex(-20, 0, 20);
+                    vertex(-20, -40, 20);
+                    vertex(-20, -40, -20);
+                    endShape(CLOSE);
+
+                    fill('#9A9B73');
+                    beginShape();
+                    // 우측면
+                    vertex(20, 0, -20);
+                    vertex(20, 0, 20);
+                    vertex(20, -40, 20);
+                    vertex(20, -40, -20);
+                    endShape(CLOSE);
+
+                    beginShape();
+                    // 지붕 앞면
+                    vertex(-20, -40, 20);
+                    vertex(20, -40, 20);
+                    vertex(0, -60, 20);
+                    endShape(CLOSE);
+
+                    beginShape();
+                    // 지붕 뒷면
+                    vertex(-20, -40, -20);
+                    vertex(20, -40, -20);
+                    vertex(0, -60, -20);
+                    endShape(CLOSE);
+
+                    beginShape();
+                    // 지붕 좌측면
+                    vertex(-20, -40, -20);
+                    vertex(-20, -40, 20);
+                    vertex(0, -60, 20);
+                    vertex(0, -60, -20);
+                    endShape(CLOSE);
+
+                    beginShape();
+                    // 지붕 우측면
+                    vertex(20, -40, -20);
+                    vertex(20, -40, 20);
+                    vertex(0, -60, 20);
+                    vertex(0, -60, -20);
+                    endShape(CLOSE);
                 }
-            } {% endcomment %}
-
-            function sphericalToCartesian(theta, phi, radius) {
-                let x = radius * sin(phi) * cos(theta);
-                let y = radius * sin(phi) * sin(theta);
-                let z = radius * cos(phi);
-                return createVector(x, y, z);
-            }
-
-            function drawHouse() {
-                fill('#C6B38E');
-                beginShape();
-                // 밑면
-                vertex(-20, 0, -20);
-                vertex(20, 0, -20);
-                vertex(20, 0, 20);
-                vertex(-20, 0, 20);
-                endShape(CLOSE);
-
-                fill('#3D0814');
-                beginShape();
-                // 앞면
-                vertex(-20, 0, 20);
-                vertex(20, 0, 20);
-                vertex(20, -40, 20);
-                vertex(-20, -40, 20);
-                endShape(CLOSE);
-
-                fill('#3D0814');
-                beginShape();
-                // 뒷면
-                vertex(-20, 0, -20);
-                vertex(20, 0, -20);
-                vertex(20, -40, -20);
-                vertex(-20, -40, -20);
-                endShape(CLOSE);
-
-                fill('#9A9B73');
-                beginShape();
-                // 좌측면
-                vertex(-20, 0, -20);
-                vertex(-20, 0, 20);
-                vertex(-20, -40, 20);
-                vertex(-20, -40, -20);
-                endShape(CLOSE);
-
-                fill('#9A9B73');
-                beginShape();
-                // 우측면
-                vertex(20, 0, -20);
-                vertex(20, 0, 20);
-                vertex(20, -40, 20);
-                vertex(20, -40, -20);
-                endShape(CLOSE);
-
-                beginShape();
-                // 지붕 앞면
-                vertex(-20, -40, 20);
-                vertex(20, -40, 20);
-                vertex(0, -60, 20);
-                endShape(CLOSE);
-
-                beginShape();
-                // 지붕 뒷면
-                vertex(-20, -40, -20);
-                vertex(20, -40, -20);
-                vertex(0, -60, -20);
-                endShape(CLOSE);
-
-                beginShape();
-                // 지붕 좌측면
-                vertex(-20, -40, -20);
-                vertex(-20, -40, 20);
-                vertex(0, -60, 20);
-                vertex(0, -60, -20);
-                endShape(CLOSE);
-
-                beginShape();
-                // 지붕 우측면
-                vertex(20, -40, -20);
-                vertex(20, -40, 20);
-                vertex(0, -60, 20);
-                vertex(0, -60, -20);
-                endShape(CLOSE);
-            }
-        </script>
+            </script>
+        </div>
     </div>
-    <button class="go-to-artists" onclick="location.href='{% url 'gallery' %}'">아티스트 보러가기</button>
-</div>
-<div class="home-second">
-    <div>Artists make smile more.</div>
+    <div class="home-second">
+        <div class="home-second-top">
+            <div class="top">
+                <div class="top-left">당신의 예술을 세상과 연결하는 곳</div>
+                <div class="top-right">세상에서 가장 쉬운 홍보</div>
+            </div>
+        </div>
+        <div class="home-second-bottom">
+            <div class="home-second-detail">
+                <div class="small-font">아티스트 등록시 혜택</div>
+                <div class="big-font">
+                    <div>평균 100%</div>
+                    <div>제안률 증가</div>
+                </div>
+                <div class="items">
+                    <div class="item">아트</div>
+                    <div class="item">공예</div>
+                    <div class="item">예술</div>
+                </div>
+            </div>
+            <div class="home-second-art"></div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

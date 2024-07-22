@@ -1,0 +1,354 @@
+.editable {
+    border: 1px solid #ccc;
+    padding: 5px;
+    min-height: 20px; /* 최소 높이 설정 */
+    font-size: 24px;
+    color: black;
+    cursor: text;
+}
+
+.placeholder {
+    color: #aaa;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: white;
+}
+
+.container {
+    width: 1920px;
+    height: 8359px;
+    position: relative;
+    background: white;
+}
+
+.box {
+    position: absolute;
+    background: rgba(255, 233.77, 218.39, 0.5);
+    border: 1px black solid;
+}
+
+.box1 {
+    width: 195px;
+    height: 579px;
+    left: 1278px;
+    top: 198px;
+}
+
+.box2 {
+    width: 181px;
+    height: 579px;
+    left: 1464px;
+    top: 198px;
+}
+
+.box3 {
+    width: 195px;
+    height: 579px;
+    left: 1636px;
+    top: 198px;
+}
+
+.image {
+    border-radius: 10px;
+    display: none; /* 이미지가 업로드되기 전에는 숨깁니다 */
+}
+
+.image-preview {
+    position: absolute;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #f0f0f0; /* placeholder 배경색 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none; /* 업로드 전에는 이미지 숨김 */
+}
+
+.placeholder-text {
+    font-size: 24px;
+    color: #888;
+}
+
+.image1 {
+    width: 734px;
+    height: 547px;
+    left: 87px;
+    top: 1765px;
+    transform: rotate(-90deg);
+    transform-origin: 0 0;
+}
+
+.image2 {
+    width: 734px;
+    height: 1744px;
+    left: 87px;
+    top: 2676px;
+    transform: rotate(-90deg);
+    transform-origin: 0 0;
+}
+
+.image3 {
+    width: 546px;
+    height: 734px;
+    left: 686px;
+    top: 1031px;
+}
+
+.image4 {
+    width: 1744px;
+    height: 734px;
+    left: 87px;
+    top: 3092px;
+}
+
+.image5 {
+    width: 547px;
+    height: 734px;
+    left: 1284px;
+    top: 1031px;
+}
+
+.image6 {
+    width: 1744px;
+    height: 734px;
+    left: 87px;
+    top: 4241px;
+}
+
+.author-name {
+    left: 87px;
+    top: 229px;
+    position: absolute;
+    color: black;
+    font-size: 150px;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.author-title {
+    left: 532px;
+    top: 342px;
+    position: absolute;
+    color: black;
+    font-size: 40px;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.view-representative-works,
+.author-intro,
+.art-gallery {
+    position: absolute;
+    transform: rotate(-90deg);
+    transform-origin: 0 0;
+    color: black;
+    font-size: 70px;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.view-representative-works {
+    left: 1513px;
+    top: 728px;
+}
+
+.author-intro {
+    left: 1333px;
+    top: 728px;
+}
+
+.art-gallery {
+    left: 1693px;
+    top: 728px;
+}
+
+.site-title {
+    left: 87px;
+    top: 47px;
+    position: absolute;
+    color: black;
+    font-size: 30px;
+    font-family: 'Knewave', cursive;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.author-info {
+    left: 1759px;
+    top: 65px;
+    position: absolute;
+    text-align: right;
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.line {
+    position: absolute;
+    border: 1px black solid;
+}
+
+.line1 {
+    width: 420px;
+    height: 0;
+    left: 1298px;
+    top: 77px;
+}
+
+.line2 {
+    width: 871px;
+    height: 0;
+    left: 960px;
+    top: 2714px;
+}
+
+.line3 {
+    width: 871px;
+    height: 0;
+    left: 960px;
+    top: 3864px;
+}
+
+.line4 {
+    width: 871px;
+    height: 0;
+    left: 960px;
+    top: 5013px;
+}
+
+.intro-text {
+    width: 674px;
+    left: 87px;
+    top: 727px;
+    position: absolute;
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.art-title {
+    position: absolute;
+    text-align: right;
+    color: black;
+    font-size: 40px;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.art-title1 {
+    left: 1402px;
+    top: 2732px;
+}
+
+.art-title2 {
+    left: 1402px;
+    top: 3882px;
+}
+
+.art-title3 {
+    left: 1402px;
+    top: 5031px;
+}
+
+.thick-line {
+    position: absolute;
+    border: 3px black solid;
+}
+
+.thick-line1 {
+    width: 1597px;
+    height: 0;
+    left: 148px;
+    top: 7673px;
+}
+
+.thick-line2 {
+    width: 1597px;
+    height: 0;
+    left: 148px;
+    top: 7847px;
+}
+
+.thick-line3 {
+    width: 1597px;
+    height: 0;
+    left: 148px;
+    top: 8021px;
+}
+
+.contact-title {
+    left: 148px;
+    top: 7279px;
+    position: absolute;
+    color: black;
+    font-size: 120px;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.contact-info {
+    left: 148px;
+    position: absolute;
+    color: black;
+    font-size: 80px;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.instagram {
+    top: 7551px;
+}
+
+.email {
+    top: 7725px;
+}
+
+.homepage {
+    top: 7899px;
+}
+
+.main-title {
+    left: 87px;
+    top: 647px;
+    position: absolute;
+    color: black;
+    font-size: 50px;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.project-name {
+    position: absolute;
+    text-align: right;
+    color: black;
+    font-size: 18px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.project-name1 {
+    left: 87px;
+    top: 1788px;
+}
+
+.project-name2 {
+    left: 686px;
+    top: 1788px;
+}
+
+.project-name3 {
+    left: 1284px;
+    top: 1788px;
+}
