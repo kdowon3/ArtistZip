@@ -16,14 +16,62 @@
                 id="portfolio-form"
                 method="post"
                 enctype="multipart/form-data"
-                action="{% url 'portfolio3' user.id %}"
+                action="{% url 'portfolio5' user.id %}"
             >
                 {% csrf_token %}
 
-                <img class="image image1" src="https://via.placeholder.com/1766x659" alt="Image 1" />
-                <img class="image image2" src="https://via.placeholder.com/1920x1010" alt="Image 2" />
-                <img class="image image3" src="https://via.placeholder.com/1920x1010" alt="Image 3" />
-                <img class="image image4" src="https://via.placeholder.com/1920x1010" alt="Image 4" />
+                <div id="image1-preview" class="image-preview image1" ondblclick="triggerFileInput('fileInput1')">
+                    <img class="image" src="https://via.placeholder.com/1766x659" alt="Image 1" />
+                    <div class="placeholder-text" style="display: none">1766 x 659</div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput1"
+                    name="image1"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image1-preview')"
+                />
+
+                <div id="image2-preview" class="image-preview image2" ondblclick="triggerFileInput('fileInput2')">
+                    <img class="image" src="https://via.placeholder.com/1920x1010" alt="Image 2" />
+                    <div class="placeholder-text" style="display: none">1920 x 1010</div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput2"
+                    name="image2"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image2-preview')"
+                />
+
+                <div id="image3-preview" class="image-preview image3" ondblclick="triggerFileInput('fileInput3')">
+                    <img class="image" src="https://via.placeholder.com/1920x1010" alt="Image 3" />
+                    <div class="placeholder-text" style="display: none">1920 x 1010</div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput3"
+                    name="image3"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image3-preview')"
+                />
+
+                <div id="image4-preview" class="image-preview image4" ondblclick="triggerFileInput('fileInput4')">
+                    <img class="image" src="https://via.placeholder.com/1920x1010" alt="Image 4" />
+                    <div class="placeholder-text" style="display: none">1920 x 1010</div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput4"
+                    name="image4"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image4-preview')"
+                />
+
                 <div class="site-title">Artist Zip</div>
                 <div
                     id="author-info"

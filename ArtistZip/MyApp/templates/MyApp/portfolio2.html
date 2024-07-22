@@ -18,9 +18,82 @@
                 action="{% url 'portfolio2' user.id %}"
             >
                 {% csrf_token %}
-                <img class="image image1" src="https://via.placeholder.com/1146x906" alt="Image 1" />
-                <img class="image image2" src="https://via.placeholder.com/1033x692" alt="Image 2" />
-                <img class="image image3" src="https://via.placeholder.com/1033x692" alt="Image 3" />
+                <div id="image1-preview" class="image-preview image1" ondblclick="triggerFileInput('fileInput1')">
+                    <img class="image" src="https://via.placeholder.com/734x547" alt="Image 1" />
+                    <div class="placeholder-text">734 x 547</div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput1"
+                    name="image1"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image1-preview')"
+                />
+                <div id="image1-preview" class="image-preview image1" ondblclick="triggerFileInput('fileInput1')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image1_url %}{{ portfolio.image1_url }}{% else %}https://via.placeholder.com/734x547{% endif %}"
+                        alt="Image 1"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image1_url %}display: none{% endif %}"
+                    >
+                        734 x 547
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput1"
+                    name="image1"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image1-preview')"
+                />
+                <div id="image2-preview" class="image-preview image2" ondblclick="triggerFileInput('fileInput2')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image2_url %}{{ portfolio.image2_url }}{% else %}https://via.placeholder.com/1033x692{% endif %}"
+                        alt="Image 2"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image2_url %}display: none{% endif %}"
+                    >
+                        1033 x 692
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput2"
+                    name="image2"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image2-preview')"
+                />
+
+                <div id="image3-preview" class="image-preview image3" ondblclick="triggerFileInput('fileInput3')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image3_url %}{{ portfolio.image3_url }}{% else %}https://via.placeholder.com/1033x692{% endif %}"
+                        alt="Image 3"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image3_url %}display: none{% endif %}"
+                    >
+                        1033 x 692
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput3"
+                    name="image3"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image3-preview')"
+                />
                 <div
                     class="text text1"
                     ondblclick="enableEditing(this)"
@@ -61,12 +134,158 @@
                 </div>
                 <input type="hidden" id="author-name-input" name="author_name" value="HEEJAE" />
 
-                <img class="image image4" src="https://via.placeholder.com/526x351" alt="Image 4" />
-                <img class="image image5" src="https://via.placeholder.com/574x370" alt="Image 5" />
-                <img class="image image6" src="https://via.placeholder.com/855x473" alt="Image 6" />
-                <img class="image image7" src="https://via.placeholder.com/934x649" alt="Image 7" />
-                <img class="image image8" src="https://via.placeholder.com/431x468" alt="Image 8" />
-                <img class="image image9" src="https://via.placeholder.com/536x668" alt="Image 9" />
+                <div id="image4Preview" class="image-preview image4" ondblclick="triggerFileInput('fileInput4')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image4_url %}{{ portfolio.image4_url }}{% endif %}"
+                        alt="Image 4"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image4_url %}display: none{% endif %}"
+                    >
+                        1744 x 734
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput4"
+                    name="image4"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image4Preview')"
+                />
+                <div id="image4-preview" class="image-preview image4" ondblclick="triggerFileInput('fileInput4')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image4_url %}{{ portfolio.image4_url }}{% else %}https://via.placeholder.com/1744x734{% endif %}"
+                        alt="Image 4"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image4_url %}display: none{% endif %}"
+                    >
+                        1744 x 734
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput4"
+                    name="image4"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image4-preview')"
+                />
+
+                <div id="image5-preview" class="image-preview image5" ondblclick="triggerFileInput('fileInput5')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image5_url %}{{ portfolio.image5_url }}{% else %}https://via.placeholder.com/574x370{% endif %}"
+                        alt="Image 5"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image5_url %}display: none{% endif %}"
+                    >
+                        574 x 370
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput5"
+                    name="image5"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image5-preview')"
+                />
+
+                <div id="image6-preview" class="image-preview image6" ondblclick="triggerFileInput('fileInput6')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image6_url %}{{ portfolio.image6_url }}{% else %}https://via.placeholder.com/855x473{% endif %}"
+                        alt="Image 6"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image6_url %}display: none{% endif %}"
+                    >
+                        855 x 473
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput6"
+                    name="image6"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image6-preview')"
+                />
+
+                <div id="image7-preview" class="image-preview image7" ondblclick="triggerFileInput('fileInput7')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image7_url %}{{ portfolio.image7_url }}{% else %}https://via.placeholder.com/934x649{% endif %}"
+                        alt="Image 7"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image7_url %}display: none{% endif %}"
+                    >
+                        934 x 649
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput7"
+                    name="image7"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image7-preview')"
+                />
+
+                <div id="image8-preview" class="image-preview image8" ondblclick="triggerFileInput('fileInput8')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image8_url %}{{ portfolio.image8_url }}{% else %}https://via.placeholder.com/431x468{% endif %}"
+                        alt="Image 8"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image8_url %}display: none{% endif %}"
+                    >
+                        431 x 468
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput8"
+                    name="image8"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image8-preview')"
+                />
+
+                <div id="image9-preview" class="image-preview image9" ondblclick="triggerFileInput('fileInput9')">
+                    <img
+                        class="image"
+                        src="{% if portfolio and portfolio.image9_url %}{{ portfolio.image9_url }}{% else %}https://via.placeholder.com/536x668{% endif %}"
+                        alt="Image 9"
+                    />
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.image9_url %}display: none{% endif %}"
+                    >
+                        536 x 668
+                    </div>
+                </div>
+                <input
+                    type="file"
+                    id="fileInput9"
+                    name="image9"
+                    style="display: none"
+                    accept="image/*"
+                    onchange="handleFileSelect(event, 'image9-preview')"
+                />
                 <div
                     class="project-name project-name1"
                     ondblclick="enableEditing(this)"

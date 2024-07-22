@@ -13,9 +13,26 @@ body {
 }
 
 .image {
-    position: absolute;
+    border-radius: 10px;
+    display: none; /* 이미지가 업로드되기 전에는 숨깁니다 */
 }
 
+.image-preview {
+    position: absolute;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #d9d9d9; /* placeholder 배경색 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none; /* 업로드 전에는 이미지 숨김 */
+}
 .image1 {
     width: 1920px;
     height: 1080px;

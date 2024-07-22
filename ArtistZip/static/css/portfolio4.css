@@ -47,7 +47,71 @@ body {
 }
 
 .image {
+    border-radius: 10px;
+    display: none; /* 이미지가 업로드되기 전에는 숨깁니다 */
+}
+
+.image-preview {
     position: absolute;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #d9d9d9; /* placeholder 배경색 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none; /* 업로드 전에는 이미지 숨김 */
+}
+.thumbnail {
+    position: relative;
+    display: inline-block;
+}
+
+.thumbnail img {
+    border-radius: 10px;
+    display: none; /* 이미지가 업로드되기 전에는 숨깁니다 */
+}
+
+.thumbnail .image-preview {
+    position: absolute;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #f0f0f0; /* placeholder 배경색 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thumbnail .placeholder-text {
+    font-size: 16px; /* 필요에 따라 조절 */
+    color: #888;
+}
+
+.thumbnail .image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none; /* 업로드 전에는 이미지 숨김 */
+}
+
+.thumbnail .placeholder-text {
+    font-size: 16px; /* 필요에 따라 조절 */
+    color: #888;
+}
+
+.thumbnail1 .image-preview {
+    width: 136px;
+    height: 117px;
+}
+
+.thumbnail2 .image-preview {
+    width: 117px;
+    height: 143px;
 }
 
 .image1 {
