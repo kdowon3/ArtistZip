@@ -8,6 +8,7 @@
         <title>{% block title %}Artist Zip{% endblock %}</title>
         {% load static %}
         <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+        {% block css %} {% endblock %}
     </head>
     <body>
         <div class="navbar">
@@ -33,19 +34,21 @@
         <div class="main-content">{% block content %} {% endblock %}</div>
         <script>
             window.onload = function () {
-                document.querySelector('.home-second').scrollIntoView({ behavior: 'smooth' });
+                document
+                    .querySelector(".home-second")
+                    .scrollIntoView({ behavior: "smooth" });
             };
 
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener("DOMContentLoaded", function () {
                 // Create a div element for the cursor
-                var cursor = document.createElement('div');
-                cursor.className = 'cursor';
+                var cursor = document.createElement("div");
+                cursor.className = "cursor";
                 document.body.appendChild(cursor);
 
                 // Update cursor position based on mouse movement
-                document.addEventListener('mousemove', function (e) {
-                    cursor.style.left = e.pageX + 'px';
-                    cursor.style.top = e.pageY + 'px';
+                document.addEventListener("mousemove", function (e) {
+                    cursor.style.left = e.pageX + "px";
+                    cursor.style.top = e.pageY + "px";
                 });
             });
         </script>
