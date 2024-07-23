@@ -45,9 +45,11 @@
                 <img src="{{ user.profile_picture.url }}" alt="프로필 이미지" class="myprofile-image" />
             {% endif %}
         </div>
-        <button type="submit" class="profile-edit-submit">
-            <img src="{% static 'images/Arrow 4.png' %}" alt="Submit" class="profile-edit-submit-icon" />
-        </button>
+        <div class="profile-edit-submit-container">
+            <button type="submit" class="profile-edit-submit">
+                <img src="{% static 'images/Arrow 4.png' %}" alt="Submit" class="profile-edit-submit-icon" />
+            </button>
+        </div>
     </form>
 </div>
 
@@ -101,6 +103,12 @@
 
     .profile-edit-checkbox input {
         margin-right: 10px;
+    }
+
+    .profile-edit-submit-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
     .profile-edit-submit {
