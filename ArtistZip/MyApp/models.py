@@ -13,6 +13,7 @@ class Artwork(models.Model):
         return self.artwork_title
 
 class Portfolio(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default = 1, related_name='portfolios')
     author_name = models.CharField(max_length=255, verbose_name='작가명')
     art_title = models.CharField(max_length=255, verbose_name='작품 제목')
     art_description = models.TextField(verbose_name='작품 설명')

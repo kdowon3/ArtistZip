@@ -188,12 +188,14 @@ def handle_portfolio(request, user_id=None, id=None, template_name='MyApp/portfo
     if id:
         portfolio = get_object_or_404(Portfolio, id=id)
     else:
-        portfolio = Portfolio()
+        portfolio = Portfolio(user=request.user) 
 
     if request.method == 'POST':
         form = PortfolioForm(request.POST, instance=portfolio)
         if form.is_valid():
-            form.save()
+            portfolio = form.save(commit=False)
+            portfolio.user = request.user  # Ensure the user is set
+            portfolio.save()
 
             # Handle ContactInfo
             contact_info, created = ContactInfo.objects.get_or_create(user=request.user)
