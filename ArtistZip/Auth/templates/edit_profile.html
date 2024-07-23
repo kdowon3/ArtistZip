@@ -1,50 +1,134 @@
 {% extends 'MyApp/base.html' %}
+{% load static %}
 {% block title %}프로필 수정{% endblock %}
 {% block content %}
 <div class="profile-edit-container">
-    <h1>프로필 수정</h1>
-    <form method="post" enctype="multipart/form-data">
+    <h1 class="profile-edit-title">프로필 수정</h1>
+    <form method="post" enctype="multipart/form-data" class="profile-edit-form">
         {% csrf_token %}
-        <div class="profile-edit-form-group">
+        <div class="profile-edit-form-group full-width">
             <label class="profile-edit-label" for="username">이름</label>
             <input class="profile-edit-input" type="text" id="username" name="username" value="{{ form.username.value }}">
         </div>
-        <div class="profile-edit-form-group">
+        <div class="profile-edit-form-group full-width">
             <label class="profile-edit-label" for="user_id">아이디</label>
             <input class="profile-edit-input" type="text" id="user_id" name="user_id" value="{{ form.user_id.value }}">
         </div>
-        <div class="profile-edit-form-group">
+        <div class="profile-edit-form-group full-width">
             <label class="profile-edit-label" for="email">이메일</label>
             <input class="profile-edit-input" type="email" id="email" name="email" value="{{ form.email.value }}">
         </div>
-        <div class="profile-edit-form-group">
+        <div class="profile-edit-form-group full-width">
             <label class="profile-edit-label" for="contact_number">연락처</label>
             <input class="profile-edit-input" type="text" id="contact_number" name="contact_number" value="{{ form.contact_number.value }}">
         </div>
-        <div class="profile-edit-form-group">
+        <div class="profile-edit-form-group full-width">
             <label class="profile-edit-label" for="brand_name">브랜드명(작가명)</label>
             <input class="profile-edit-input" type="text" id="brand_name" name="brand_name" value="{{ form.brand_name.value }}">
         </div>
-        <div class="profile-edit-form-group">
+        <div class="profile-edit-form-group full-width">
             <label class="profile-edit-label" for="company_name">회사명</label>
             <input class="profile-edit-input" type="text" id="company_name" name="company_name" value="{{ form.company_name.value }}">
         </div>
-        <div class="profile-edit-form-group">
+        <div class="profile-edit-form-group full-width">
             <label class="profile-edit-label" for="position">직책</label>
             <input class="profile-edit-input" type="text" id="position" name="position" value="{{ form.position.value }}">
         </div>
-        <div class="profile-edit-form-group profile-edit-checkbox">
+        <div class="profile-edit-form-group full-width profile-edit-checkbox">
             <input type="checkbox" id="is_artist" name="is_artist" {% if form.is_artist.value %}checked{% endif %}>
             <label class="profile-edit-label" for="is_artist">작가 여부</label>
         </div>
-        <div class="profile-edit-form-group">
+        <div class="profile-edit-form-group full-width">
             <label class="profile-edit-label" for="profile_picture">프로필 사진</label>
             <input class="profile-edit-input" type="file" id="profile_picture" name="profile_picture">
             {% if user.profile_picture %}
                 <img src="{{ user.profile_picture.url }}" alt="프로필 이미지" class="myprofile-image" />
             {% endif %}
         </div>
-        <button type="submit" class="profile-edit-submit">수정</button>
+        <button type="submit" class="profile-edit-submit">
+            <img src="{% static 'images/Arrow 4.png' %}" alt="Submit" class="profile-edit-submit-icon" />
+        </button>
     </form>
 </div>
+
+<style>
+    .profile-edit-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 50px;
+        background: rgb(45, 43, 43);
+    }
+
+    .profile-edit-title {
+        font-size: 36px;
+        margin-bottom: 20px;
+        color: #ffffff;
+    }
+
+    .profile-edit-form {
+        width: 100%;
+        max-width: 600px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .profile-edit-form-group {
+        width: 100%;
+    }
+
+    .profile-edit-label {
+        display: block;
+        margin-bottom: 5px;
+        color: #ffffff;
+    }
+
+    .profile-edit-input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-bottom: 2px solid #ccc;
+        background-color: transparent;
+        font-size: 16px;
+        color: white;
+    }
+
+    .profile-edit-checkbox {
+        display: flex;
+        align-items: center;
+    }
+
+    .profile-edit-checkbox input {
+        margin-right: 10px;
+    }
+
+    .profile-edit-submit {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profile-edit-submit-icon {
+        width: 30px;
+        height: 30px;
+        transition: transform 0.3s ease;
+    }
+
+    .profile-edit-submit:hover .profile-edit-submit-icon {
+        transform: translateX(10px);
+    }
+
+    .myprofile-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-top: 20px;
+    }
+</style>
 {% endblock %}
