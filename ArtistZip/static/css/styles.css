@@ -951,7 +951,6 @@ body.modal-open {
     width: 200px; /* 호버 시 확대 크기를 원래 크기로 유지 */
 }
 
-
 .artist-image-container {
     width: 200px;
     height: 100%;
@@ -1000,6 +999,15 @@ body.modal-open {
     align-items: center;
     height: 100%;
     position: relative;
+
+    .artist-card {
+        position: relative;
+        width: 508px;
+        height: 631px;
+        background: linear-gradient(0deg, #dadada 0%, #dadada 100%);
+        border-radius: 30px;
+        overflow: hidden;
+    }
 }
 
 .artist-image-container {
@@ -1431,14 +1439,15 @@ canvas {
 }
 
 .unstyled-link {
-    color: inherit;  /* 기존 색상 유지 */
-    text-decoration: none;  /* 밑줄 제거 */
-    font-weight: bold;  /* 볼드체 유지 */
+    color: inherit; /* 기존 색상 유지 */
+    text-decoration: none; /* 밑줄 제거 */
+    font-weight: bold; /* 볼드체 유지 */
 }
 
-.unstyled-link:hover, .unstyled-link:focus {
-    text-decoration: none;  /* 호버 및 포커스 시에도 밑줄 제거 */
-    color: inherit;  /* 호버 및 포커스 시에도 색상 유지 */
+.unstyled-link:hover,
+.unstyled-link:focus {
+    text-decoration: none; /* 호버 및 포커스 시에도 밑줄 제거 */
+    color: inherit; /* 호버 및 포커스 시에도 색상 유지 */
 }
 
 /* template css */

@@ -5,117 +5,6 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-<style>
-    .gallery-container {
-        padding: 20px;
-    }
-
-    .search-bar {
-        width: 389px;
-        height: 46px;
-        margin: 0 auto 40px;
-        display: flex;
-        position: relative;
-    }
-
-    .search-bar input {
-        width: 100%;
-        height: 100%;
-        padding: 10px;
-        font-size: 18px;
-        border: 1px solid #ccc;
-        border-radius: 5px 0 0 5px;
-    }
-
-    .search-bar button {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-left: none;
-        border-radius: 0 5px 5px 0;
-        background-color: #fff;
-        cursor: pointer;
-    }
-
-    .artists-gallery {
-        display: flex;
-        justify-content: space-around;
-    }
-
-    .artist-card {
-        position: relative;
-        width: 508px;
-        height: 631px;
-        background: linear-gradient(0deg, #dadada 0%, #dadada 100%);
-        border-radius: 30px;
-        overflow: hidden;
-    }
-
-    .image-container-new {
-        width: 100%;
-        height: 100%;
-        position: relative;
-    }
-
-    .image-new {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .avatar-placeholder-new {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #dadada;
-        font-size: 3em;
-        color: white;
-    }
-
-    .artist-info {
-        position: absolute;
-        bottom: 20px;
-        left: 20px;
-        color: black;
-    }
-
-    .artist-name {
-        font-size: 27px;
-        font-weight: 600;
-    }
-
-    .artist-role {
-        font-size: 15px;
-        font-weight: 300;
-    }
-
-    .circle-button {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 48.43px;
-        height: 51.13px;
-    }
-
-    .circle {
-        width: 48.43px;
-        height: 48.43px;
-        background: black;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .circle-text {
-        color: white;
-        font-size: 40px;
-        font-weight: 300;
-        text-align: center;
-    }
-</style>
 {% endblock %}
 
 {% block content %}
@@ -127,22 +16,15 @@
     <div class="artists-gallery">
         {% for artist in artists %}
         <div class="artist-card">
-            <div class="image-container-new">
-                {% if artist.profile_picture %}
-                <img src="{{ artist.profile_picture.url }}" alt="{{ artist.username }}" class="image-new">
-                {% else %}
-                <img src="{% static 'images/default_profile_image.png' %}" alt="default" class="image-new">
-                {% endif %}
+            {% if artist.profile_picture %}
+            <img src="{{ artist.profile_picture.url }}" alt="{{ artist.username }}" class="myprofile-image">
+            {% else %}
+            <div class="myprofile-image avatar-placeholder">
+                <span>{{ artist.username|slice:":1" }}</span> <!-- 첫 글자를 표시 -->
             </div>
-            <div class="artist-info">
-                <div class="artist-name">{{ artist.username }}</div>
-                <div class="artist-role">작가</div>
-            </div>
-            <div class="circle-button">
-                <div class="circle">
-                    <div class="circle-text">+</div>
-                </div>
-            </div>
+            {% endif %}
+            <div class="artist-name">{{ artist.username }}</div>
+            <a href="#" class="unstyled-link portfolio-button">포트폴리오 보기</a>
         </div>
         {% endfor %}
     </div>
@@ -153,34 +35,5 @@
         const input = document.getElementById("search-input").value.toLowerCase();
         window.location.href = `?search=${input}`;
     }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const artistCards = document.querySelectorAll(".image-new");
-
-        const descriptions = [
-            {% for artist in artists %}
-                "{{ artist.description }}"{% if not forloop.last %},{% endif %}
-            {% endfor %}
-        ];
-
-        artistCards.forEach((card, index) => {
-            const description = document.createElement("div");
-            description.className = "artist-description";
-            description.textContent = descriptions[index];
-            description.style.top = card.offsetTop + 10 + "px";
-            description.style.left = card.offsetLeft + 10 + "px";
-            card.parentNode.insertBefore(description, card.nextSibling);
-
-            card.addEventListener("mouseenter", function () {
-                this.style.opacity = "0.3";
-                description.style.display = "block";
-            });
-
-            card.addEventListener("mouseleave", function () {
-                this.style.opacity = "1";
-                description.style.display = "none";
-            });
-        });
-    });
 </script>
 {% endblock %}
