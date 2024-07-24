@@ -6,7 +6,7 @@ __pycache__/
 .env
 
 # Django 관련
-
+ArtistZip/db.sqlite3
 media/
 
 # Virtual environment

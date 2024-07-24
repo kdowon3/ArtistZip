@@ -943,13 +943,14 @@ body.modal-open {
     height: 100%;
     object-fit: cover;
     scroll-snap-align: start;
-    transition: all 0.3s ease;
     margin-right: 10px; /* 이미지 간 간격 추가 */
 }
 
+/* 호버 시 효과 제거 */
 .artists-gallery img:hover {
-    width: 400px; /* 호버 시 확대 크기도 조정 */
+    width: 200px; /* 호버 시 확대 크기를 원래 크기로 유지 */
 }
+
 
 .artist-image-container {
     width: 200px;

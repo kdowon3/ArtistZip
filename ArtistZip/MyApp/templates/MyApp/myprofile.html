@@ -1,4 +1,4 @@
-{% extends 'Myapp/base.html' %} {% load static %} {% block content %}
+{% extends 'MyApp/base.html' %} {% load static %} {% block content %}
 <div class="myprofile-container">
     <div class="myprofile-header">
         <div class="myprofile-info">
@@ -49,7 +49,7 @@
                 <div class="template-text-content">
                     <p class="template-subtitle">움직임을 표현하고 싶은 아티스트라면,</p>
                     <h1 class="template-title">예술적인 템플릿</h1>
-                    <a href="{% url 'template' user.id %}">
+                    <a id="templateSelectBtn" href="#">
                         <button class="template-select-btn">선택하기</button>
                     </a>
                 </div>
@@ -105,12 +105,23 @@
         "{% static 'images/template5.png' %}",
         "{% static 'images/template6.png' %}",
     ];
+
+    const templateUrls = [
+        "{% url 'portfolio1' user.id %}",
+        "{% url 'portfolio2' user.id %}",
+        "{% url 'portfolio3' user.id %}",
+        "{% url 'portfolio4' user.id %}",
+        "{% url 'portfolio5' user.id %}",
+        "{% url 'portfolio6' user.id %}"
+    ];
+
     let currentTemplateIndex = 0;
 
     function openModal() {
         document.getElementById("modal-overlay").style.display = "block";
         document.getElementById("myprofile-modal").style.display = "block";
         document.body.style.overflow = "hidden";
+        updateSelectButton();
     }
 
     function closeModal() {
@@ -129,6 +140,7 @@
         currentTemplateIndex = (currentTemplateIndex + direction + templates.length) % templates.length;
         document.getElementById("templateImage").src = templates[currentTemplateIndex];
         updateIndicators();
+        updateSelectButton();
     }
 
     function updateIndicators() {
@@ -140,6 +152,11 @@
                 indicator.classList.remove("active");
             }
         });
+    }
+
+    function updateSelectButton() {
+        const selectButton = document.getElementById("templateSelectBtn");
+        selectButton.href = templateUrls[currentTemplateIndex];
     }
 </script>
 {% endblock %}

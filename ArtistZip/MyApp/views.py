@@ -20,7 +20,7 @@ def index(request):
 
 def az(request):
     return render(request, 'MyApp/az.html')
-
+@login_required
 def artists(request):
     search_query = request.GET.get('search', '')
     if search_query:
@@ -38,7 +38,7 @@ def artists(request):
         'search_query': search_query,
     }
     return render(request, 'MyApp/artists.html', context)
-
+@login_required
 def gallery(request):
     search_query = request.GET.get('search', '')
     
@@ -97,7 +97,7 @@ def signup(request):
 
 def login(request):
     return render(request, 'MyApp/login.html')
-
+@login_required
 def profile(request, user_id):
     profile_user = get_object_or_404(CustomUser, id=user_id)
     artworks = Artwork.objects.filter(user=profile_user)
@@ -143,7 +143,7 @@ def template(request, user_id):
         'form': form,
     }
     return render(request, 'MyApp/template.html', context)
-
+@login_required
 def edit_artwork(request, artwork_id):
     artwork = get_object_or_404(Artwork, id=artwork_id)
     if request.method == 'POST':

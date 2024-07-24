@@ -39,7 +39,13 @@ SECRET_KEY = 'django-insecure-u96s&vv^sixanjm+l5&+t)v=aet(cpugd%wr7-8o+&=nhjwfh5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'artistzip.com',
+    'www.artistzip.com',
+    'localhost',
+    '127.0.0.1',
+    '.ap-northeast-2.compute.amazonaws.com',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -171,7 +177,9 @@ SOCIALACCOUNT_ADAPTER = 'Auth.adapter.CustomSocialAccountAdapter'
 #chatsetting#
 ASGI_APPLICATION = 'ArtistZip.asgi.application'
 
-
+#상현임시
+REDIS_HOST = env('REDIS_HOST', default='localhost')
+REDIS_PORT = env('REDIS_PORT', default='6379')
 
 CACHES = {
     'default': {
