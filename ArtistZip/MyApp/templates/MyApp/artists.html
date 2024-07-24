@@ -1,26 +1,20 @@
-{% extends 'MyApp/base.html' %}
-{% load static %}
-
-{% block title %}아티스트 갤러리{% endblock %}
-
-{% block extra_css %}
+{% extends 'MyApp/base.html' %} {% load static %} {% block title %}아티스트 갤러리{% endblock %} {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <div class="gallery-container">
     <div class="search-bar">
-        <input type="text" id="search-input" placeholder="작가명으로 검색하세요" value="{{ search_query }}">
+        <input type="text" id="search-input" placeholder="작가명으로 검색하세요" value="{{ search_query }}" />
         <button type="button" onclick="searchArtist()">검색</button>
     </div>
     <div class="artists-gallery">
         {% for artist in artists %}
         <div class="artist-card">
             {% if artist.profile_picture %}
-            <img src="{{ artist.profile_picture.url }}" alt="{{ artist.username }}" class="myprofile-image">
+            <img src="{{ artist.profile_picture.url }}" alt="{{ artist.username }}" class="myprofile-image" />
             {% else %}
             <div class="myprofile-image avatar-placeholder">
-                <span>{{ artist.username|slice:":1" }}</span> <!-- 첫 글자를 표시 -->
+                <span>{{ artist.username|slice:":1" }}</span>
+                <!-- 첫 글자를 표시 -->
             </div>
             {% endif %}
             <div class="artist-name">{{ artist.username }}</div>
@@ -32,7 +26,7 @@
 
 <script>
     function searchArtist() {
-        const input = document.getElementById("search-input").value.toLowerCase();
+        const input = document.getElementById('search-input').value.toLowerCase();
         window.location.href = `?search=${input}`;
     }
 </script>
