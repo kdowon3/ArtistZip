@@ -1,9 +1,4 @@
-{% extends 'MyApp/base.html' %}
-{% load static %}
-
-{% block title %}아티스트 갤러리{% endblock %}
-
-{% block extra_css %}
+{% extends 'MyApp/base.html' %} {% load static %} {% block title %}아티스트 갤러리{% endblock %} {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 <style>
     .gallery-container {
@@ -51,9 +46,12 @@
     }
 
     .image-container-new {
-        width: 100%;
-        height: 100%;
+        width: 300px; /* 원하는 크기로 조정 */
+        height: 300px; /* 원하는 크기로 조정 */
         position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 20px auto; /* 상하 여백과 중앙 정렬 */
     }
 
     .image-new {
@@ -75,7 +73,7 @@
 
     .artist-info {
         position: absolute;
-        bottom: 20px;
+        bottom: 80px; /* 원형 이미지 아래로 위치 조정 */
         left: 20px;
         color: black;
     }
@@ -95,8 +93,6 @@
         bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
-        width: 48.43px;
-        height: 51.13px;
     }
 
     .circle {
@@ -115,13 +111,26 @@
         font-weight: 300;
         text-align: center;
     }
-</style>
-{% endblock %}
 
-{% block content %}
+    .artist-description {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+</style>
+{% endblock %} {% block content %}
 <div class="gallery-container">
     <div class="search-bar">
-        <input type="text" id="search-input" placeholder="작가명으로 검색하세요" value="{{ search_query }}">
+        <input type="text" id="search-input" placeholder="작가명으로 검색하세요" value="{{ search_query }}" />
         <button type="button" onclick="searchArtist()">검색</button>
     </div>
     <div class="artists-gallery">
@@ -129,9 +138,9 @@
         <div class="artist-card">
             <div class="image-container-new">
                 {% if artist.profile_picture %}
-                <img src="{{ artist.profile_picture.url }}" alt="{{ artist.username }}" class="image-new">
+                <img src="{{ artist.profile_picture.url }}" alt="{{ artist.username }}" class="image-new" />
                 {% else %}
-                <img src="{% static 'images/default_profile_image.png' %}" alt="default" class="image-new">
+                <img src="{% static 'images/default_profile_image.png' %}" alt="default" class="image-new" />
                 {% endif %}
             </div>
             <div class="artist-info">
@@ -149,13 +158,10 @@
 </div>
 
 <script>
-    function searchArtist() {
-        const input = document.getElementById("search-input").value.toLowerCase();
-        window.location.href = `?search=${input}`;
-    }
+    // 기존 searchArtist 함수 유지
 
     document.addEventListener("DOMContentLoaded", function () {
-        const artistCards = document.querySelectorAll(".image-new");
+        const imageContainers = document.querySelectorAll(".image-container-new");
 
         const descriptions = [
             {% for artist in artists %}
@@ -163,21 +169,21 @@
             {% endfor %}
         ];
 
-        artistCards.forEach((card, index) => {
+        imageContainers.forEach((container, index) => {
             const description = document.createElement("div");
             description.className = "artist-description";
             description.textContent = descriptions[index];
-            description.style.top = card.offsetTop + 10 + "px";
-            description.style.left = card.offsetLeft + 10 + "px";
-            card.parentNode.insertBefore(description, card.nextSibling);
+            container.appendChild(description);
 
-            card.addEventListener("mouseenter", function () {
-                this.style.opacity = "0.3";
-                description.style.display = "block";
+            container.addEventListener("mouseenter", function () {
+                this.querySelector('.image-new').style.opacity = "0.3";
+                description.style.display = "flex";
+                description.style.alignItems = "center";
+                description.style.justifyContent = "center";
             });
 
-            card.addEventListener("mouseleave", function () {
-                this.style.opacity = "1";
+            container.addEventListener("mouseleave", function () {
+                this.querySelector('.image-new').style.opacity = "1";
                 description.style.display = "none";
             });
         });

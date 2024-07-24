@@ -1,30 +1,20 @@
-# myapp/models.py
-
 from django.db import models
 from django.conf import settings
 
-class Artwork(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    artwork_image = models.ImageField(upload_to='artworks/', verbose_name='작품 이미지')
-    artwork_title = models.CharField(max_length=150, verbose_name='작품명')
-    artwork_description = models.TextField(verbose_name='작품 설명')
-
-    def __str__(self):
-        return self.artwork_title
-
 class Portfolio(models.Model):
-    author_name = models.CharField(max_length=255, verbose_name='작가명')
-    art_title = models.CharField(max_length=255, verbose_name='작품 제목')
-    art_description = models.TextField(verbose_name='작품 설명')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='portfolios')
+    title = models.CharField(max_length=255, verbose_name='포트폴리오 제목', blank=True, null=True)
+    description = models.TextField(verbose_name='포트폴리오 설명', blank=True, null=True)
 
     def __str__(self):
-        return self.art_title
+        return self.title if self.title else 'Untitled Portfolio'
 
-class ContactInfo(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    instagram = models.URLField(blank=True, verbose_name='Instagram')
-    email = models.EmailField(blank=True, verbose_name='이메일')
-    homepage = models.URLField(blank=True, verbose_name='홈페이지')
-
+class Artwork(models.Model):
+    portfolio = models.ForeignKey(Portfolio, on_delete=models.SET_NULL, related_name='artworks', null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=150, verbose_name='작품 제목', blank=True, null=True)
+    description = models.TextField(verbose_name='작품 설명', blank=True, null=True)
+    image = models.ImageField(upload_to='artworks/', verbose_name='작품 이미지', blank=True, null=True)
+    
     def __str__(self):
-        return f"{self.user.username}'s Contact Info"
+        return self.title if self.title else 'Untitled Artwork'
