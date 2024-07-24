@@ -37,7 +37,7 @@ AWS_S3_CUSTOM_DOMAIN = "%s.s3.%s.amazonaws.com" % (
 SECRET_KEY = 'django-insecure-u96s&vv^sixanjm+l5&+t)v=aet(cpugd%wr7-8o+&=nhjwfh5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'artistzip.com',
