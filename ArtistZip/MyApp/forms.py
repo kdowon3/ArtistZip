@@ -1,8 +1,15 @@
 # forms.py
 from django import forms
-from .models import Artwork
+from .models import Portfolio, Artwork
+
+class PortfolioForm(forms.ModelForm):
+    class Meta:
+        model = Portfolio
+        fields = ['title', 'description']
 
 class ArtworkForm(forms.ModelForm):
     class Meta:
         model = Artwork
-        fields = ['artwork_image', 'artwork_title', 'artwork_description', 'author_name', 'author_info', 'art_description']
+        fields = ['title', 'description', 'image']
+
+ArtworkFormSet = forms.inlineformset_factory(Portfolio, Artwork, form=ArtworkForm, extra=1, can_delete=True)

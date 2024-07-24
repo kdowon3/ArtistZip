@@ -1,0 +1,28 @@
+<!-- templates/MyApp/portfolio_view.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ portfolio.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/portfolio_view.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ portfolio.title }}</h1>
+        <p>{{ portfolio.description }}</p>
+        <p>작가명: {{ portfolio.user.username }}</p>
+        
+        {% for artwork in portfolio.artworks.all %}
+            <div class="artwork">
+                <h2>{{ artwork.title }}</h2>
+                <p>{{ artwork.description }}</p>
+                {% if artwork.image %}
+                    <img src="{{ artwork.image.url }}" alt="{{ artwork.title }}">
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

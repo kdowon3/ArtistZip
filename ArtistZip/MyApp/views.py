@@ -1,17 +1,14 @@
-# MyApp/views.py
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Artwork
-from .forms import ArtworkForm
+from .models import Portfolio, Artwork
+from .forms import PortfolioForm, ArtworkFormSet, ArtworkForm
 from Auth.models import CustomUser
 from Chat.models import ChatRoom, Message
 from django.contrib.auth import get_user_model
 import random
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
-
 
 User = get_user_model()
 
@@ -20,6 +17,7 @@ def index(request):
 
 def az(request):
     return render(request, 'MyApp/az.html')
+
 @login_required
 def artists(request):
     search_query = request.GET.get('search', '')
@@ -38,6 +36,7 @@ def artists(request):
         'search_query': search_query,
     }
     return render(request, 'MyApp/artists.html', context)
+
 @login_required
 def gallery(request):
     search_query = request.GET.get('search', '')
@@ -90,13 +89,12 @@ def contact(request):
         'other_user': other_user
     })
 
-
-    
 def signup(request):
     return render(request, 'MyApp/signup.html')
 
 def login(request):
     return render(request, 'MyApp/login.html')
+
 @login_required
 def profile(request, user_id):
     profile_user = get_object_or_404(CustomUser, id=user_id)
@@ -143,6 +141,7 @@ def template(request, user_id):
         'form': form,
     }
     return render(request, 'MyApp/template.html', context)
+
 @login_required
 def edit_artwork(request, artwork_id):
     artwork = get_object_or_404(Artwork, id=artwork_id)
@@ -169,134 +168,63 @@ def delete_artwork(request):
     return redirect('myprofile')
 
 #칸택트저장하는로직은 추후에
-@login_required
-def edit_contact_info(request):
-    contact_info, created = ContactInfo.objects.get_or_create(user=request.user)
-    
-    if request.method == 'POST':
-        form = ContactInfoForm(request.POST, instance=contact_info)
-        if form.is_valid():
-            form.save()
-            return redirect('profile', user_id=request.user.id)  # Redirect to profile page
-    else:
-        form = ContactInfoForm(instance=contact_info)
-    
-    return render(request, 'edit_contact_info.html', {'form': form})
 
 @login_required
 @csrf_exempt
-def handle_portfolio(request, user_id=None, id=None, poltfolio_id='MyApp/portfolio1, 2, 3, 4, 5, 6.html'):
-    if id:
-        portfolio = get_object_or_404(Artwork, id=id)
-    else:
-        portfolio = Artwork(user=request.user) 
-
+def handle_portfolio(request, user_id, template_name):
+    portfolio, created = Portfolio.objects.get_or_create(user_id=user_id)
+    
     if request.method == 'POST':
-        form = ArtworkForm(request.POST, instance=portfolio)
-        if form.is_valid():
-            portfolio = form.save(commit=False)
-            portfolio.user = request.user  # Ensure the user is set
+        portfolio_form = PortfolioForm(request.POST, request.FILES, instance=portfolio)
+        artwork_formset = ArtworkFormSet(request.POST, request.FILES, instance=portfolio)
+        
+        if portfolio_form.is_valid() and artwork_formset.is_valid():
+            portfolio = portfolio_form.save(commit=False)
+            portfolio.user_id = user_id
             portfolio.save()
-
-            # Handle Artwork uploads
-            for i in range(1, 7):
-                image_file = request.FILES.get(f'image{i}')
-                if image_file:
-                    artwork = Artwork(
-                        user=request.user,
-                        artwork_image=image_file,
-                        artwork_title=f'Artwork {i}',  # Placeholder title
-                        artwork_description=f'Description for artwork {i}'  # Placeholder description
-                    )
-                    artwork.save()
-
-            return redirect('myprofile', user_id=user_id)
+            artworks = artwork_formset.save(commit=False)
+            for artwork in artworks:
+                artwork.user = request.user
+                artwork.portfolio = portfolio
+                artwork.save()
+            artwork_formset.save_m2m()
+            return redirect('portfolio_view', user_id=user_id)
     else:
-        form = ArtworkForm(instance=portfolio)
-
-    artworks = Artwork.objects.filter(user=request.user)
+        portfolio_form = PortfolioForm(instance=portfolio)
+        artwork_formset = ArtworkFormSet(instance=portfolio)
+    
     context = {
-        'form': form,
-        'artworks': artworks,
+        'portfolio_form': portfolio_form,
+        'artwork_formset': artwork_formset,
+        'portfolio': portfolio
     }
     return render(request, template_name, context)
 
 @login_required
+def portfolio_view(request, user_id):
+    portfolio = get_object_or_404(Portfolio, user__id=user_id)
+    return render(request, 'MyApp/portfolio_view.html', {'portfolio': portfolio})
+
+@login_required
 def portfolio1(request, user_id):
-    if request.method == 'POST':
-        # 포트폴리오 객체가 존재하는지 확인
-        try:
-            portfolio = Artwork.objects.get(user_id=user_id)
-        except Artwork.DoesNotExist:
-            portfolio = Artwork(user_id=user_id)
-
-        # 폼 데이터 처리
-        portfolio.author_name = request.POST.get('author_name', '')
-        portfolio.author_info = request.POST.get('author_info', '')
-        portfolio.art_description = request.POST.get('art_description', '')
-        portfolio.art_title = request.POST.get('art_title', '')
-
-        # 이미지 파일 처리
-        if 'image1' in request.FILES:
-                portfolio.image1 = request.FILES['image1']
-        if 'image2' in request.FILES:
-            portfolio.image2 = request.FILES['image2']
-        if 'image3' in request.FILES:
-            portfolio.image3 = request.FILES['image3']
-        if 'image4' in request.FILES:
-            portfolio.image4 = request.FILES['image4']
-        if 'image5' in request.FILES:
-            portfolio.image5 = request.FILES['image5']
-        if 'image6' in request.FILES:
-            portfolio.image6 = request.FILES['image6']
-        # 필요한 경우 추가 이미지 필드 처리
-        # ...
-
-        # 데이터베이스에 저장
-        portfolio.save()
-
-        # 변경 사항이 저장된 포트폴리오 페이지로 리다이렉트
-        return redirect('portfolio1', user_id=user_id)
-
-    else:
-        # GET 요청인 경우, 포트폴리오 데이터를 가져와서 렌더링
-        try:
-            portfolio = Artwork.objects.get(user_id=user_id)
-        except Artwork.DoesNotExist:
-            portfolio = None
-
-        context = {
-            'portfolio': portfolio,
-            'user_id': user_id, 
-        }
-        return render(request, 'MyApp/portfolio1.html', context)
-
-
-
-
-
-
-        
-        
-
+    return handle_portfolio(request, user_id, template_name='MyApp/portfolio1.html')
 
 @login_required
-def portfolio2(request, user_id=None, id=None):
-    return handle_portfolio(request, user_id, id, 'MyApp/portfolio2.html')
+def portfolio2(request, user_id):
+    return handle_portfolio(request, user_id, template_name='MyApp/portfolio2.html')
 
 @login_required
-def portfolio3(request, user_id=None, id=None):
-    return handle_portfolio(request, user_id, id, 'MyApp/portfolio3.html')
+def portfolio3(request, user_id):
+    return handle_portfolio(request, user_id, template_name='MyApp/portfolio3.html')
 
 @login_required
-def portfolio4(request, user_id=None, id=None):
-    return handle_portfolio(request, user_id, id, 'MyApp/portfolio4.html')
+def portfolio4(request, user_id):
+    return handle_portfolio(request, user_id, template_name='MyApp/portfolio4.html')
 
 @login_required
-def portfolio5(request, user_id=None, id=None):
-    return handle_portfolio(request, user_id, id, 'MyApp/portfolio5.html')
+def portfolio5(request, user_id):
+    return handle_portfolio(request, user_id, template_name='MyApp/portfolio5.html')
 
 @login_required
-def portfolio6(request, user_id=None, id=None):
-    return handle_portfolio(request, user_id, id, 'MyApp/portfolio6.html')
-
+def portfolio6(request, user_id):
+    return handle_portfolio(request, user_id, template_name='MyApp/portfolio6.html')
