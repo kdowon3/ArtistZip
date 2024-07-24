@@ -1,4 +1,6 @@
-{% extends 'MyApp/base.html' %} {% load static %} {% block content %}
+{% extends 'MyApp/base.html' %}
+{% load static %}
+{% block content %}
 <div class="myprofile-container">
     <div class="myprofile-header">
         <div class="myprofile-info">
@@ -30,10 +32,13 @@
         {% endfor %}
     </div>
     {% else %}
-    <p>아직 포트폴리오가 생성되지 않았습니다.</p>
+    <p>아직 작품을 저장하지 않았습니다.</p>
     {% endif %}
     <div class="myprofile-actions">
-        <button class="myprofile-action-btn" id="myprofileCreateBtn" onclick="openModal()">생성</button>
+        <button class="myprofile-action-btn" id="myprofilePreviewBtn" onclick="openModal()">템플릿 미리보기</button>
+        <a href="{% url 'template' user.id %}">
+            <button class="myprofile-action-btn">작품 업로드</button>
+        </a>
     </div>
 </div>
 
@@ -50,7 +55,7 @@
                     <p class="template-subtitle">움직임을 표현하고 싶은 아티스트라면,</p>
                     <h1 class="template-title">예술적인 템플릿</h1>
                     <a id="templateSelectBtn" href="#">
-                        <button class="template-select-btn">선택하기</button>
+                        <button class="template-select-btn">구경하기</button>
                     </a>
                 </div>
                 <div class="template-image-content">
