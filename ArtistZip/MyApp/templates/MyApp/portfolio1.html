@@ -11,12 +11,7 @@
     <body>
         <script src="{% static 'js/portfolio.js' %}" defer></script>
         <div class="container">
-            <form
-                id="portfolio-form"
-                method="post"
-                enctype="multipart/form-data"
-                action="{% url 'portfolio1' user.id %}"
-            >
+            <form method="POST" enctype="multipart/form-data" action="{% url 'portfolio1' user_id %}">
                 {% csrf_token %}
                 <div class="box box1"></div>
                 <div class="box box2"></div>
@@ -24,12 +19,12 @@
                 <div id="image1Preview" class="image-preview image1" ondblclick="triggerFileInput('fileInput1')">
                     <img
                         class="image"
-                        src="{% if portfolio and portfolio.image1_url %}{{ portfolio.image1_url }}{% endif %}"
+                        src="{% if portfolio and portfolio.artwork_image %}{{ portfolio.artwork_image.url }}{% endif %}"
                         alt="Image 1"
                     />
                     <div
                         class="placeholder-text"
-                        style="{% if portfolio and portfolio.image1_url %}display: none{% endif %}"
+                        style="{% if portfolio and portfolio.artwork_image %}display: none{% endif %}"
                     >
                         547 x 734
                     </div>
