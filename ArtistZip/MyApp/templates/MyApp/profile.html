@@ -12,15 +12,20 @@
         <p><strong>이메일:</strong> {{ profile_user.email }}</p>
         <!-- 프로필에 추가 정보가 있으면 여기에 표시 -->
     </div>
+    
+    <!-- 작품 목록 -->
     <div class="profile-artworks">
         <h2>작품 목록</h2>
-        <div class="artwork-list">
+        <div class="gallery-content">
             {% for artwork in artworks %}
-            <div class="artwork-item">
-                <img src="{{ artwork.artwork_image.url }}" alt="{{ artwork.artwork_title }}" class="artwork-image" />
-                <div class="artwork-info">
-                    <h3>{{ artwork.artwork_title }}</h3>
-                    <p>{{ artwork.description }}</p>
+            <div class="gallery-column">
+                <div class="gallery-item">
+                    <img src="{{ artwork.artwork_image.url }}" alt="{{ artwork.artwork_title }}" class="gallery-image" />
+                    <div class="gallery-text">
+                        <div class="gallery-title">
+                            <a href="{% url 'profile' artwork.user.id %}" class="unstyled-link">{{ artwork.artwork_title }}</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             {% endfor %}

@@ -12,28 +12,35 @@
         </div>
     </div>
     {% if artworks %}
-    <div class="myprofile-gallery">
+    <div class="gallery-content">
         {% for artwork in artworks %}
-        <div class="myprofile-gallery-item">
-            <img
-                src="{{ artwork.artwork_image.url }}"
-                alt="{{ artwork.artwork_title }}"
-                class="myprofile-gallery-image"
-            />
-            <div class="myprofile-artwork-details">
-                <h3>{{ artwork.artwork_title }}</h3>
-                <p>{{ artwork.artwork_description }}</p>
-                <a href="{% url 'edit_artwork' artwork.id %}">
-                    <button class="myprofile-action-btn">편집</button>
-                </a>
-                <button class="myprofile-action-btn" onclick="confirmDelete('{{ artwork.id }}')">삭제</button>
+        <div class="gallery-column">
+            <div class="gallery-item">
+                <img
+                    src="{{ artwork.artwork_image.url }}"
+                    alt="{{ artwork.artwork_title }}"
+                    class="gallery-image"
+                />
+                <div class="gallery-text">
+                    <div class="gallery-title">
+                        <h3>{{ artwork.artwork_title }}</h3>
+                    </div>
+                    <p>{{ artwork.artwork_description }}</p>
+                    <div class="gallery-buttons">
+                        <a href="{% url 'edit_artwork' artwork.id %}">
+                            <button class="gallery-action-btn">편집</button>
+                        </a>
+                        <button class="gallery-action-btn" onclick="confirmDelete('{{ artwork.id }}')">삭제</button>
+                    </div>
+                </div>
             </div>
         </div>
         {% endfor %}
     </div>
-    {% else %}
+{% else %}
     <p>아직 작품을 저장하지 않았습니다.</p>
-    {% endif %}
+{% endif %}
+
     <div class="myprofile-actions">
         <button class="myprofile-action-btn" id="myprofilePreviewBtn" onclick="openModal()">템플릿 미리보기</button>
         <a href="{% url 'template' user.id %}">
@@ -136,7 +143,7 @@
     }
 
     function confirmDelete(artworkId) {
-        if (confirm("해당 포트폴리오를 삭제하시겠습니까?")) {
+        if (confirm("해당 작품을 삭제하시겠습니까?")) {
             window.location.href = "{% url 'delete_artwork' %}?id=" + artworkId;
         }
     }
