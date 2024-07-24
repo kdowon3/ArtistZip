@@ -124,25 +124,7 @@ def myprofile(request, user_id):
     }
     return render(request, 'MyApp/myprofile.html', context)
 
-@login_required
-def template(request, user_id):
-    user = get_object_or_404(CustomUser, id=user_id)
-    if request.method == 'POST':
-        form = ArtworkForm(request.POST, request.FILES)
-        if form.is_valid():
-            artwork = form.save(commit=False)
-            artwork.user = user
-            artwork.save()
-            messages.success(request, '작품이 성공적으로 저장되었습니다.')
-            return redirect('myprofile', user_id=user.id)
-        else:
-            messages.error(request, '저장 중 오류가 발생했습니다.')
-    else:
-        form = ArtworkForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'MyApp/template.html', context)
+
 @login_required
 def edit_artwork(request, artwork_id):
     artwork = get_object_or_404(Artwork, id=artwork_id)
@@ -157,7 +139,7 @@ def edit_artwork(request, artwork_id):
     context = {
         'form': form
     }
-    return render(request, 'MyApp/template.html', context)
+    return render(request, 'MyApp/myprofile.html', context)
 
 def delete_artwork(request):
     if request.method == 'GET' and 'id' in request.GET:
@@ -237,20 +219,19 @@ def portfolio1(request, user_id):
         portfolio.art_title = request.POST.get('art_title', '')
 
         # 이미지 파일 처리
-        if 'image1' in request.FILES:
-                portfolio.image1 = request.FILES['image1']
-        if 'image2' in request.FILES:
+        # 파일이 비어있지 않은 경우만 처리
+        if 'image1' in request.FILES and request.FILES['image1']:
+            portfolio.image1 = request.FILES['image1']
+        if 'image2' in request.FILES and request.FILES['image2']:
             portfolio.image2 = request.FILES['image2']
-        if 'image3' in request.FILES:
+        if 'image3' in request.FILES and request.FILES['image3']:
             portfolio.image3 = request.FILES['image3']
-        if 'image4' in request.FILES:
+        if 'image4' in request.FILES and request.FILES['image4']:
             portfolio.image4 = request.FILES['image4']
-        if 'image5' in request.FILES:
+        if 'image5' in request.FILES and request.FILES['image5']:
             portfolio.image5 = request.FILES['image5']
-        if 'image6' in request.FILES:
+        if 'image6' in request.FILES and request.FILES['image6']:
             portfolio.image6 = request.FILES['image6']
-        # 필요한 경우 추가 이미지 필드 처리
-        # ...
 
         # 데이터베이스에 저장
         portfolio.save()
@@ -267,14 +248,9 @@ def portfolio1(request, user_id):
 
         context = {
             'portfolio': portfolio,
-            'user_id': user_id, 
+            'user_id': user_id,
         }
         return render(request, 'MyApp/portfolio1.html', context)
-
-
-
-
-
 
         
         

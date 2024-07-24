@@ -5,4 +5,4 @@ from .models import Artwork
 class ArtworkForm(forms.ModelForm):
     class Meta:
         model = Artwork
-        fields = ['artwork_image', 'artwork_title', 'artwork_description', 'author_name', 'author_info', 'art_description']
+        fields = ['artwork_image', 'author_name', 'author_info', 'art_description', 'art_title']
