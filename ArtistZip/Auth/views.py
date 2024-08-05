@@ -4,7 +4,7 @@ from .forms import ArtistSignupForm, GeneralSignupForm, CustomUserChangeForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import CustomUser
+from .models import CustomUser, Subscription
 from allauth.socialaccount.models import SocialAccount
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -136,16 +136,18 @@ def signup(request):
     return render(request, 'login.html')
 
 
-@login_required
-@require_POST
-def subscribe(request):
-    user_id = request.POST.get('user_id')
-    action = request.POST.get('action')
-    user = get_object_or_404(CustomUser, pk=user_id)
-    
-    if action == 'subscribe':
-        request.user.following.add(user)
-    elif action == 'unsubscribe':
-        request.user.following.remove(user)
-    
-    return JsonResponse({'status': 'ok'})
+def subscribe(request, user_id):
+    if request.method == 'POST':
+        subscribed_to = get_object_or_404(User, id=user_id)
+        subscription, created = Subscription.objects.get_or_create(subscriber=request.user, subscribed_to=subscribed_to)
+        if created:
+            subscription.save()
+    return redirect('profile', user_id=user_id)
+
+def unsubscribe(request, user_id):
+    if request.method == 'POST':
+        subscribed_to = get_object_or_404(User, id=user_id)
+        subscription = Subscription.objects.filter(subscriber=request.user, subscribed_to=subscribed_to)
+        if subscription.exists():
+            subscription.delete()
+    return redirect('profile', user_id=user_id)

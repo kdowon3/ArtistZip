@@ -13,13 +13,12 @@ class Artwork(models.Model):
         return self.artwork_title
 
 class Portfolio(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default = 1, related_name='portfolios')
-    author_name = models.CharField(max_length=255, verbose_name='작가명')
-    art_title = models.CharField(max_length=255, verbose_name='작품 제목')
-    art_description = models.TextField(verbose_name='작품 설명')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='portfolios')
+    image = models.ImageField(upload_to='portfolios/', null=True, blank=True)  # 완성본 이미지 파일
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
-        return self.art_title
+        return f"Portfolio of {self.user.username}"
 
 class ContactInfo(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

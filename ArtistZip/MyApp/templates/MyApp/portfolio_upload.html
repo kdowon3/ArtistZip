@@ -1,0 +1,12 @@
+{% extends 'MyApp/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h2>포트폴리오 업로드</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">업로드</button>
+    </form>
+</div>
+{% endblock %}

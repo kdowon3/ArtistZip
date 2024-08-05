@@ -3,6 +3,34 @@
 {% block title %}갤러리{% endblock %}
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .pagination .step-links {
+        display: flex;
+        gap: 5px;
+    }
+    .pagination .step-links a,
+    .pagination .step-links span {
+        color: #007bff;
+        padding: 8px 16px;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        margin: 0 2px;
+        border-radius: 4px;
+    }
+    .pagination .step-links a:hover {
+        background-color: #f1f1f1;
+    }
+    .pagination .step-links .current {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+</style>
 {% endblock %}
 {% block content %}
 <div class="gallery-container">
@@ -26,7 +54,7 @@
         </div>
     </div>
     <div class="gallery-content">
-        {% for artwork in artworks %}
+        {% for artwork in page_obj %}
         <div class="gallery-column">
             <div class="gallery-item rectangle-{{ forloop.counter }}">
                 <img src="{{ artwork.artwork_image.url }}" alt="{{ artwork.artwork_title }}" class="gallery-image" />
@@ -40,5 +68,24 @@
         </div>
         {% endfor %}
     </div>
+    <!-- Pagination -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}" class="unstyled-link">이전</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}" class="unstyled-link">다음</a>
+            {% endif %}
+        </span>
+    </div>
 </div>
+<script>
+    document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 {% endblock %}

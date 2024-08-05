@@ -29,6 +29,8 @@ urlpatterns = [
     path('portfolio5/<int:user_id>/', views.portfolio5, name='portfolio5'),
     path('portfolio6/<int:user_id>/', views.portfolio6, name='portfolio6'),
     path('edit-contact-info/', views.edit_contact_info, name='edit_contact_info'),
+    path('portfolio_upload/<int:user_id>/', views.portfolio_upload, name='portfolio_upload'),
+    path('portfolio_list/<int:user_id>/', views.portfolio_list, name='portfolio_list'),
 
 ]
 

@@ -5,12 +5,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Artwork, Portfolio, ContactInfo
 from .forms import ArtworkForm, PortfolioForm, ContactInfoForm
-from Auth.models import CustomUser
+from Auth.models import CustomUser, Subscription
 from Chat.models import ChatRoom, Message
 from django.contrib.auth import get_user_model
 import random
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator
 
 
 User = get_user_model()
@@ -38,6 +39,7 @@ def artists(request):
         'search_query': search_query,
     }
     return render(request, 'MyApp/artists.html', context)
+
 @login_required
 def gallery(request):
     search_query = request.GET.get('search', '')
@@ -52,8 +54,12 @@ def gallery(request):
     
     random.shuffle(artworks)
     
+    paginator = Paginator(artworks, 20)  # Show 20 artworks per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
     context = {
-        'artworks': artworks,
+        'page_obj': page_obj,
         'search_query': search_query,
     }
     return render(request, 'MyApp/gallery.html', context)
@@ -101,28 +107,42 @@ def login(request):
 def profile(request, user_id):
     profile_user = get_object_or_404(CustomUser, id=user_id)
     artworks = Artwork.objects.filter(user=profile_user)
+    portfolios = Portfolio.objects.filter(user=profile_user)
+    is_subscribed = Subscription.objects.filter(subscriber=request.user, subscribed_to=profile_user).exists()
+    
     # 기존에 이 두 사용자 간의 채팅방이 있는지 확인
     chatroom = ChatRoom.objects.filter(participants__id=profile_user.id).filter(participants__id=request.user.id).first()
     if not chatroom:
         chatroom = ChatRoom.objects.create()
         chatroom.participants.add(request.user, profile_user)
+        
     return render(request, 'MyApp/profile.html', {
         'profile_user': profile_user,
         'artworks': artworks,
+        'portfolios': portfolios,
+        'is_subscribed': is_subscribed,
         'chatroom_id': chatroom.id
     })
 
 @login_required
 def myprofile(request, user_id):
-    user = get_object_or_404(User, id=user_id)
+    user = get_object_or_404(CustomUser, id=user_id)
     artworks = Artwork.objects.filter(user=user)
-    followed_artists = user.following.all()
-    context = {
+    portfolios = Portfolio.objects.filter(user=user)
+    subscriptions = Subscription.objects.filter(subscriber=user)
+    
+    if user.is_artist:
+        is_subscribed = Subscription.objects.filter(subscriber=request.user, subscribed_to=user).exists()
+    else:
+        is_subscribed = None
+    
+    return render(request, 'MyApp/myprofile.html', {
         'user': user,
         'artworks': artworks,
-        'followed_artists': followed_artists,
-    }
-    return render(request, 'MyApp/myprofile.html', context)
+        'portfolios': portfolios,
+        'subscriptions': subscriptions,
+        'is_subscribed': is_subscribed
+    })
 
 @login_required
 def template(request, user_id):
@@ -254,3 +274,20 @@ def portfolio5(request, user_id=None, id=None):
 def portfolio6(request, user_id=None, id=None):
     return handle_portfolio(request, user_id, id, 'MyApp/portfolio6.html')
 
+
+def portfolio_upload(request, user_id):
+    if request.method == 'POST':
+        form = PortfolioForm(request.POST, request.FILES)
+        if form.is_valid():
+            portfolio = form.save(commit=False)
+            portfolio.user_id = user_id
+            portfolio.save()
+            return redirect('myprofile', user_id=user_id)
+    else:
+        form = PortfolioForm()
+    
+    return render(request, 'MyApp/portfolio_upload.html', {'form': form})
+
+def portfolio_list(request, user_id):
+    portfolios = Portfolio.objects.filter(user_id=user_id)
+    return render(request, 'MyApp/portfolio_list.html', {'portfolios': portfolios})

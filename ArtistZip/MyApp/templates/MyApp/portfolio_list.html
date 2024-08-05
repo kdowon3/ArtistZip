@@ -1,0 +1,56 @@
+{% extends 'MyApp/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h2>내 포트폴리오</h2>
+    {% if portfolios.exists %}
+    <div class="gallery-content">
+        {% for portfolio in portfolios %}
+        <div class="gallery-column">
+            <div class="gallery-item">
+                {% if portfolio.image %}
+                <img
+                    src="{{ portfolio.image.url }}"
+                    alt="포트폴리오 이미지"
+                    class="gallery-image"
+                />
+                {% else %}
+                <p>포트폴리오가 없습니다.</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>포트폴리오가 없습니다.</p>
+    {% endif %}
+</div>
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+    .gallery-content {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 80%;
+        margin: 0 auto;
+    }
+    .gallery-column {
+        flex: 1 1 100%;
+    }
+    .gallery-item {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .gallery-image {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+</style>
+
+{% endblock %}
