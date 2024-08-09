@@ -10,11 +10,9 @@
     <div class="profile-info">
         <p><strong>이름:</strong> {{ profile_user.username }}</p>
         <p><strong>이메일:</strong> {{ profile_user.email }}</p>
-        {% if portfolios.exists %}
         <a href="{% url 'portfolio_list' profile_user.id %}">
             <button class="myprofile-action-btn">포트폴리오 보기</button>
         </a>
-        {% endif %}
         <!-- 구독 버튼 -->
         {% if request.user != profile_user %}
             <div id="subscription-section">

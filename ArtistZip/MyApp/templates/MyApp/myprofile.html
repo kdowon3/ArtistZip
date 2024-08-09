@@ -15,63 +15,48 @@
             </a>
         </div>
     </div>
-
-    {% if user.is_artist %}
-        {% if artworks %}
-        <div class="gallery-content">
-            {% for artwork in artworks %}
-            <div class="gallery-column">
-                <div class="gallery-item">
-                    <img
-                        src="{{ artwork.artwork_image.url }}"
-                        alt="{{ artwork.artwork_title }}"
-                        class="gallery-image"
-                    />
-                    <div class="gallery-text">
-                        <div class="gallery-title">
-                            <h3>{{ artwork.artwork_title }}</h3>
-                        </div>
-                        <p>{{ artwork.artwork_description }}</p>
-                        <div class="gallery-buttons">
-                            <a href="{% url 'edit_artwork' artwork.id %}">
-                                <button class="gallery-action-btn">편집</button>
-                            </a>
-                            <button class="gallery-action-btn" onclick="confirmDelete('{{ artwork.id }}')">삭제</button>
-                        </div>
+    {% if artworks %}
+    <div class="gallery-content">
+        {% for artwork in artworks %}
+        <div class="gallery-column">
+            <div class="gallery-item">
+                <img
+                    src="{{ artwork.artwork_image.url }}"
+                    alt="{{ artwork.artwork_title }}"
+                    class="gallery-image"
+                />
+                <div class="gallery-text">
+                    <div class="gallery-title">
+                        <h3>{{ artwork.artwork_title }}</h3>
+                    </div>
+                    <p>{{ artwork.artwork_description }}</p>
+                    <div class="gallery-buttons">
+                        <a href="{% url 'edit_artwork' artwork.id %}">
+                            <button class="gallery-action-btn">편집</button>
+                        </a>
+                        <button class="gallery-action-btn" onclick="confirmDelete('{{ artwork.id }}')">삭제</button>
                     </div>
                 </div>
             </div>
-            {% endfor %}
         </div>
-        {% else %}
-        <p>아직 작품을 저장하지 않았습니다.</p>
-        {% endif %}
-    
-        <div class="myprofile-actions">
-            <button class="myprofile-action-btn" id="myprofilePreviewBtn" onclick="openModal()">템플릿 미리보기</button>
-            <a href="{% url 'template' user.id %}">
-                <button class="myprofile-action-btn">작품 업로드</button>
-            </a>
-            <a href="{% url 'portfolio_list' user.id %}">
-                <button class="myprofile-action-btn">포트폴리오 보기</button>
-            </a>
-        </div>
-    {% else %}
-        <h2>구독한 아티스트</h2>
-        <div class="artists-gallery">
-            {% for subscription in subscriptions %}
-            <div class="artist-card">
-                {% if subscription.subscribed_to.profile_picture %}
-                <img src="{{ subscription.subscribed_to.profile_picture.url }}" class="myprofile-image">
-                {% else %}
-                <div class="myprofile-image avatar-placeholder"></div>
-                {% endif %}
-                <div class="artist-name">{{ subscription.subscribed_to.username }}</div>
-                <a href="{% url 'profile' subscription.subscribed_to.id %}" class="unstyled-link portfolio-button">프로필 보기</a>
-            </div>
-            {% endfor %}
-        </div>
-    {% endif %}
+        {% endfor %}
+    </div>
+{% else %}
+    <p>아직 작품을 저장하지 않았습니다.</p>
+{% endif %}
+
+    <div class="myprofile-actions">
+        <button class="myprofile-action-btn" id="myprofilePreviewBtn" onclick="openModal()">템플릿 미리보기</button>
+        <a href="{% url 'template' user.id %}">
+            <button class="myprofile-action-btn">작품 업로드</button>
+        </a>
+        <a href="{% url 'portfolio_upload' user.id %}">
+            <button class="myprofile-action-btn">포트폴리오 업로드</button>
+        </a>
+        <a href="{% url 'portfolio_list' user.id %}">
+            <button class="myprofile-action-btn">내 포트폴리오 보기</button>
+        </a>
+    </div>
 </div>
 
 <!-- 모달 오버레이 -->
@@ -130,37 +115,6 @@
         width: 100%;
         object-fit: cover;
         object-position: top;
-    }
-    .artists-gallery {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .artist-card {
-        margin: 10px;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        text-align: center;
-        width: 200px;
-    }
-    .artist-card img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-    }
-    .artist-name {
-        font-size: 1.2em;
-        margin-top: 10px;
-    }
-    .portfolio-button {
-        margin-top: 10px;
-        display: block;
-        padding: 10px;
-        background-color: #007bff;
-        color: white;
-        border-radius: 5px;
-        text-decoration: none;
     }
 </style>
 
