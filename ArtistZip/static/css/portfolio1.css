@@ -152,13 +152,13 @@ body {
     transform: rotate(-90deg);
     transform-origin: 0 0;
     color: black;
-    font-size: 70px;
-    font-weight: 600;
-    word-wrap: break-word;
+    font-size: 30px;
+    font-weight: 400;
+    /*word-wrap: break-word;*/
 }
 
 .view-representative-works {
-    left: 1513px;
+    left: 1510px;
     top: 728px;
 }
 
