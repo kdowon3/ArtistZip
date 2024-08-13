@@ -15,8 +15,6 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('profile/<int:user_id>/', views.profile, name='profile'),
     path('myprofile/<int:user_id>/', views.myprofile, name='myprofile'),
-    path('template/<int:user_id>/', views.template, name='template'),
-    path('template/<int:user_id>/<int:artwork_id>/', views.template, name='template'),
     path('edit_artwork/<int:artwork_id>/', views.edit_artwork, name='edit_artwork'),
     path('delete_artwork/', views.delete_artwork, name='delete_artwork'),
     path('accounts/', include('allauth.urls')),  # django-allauth URLs 추가

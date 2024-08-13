@@ -11,10 +11,10 @@
     <body>
         <div class="container">
             <form
-                id="portfolio-form"
-                method="post"
+                method="POST"
                 enctype="multipart/form-data"
-                action="{% url 'portfolio1' user.id %}"
+                action="{% url 'portfolio1' user_id %}"
+                id="portfolio-form"
             >
                 {% csrf_token %}
                 
@@ -25,10 +25,17 @@
                 <div id="image1Preview" class="image-preview image1">
                     <img
                         class="image"
-                        src="{% if portfolio and portfolio.image1_url %}{{ portfolio.image1_url }}{% endif %}"
+                        src="{% if portfolio and portfolio.artwork_image %}{{ portfolio.artwork_image.url }}{% endif %}"
                         alt="Image 1"
                     />
+<<<<<<< HEAD
                     <div class="placeholder-text" style="{% if portfolio and portfolio.image1_url %}display: none{% endif %}">
+=======
+                    <div
+                        class="placeholder-text"
+                        style="{% if portfolio and portfolio.artwork_image %}display: none{% endif %}"
+                    >
+>>>>>>> 4c3d81fefcf31cfa5335550a1ea079665b4dbd39
                         547 x 734
                     </div>
                 </div>
