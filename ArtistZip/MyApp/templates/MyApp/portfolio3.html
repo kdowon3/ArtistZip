@@ -6,6 +6,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Portfolio Template</title>
         <link rel="stylesheet" href="{% static 'css/portfolio3.css' %}" />
+        <style>
+            .container {
+                width: 1920px;
+                height: 8716px;
+                position: relative;
+                background-color: {{ form.background_color.value|default_if_none:'#000000' }}; /* 저장된 배경색 적용 */
+            }
+            .color-picker {
+                margin: 20px;
+                color: #FFFFFF; /* 글씨를 흰색으로 설정 */
+            }
+        </style>
+        <script>
+            function changeBackgroundColor(color) {
+                document.querySelector('.container').style.backgroundColor = color;
+            }
+        </script>
     </head>
     <body>
         <div class="container">
@@ -16,8 +33,11 @@
                 action="{% url 'create_portfolio3' user.id %}"
             >
                 {% csrf_token %}
-
-
+                <div style="z-index: 1000; position: relative;">
+                    <label for="background-color-picker" style="color: black;">배경 색상 선택:</label>
+                    <input type="color" id="background-color-picker" name="background_color" value="{{ form.background_color.value|default_if_none:'#000000' }}" onchange="changeBackgroundColor(this.value)">
+                </div>
+                
                 <div id="image1-preview" class="image-preview image1">
                     <img
                     class="image"

@@ -5,12 +5,6 @@ body {
     background: black;
 }
 
-.container {
-    width: 1920px;
-    height: 10677px;
-    position: relative;
-    background: black;
-}
 
 .image {
     border-radius: 10px;

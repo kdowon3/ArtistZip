@@ -7,13 +7,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Portfolio Template</title>
         <link rel="stylesheet" href="{% static 'css/portfolio4.css' %}" />
+        <style>
+            .container {
+                width: 1920px;
+                height: 9183px;
+                position: relative;
+                background-color: {{ form.background_color.value|default_if_none:'#ffffff' }}; /* 저장된 배경색 적용 */
+            }
+            .color-picker {
+                margin: 20px;
+            }
+        </style>
+        <script>
+            function changeBackgroundColor(color) {
+                document.querySelector('.container').style.backgroundColor = color;
+            }
+        </script>
     </head>
     <body>
 
         <div class="container">
             <form id="portfolio-form" method="post" enctype="multipart/form-data" action="{% url 'create_portfolio4' user.id %}">
                 {% csrf_token %}
-    
+                <div style="z-index: 1000; position: relative;">
+                    <label for="background-color-picker" style="color: black;">배경 색상 선택:</label>
+                    <input type="color" id="background-color-picker" name="background_color" value="{{ form.background_color.value|default_if_none:'#ffffff' }}" onchange="changeBackgroundColor(this.value)">
+                </div>
             <div class="site-title">Artist Zip</div>
             <div id="author-info" class="author-info">
                 <input

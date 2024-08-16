@@ -6,6 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Portfolio Template</title>
         <link rel="stylesheet" href="{% static 'css/portfolio3.css' %}" />
+        <style>
+            .container {
+                width: 1920px;
+                height: 8716px;
+                position: relative;
+                background-color: {{ portfolio.background_color }};
+            }
+        </style>
     </head>
     <body>
         <div class="container">

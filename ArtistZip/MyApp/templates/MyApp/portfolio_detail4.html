@@ -7,6 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{{ portfolio.author_name }}'s Portfolio</title>
         <link rel="stylesheet" href="{% static 'css/portfolio4.css' %}" />
+        <style>
+            .container {
+                width: 1920px;
+                height: 9183px;
+                position: relative;
+                background-color: {{ portfolio.background_color }};
+            }
+        </style>
     </head>
     <body>
 
