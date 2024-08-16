@@ -1,0 +1,214 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{ portfolio.author_name }}'s Portfolio</title>
+        <link rel="stylesheet" href="{% static 'css/portfolio2.css' %}" />
+    </head>
+    <body>
+        <div class="container">
+                {% csrf_token %}
+                
+              
+                <div id="image1-preview" class="image-preview image1">
+                    {% if portfolio.photo1 %}
+                        <img src="{{ portfolio.photo1.url }}" alt="Image 1" />
+                    {% else %}
+                        <div class="placeholder-text">
+                            734 x 547
+                        </div>
+                    {% endif %}   
+                </div>
+                <div id="image2-preview" class="image-preview image2">
+                    {% if portfolio.photo2 %}
+                        <img class="image" src="{{ portfolio.photo2.url }}" alt="Image 2"/>
+                    {% endif %}
+                    <div class="placeholder-text" style="{% if portfolio.photo2 %}display: none{% endif %}">
+                        1033 x 692
+                    </div>
+                </div>
+
+                <div id="image3-preview" class="image-preview image3">
+                    {% if portfolio.photo3 %}
+                        <img class="image" src="{{ portfolio.photo3.url }}" alt="Image 3"/>
+                    {% endif %}
+                    <div class="placeholder-text" style="{% if portfolio.photo3 %}display: none{% endif %}">
+                        1033 x 692
+                    </div>
+                </div>
+
+                <div
+                    class="text text1"
+                >
+                    {{ portfolio.description1 }}
+                </div>
+
+                <div
+                    class="text text2"
+                >
+                    {{ portfolio.description2 }}
+                </div>
+                
+
+                <div
+                    class="text text3"
+                >
+                    {{ portfolio.description3 }}
+                </div>
+                
+
+                <div
+                    id="author-name"
+                    class="author-name"
+                >
+                    {{ portfolio.author_name }}
+                </div>
+                
+
+                <div id="image4Preview" class="image-preview image4">
+                    {% if portfolio.photo4 %}
+                        <img class="image" src="{{ portfolio.photo4.url }}" alt="Image 4"/>
+                    {% endif %}
+                    <div class="placeholder-text" style="{% if portfolio.photo4 %}display: none{% endif %}">
+                        1744 x 734
+                    </div>
+                </div>
+
+                <div id="image5-preview" class="image-preview image5">
+                    {% if portfolio.photo5 %}
+                        <img class="image" src="{{ portfolio.photo5.url }}" alt="Image 5"/>
+                    {% endif %}
+                    <div class="placeholder-text" style="{% if portfolio.photo5 %}display: none{% endif %}">
+                        547 x 370
+                    </div>
+                </div>
+                
+
+                <div id="image6-preview" class="image-preview image6">
+                    {% if portfolio.photo6 %}
+                        <img class="image" src="{{ portfolio.photo6.url }}" alt="Image 6"/>
+                    {% endif %}
+                    <div class="placeholder-text" style="{% if portfolio.photo6 %}display: none{% endif %}">
+                        855 x 473
+                    </div>
+                </div>
+        
+
+                <div id="image7-preview" class="image-preview image7">
+                    {% if portfolio.photo7 %}
+                        <img class="image" src="{{ portfolio.photo7.url }}" alt="Image 7"/>
+                    {% endif %}
+                    <div class="placeholder-text" style="{% if portfolio.photo7 %}display: none{% endif %}">
+                        934 x 649
+                    </div>
+                </div>
+                
+
+                <div id="image8-preview" class="image-preview image8">
+                    {% if portfolio.photo8 %}
+                        <img class="image" src="{{ portfolio.photo8.url }}" alt="Image 8"/>
+                    {% endif %}
+                    <div class="placeholder-text" style="{% if portfolio.photo8 %}display: none{% endif %}">
+                        431 x 468
+                    </div>
+                </div>
+                
+
+                <div id="image9-preview" class="image-preview image9">
+                    {% if portfolio.photo9 %}
+                        <img class="image" src="{{ portfolio.photo9.url }}" alt="Image 9"/>
+                    {% endif %}
+                    <div class="placeholder-text" style="{% if portfolio.photo9 %}display: none{% endif %}">
+                        536 x 668
+                    </div>
+                </div>
+                
+
+                <div
+                    class="project-name project-name1"
+                >
+                    {{ portfolio.description4 }}
+                </div>
+
+                <div
+                    class="project-name project-name2"
+                >
+                    {{ portfolio.description5 }}
+                </div>
+
+                <div
+                    class="project-name project-name3"
+                >
+                    {{ portfolio.description6 }}
+                </div>
+                <div
+                    class="project-name project-name4"
+                >
+                    {{ portfolio.description7 }}
+                </div>
+                <div
+                    class="project-name project-name5"
+                >
+                    {{ portfolio.description8 }}
+                </div>
+                <div
+                    class="title title1"
+                >
+                    {{ portfolio.author_name }}
+                </div>
+                <div class="site-title">Artist Zip</div>
+                <div
+                    id="author-info"
+                    class="author-info"
+                >
+                    {{ portfolio.author_name }}
+                </div>
+
+                <div class="line line1"></div>
+
+                <div
+                    id="intro-text"
+                    class="intro-text"
+                >
+                    {{ portfolio.career }}
+                </div>
+
+                <div
+                    class="intro-title"
+                >
+                    {{ portfolio.intro }}
+                </div>
+                <div class="contact-container">
+                    <div class="contact-line contact-line1"></div>
+                    <div class="contact-line contact-line2"></div>
+                    <div class="contact-line contact-line3"></div>
+                    <div class="contact-title">CONTACT</div>
+                    <div class="contact-info contact-info1">INSTA <a href="{{ portfolio.instagram }}" target="_blank">{{ portfolio.instagram }}</a></div>
+                    <div class="contact-info contact-info2">E-MAIL <a href="mailto:{{ portfolio.email }}">{{ portfolio.email }}</a></div>
+                    <div class="contact-info contact-info3">HOMEPAGE <a href="{{ portfolio.website }}" target="_blank">{{ portfolio.website }}</a></div>
+                </div>
+                <img class="image image10" src="https://via.placeholder.com/637x403" alt="Image 10" />
+                <div class="footer">
+                    <div class="footer-bg"></div>
+                    <div class="footer-text footer-text1">Gallery</div>
+                    <div class="footer-text footer-text2">Message</div>
+                    <div class="footer-text footer-text3">My page</div>
+                    <div class="footer-text footer-text4">Home</div>
+                    <div class="footer-line"></div>
+                    <div class="footer-title">Artist Zip</div>
+                    <img class="footer-img" src="https://via.placeholder.com/1342x243" alt="Footer Image" />
+                </div>
+                <div class="scroll-bar scroll-bar1"></div>
+                <div class="scroll-bar scroll-bar2"></div>
+                <div class="scroll-bar scroll-bar3"></div>
+                <div class="scroll-bar scroll-bar4"></div>
+                <div class="cta">
+                    <div class="cta-bg"></div>
+                    <div class="cta-text">아티스트집이 궁금하다면?</div>
+                    <div class="cta-line"></div>
+                </div>
+        </div>
+    </body>
+</html>

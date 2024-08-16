@@ -6,12 +6,15 @@
 {% block content %}
 <div class="gallery-container">
     <div class="search-bar">
-        <input type="text" id="search-input" placeholder="작가명으로 검색하세요" value="{{ search_query }}">
+        <input type="text" id="search-input" placeholder="작가명으로 검색하세요" value="{{ search_query }}" />
         <button type="button" onclick="searchArtist()">검색</button>
     </div>
     <div class="artists-gallery">
         {% for artist in artists %}
-        <div class="artist-card">
+        <div
+            class="artist-card"
+            style="display: flex; flex-direction: column; justify-content: center; align-items: center"
+        >
             {% if artist.profile_picture %}
             <img src="{{ artist.profile_picture.url }}" class="myprofile-image">
             {% else %}
@@ -26,7 +29,7 @@
 
 <script>
     function searchArtist() {
-        const input = document.getElementById("search-input").value.toLowerCase();
+        const input = document.getElementById('search-input').value.toLowerCase();
         window.location.href = `?search=${input}`;
     }
 </script>

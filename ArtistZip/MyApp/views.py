@@ -1,10 +1,8 @@
-# MyApp/views.py
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Artwork, Portfolio, ContactInfo
-from .forms import ArtworkForm, PortfolioForm, ContactInfoForm
+from .models import Artwork, Portfolio
+from .forms import ArtworkForm, PortfolioForm
 from Auth.models import CustomUser, Subscription
 from Chat.models import ChatRoom, Message
 from django.contrib.auth import get_user_model
@@ -12,8 +10,10 @@ import random
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
-
-
+from django.urls import reverse, resolve, NoReverseMatch
+from django.http import Http404
+import requests
+from django.http import HttpResponse
 User = get_user_model()
 
 def index(request):
@@ -21,6 +21,7 @@ def index(request):
 
 def az(request):
     return render(request, 'MyApp/az.html')
+
 @login_required
 def artists(request):
     search_query = request.GET.get('search', '')
@@ -96,13 +97,12 @@ def contact(request):
         'other_user': other_user
     })
 
-
-    
 def signup(request):
     return render(request, 'MyApp/signup.html')
 
 def login(request):
     return render(request, 'MyApp/login.html')
+
 @login_required
 def profile(request, user_id):
     profile_user = get_object_or_404(CustomUser, id=user_id)
@@ -163,6 +163,7 @@ def template(request, user_id):
         'form': form,
     }
     return render(request, 'MyApp/template.html', context)
+
 @login_required
 def edit_artwork(request, artwork_id):
     artwork = get_object_or_404(Artwork, id=artwork_id)
@@ -188,40 +189,148 @@ def delete_artwork(request):
         return redirect('myprofile', user_id=user_id)
     return redirect('myprofile')
 
-@login_required
-def edit_contact_info(request):
-    contact_info, created = ContactInfo.objects.get_or_create(user=request.user)
-    
+
+
+def create_portfolio1(request, user_id):
     if request.method == 'POST':
-        form = ContactInfoForm(request.POST, instance=contact_info)
+        form = PortfolioForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('profile', user_id=request.user.id)  # Redirect to profile page
+            portfolio = form.save(commit=False)
+            portfolio.user_id = user_id  # user_id를 할당
+            portfolio.template_number = 1
+            portfolio.save()
+            # 저장된 포트폴리오의 ID를 사용하여 리디렉션
+            return redirect('portfolio_detail1', user_id=user_id, portfolio_id=portfolio.id)
+        else:
+            print(form.errors)  # 폼 에러 출력
     else:
-        form = ContactInfoForm(instance=contact_info)
-    
-    return render(request, 'edit_contact_info.html', {'form': form})
+        form = PortfolioForm()
+
+    return render(request, 'MyApp/portfolio1.html', {'form': form})
+
+def create_portfolio2(request, user_id):
+    if request.method == 'POST':
+        form = PortfolioForm(request.POST, request.FILES)
+        if form.is_valid():
+            portfolio = form.save(commit=False)
+            portfolio.user_id = user_id  # user_id를 할당
+            portfolio.template_number = 2
+            portfolio.save()
+            # 저장된 포트폴리오의 ID를 사용하여 리디렉션
+            return redirect('portfolio_detail2', user_id=user_id, portfolio_id=portfolio.id)
+        else:
+            print(form.errors)  # 폼 에러 출력
+    else:
+        form = PortfolioForm()
+
+    return render(request, 'MyApp/portfolio2.html', {'form': form})
+
+def create_portfolio3(request, user_id):
+    if request.method == 'POST':
+        form = PortfolioForm(request.POST, request.FILES)
+        if form.is_valid():
+            portfolio = form.save(commit=False)
+            portfolio.user_id = user_id  # user_id를 할당
+            portfolio.template_number = 3
+            portfolio.save()
+            # 저장된 포트폴리오의 ID를 사용하여 리디렉션
+            return redirect('portfolio_detail3', user_id=user_id, portfolio_id=portfolio.id)
+        else:
+            print(form.errors)  # 폼 에러 출력
+    else:
+        form = PortfolioForm()
+
+    return render(request, 'MyApp/portfolio3.html', {'form': form})
+
+def create_portfolio4(request, user_id):
+    if request.method == 'POST':
+        form = PortfolioForm(request.POST, request.FILES)
+        if form.is_valid():
+            portfolio = form.save(commit=False)
+            portfolio.user_id = user_id  # user_id를 할당
+            portfolio.template_number = 4
+            portfolio.save()
+            # 저장된 포트폴리오의 ID를 사용하여 리디렉션
+            return redirect('portfolio_detail4', user_id=user_id, portfolio_id=portfolio.id)
+        else:
+            print(form.errors)  # 폼 에러 출력
+    else:
+        form = PortfolioForm()
+
+    return render(request, 'MyApp/portfolio4.html', {'form': form})
+def create_portfolio5(request, user_id):
+    if request.method == 'POST':
+        form = PortfolioForm(request.POST, request.FILES)
+        if form.is_valid():
+            portfolio = form.save(commit=False)
+            portfolio.user_id = user_id  # user_id를 할당
+            portfolio.template_number = 5
+            portfolio.save()
+            # 저장된 포트폴리오의 ID를 사용하여 리디렉션
+            return redirect('portfolio_detail5', user_id=user_id, portfolio_id=portfolio.id)
+        else:
+            print(form.errors)  # 폼 에러 출력
+    else:
+        form = PortfolioForm()
+
+    return render(request, 'MyApp/portfolio5.html', {'form': form})
+
+def create_portfolio6(request, user_id):
+    if request.method == 'POST':
+        form = PortfolioForm(request.POST, request.FILES)
+        if form.is_valid():
+            portfolio = form.save(commit=False)
+            portfolio.user_id = user_id  # user_id를 할당
+            portfolio.template_number = 6
+            portfolio.save()
+            # 저장된 포트폴리오의 ID를 사용하여 리디렉션
+            return redirect('portfolio_detail6', user_id=user_id, portfolio_id=portfolio.id)
+        else:
+            print(form.errors)  # 폼 에러 출력
+    else:
+        form = PortfolioForm()
+
+    return render(request, 'MyApp/portfolio6.html', {'form': form})
+
+
+def portfolio_detail1(request, user_id, portfolio_id):
+    portfolio = get_object_or_404(Portfolio, user_id=user_id, id=portfolio_id)
+    return render(request, 'MyApp/portfolio_detail1.html', {'portfolio': portfolio})
+
+def portfolio_detail2(request, user_id, portfolio_id):
+    portfolio = get_object_or_404(Portfolio, user_id=user_id, id=portfolio_id)
+    return render(request, 'MyApp/portfolio_detail2.html', {'portfolio': portfolio})
+
+def portfolio_detail3(request, user_id, portfolio_id):
+    portfolio = get_object_or_404(Portfolio, user_id=user_id, id=portfolio_id)
+    return render(request, 'MyApp/portfolio_detail3.html', {'portfolio': portfolio})
+
+def portfolio_detail4(request, user_id, portfolio_id):
+    portfolio = get_object_or_404(Portfolio, user_id=user_id, id=portfolio_id)
+    return render(request, 'MyApp/portfolio_detail4.html', {'portfolio': portfolio})
+
+def portfolio_detail5(request, user_id, portfolio_id):
+    portfolio = get_object_or_404(Portfolio, user_id=user_id, id=portfolio_id)
+    return render(request, 'MyApp/portfolio_detail5.html', {'portfolio': portfolio})
+
+def portfolio_detail6(request, user_id, portfolio_id):
+    portfolio = get_object_or_404(Portfolio, user_id=user_id, id=portfolio_id)
+    return render(request, 'MyApp/portfolio_detail6.html', {'portfolio': portfolio})
+
 
 @login_required
 @csrf_exempt
-def handle_portfolio(request, user_id=None, id=None, template_name='MyApp/portfolio1.html'):
-    if id:
-        portfolio = get_object_or_404(Portfolio, id=id)
-    else:
-        portfolio = Portfolio(user=request.user) 
-
+def handle_portfolio(request, user_id, template_name):
+    portfolio, created = Portfolio.objects.get_or_create(user_id=user_id)
+    
     if request.method == 'POST':
-        form = PortfolioForm(request.POST, instance=portfolio)
-        if form.is_valid():
-            portfolio = form.save(commit=False)
-            portfolio.user = request.user  # Ensure the user is set
+        portfolio_form = PortfolioForm(request.POST, request.FILES, instance=portfolio)
+        artwork_formset = ArtworkFormSet(request.POST, request.FILES, instance=portfolio)
+        
+        if portfolio_form.is_valid() and artwork_formset.is_valid():
+            portfolio = portfolio_form.save(commit=False)
+            portfolio.user_id = user_id
             portfolio.save()
-
-            # Handle ContactInfo
-            contact_info, created = ContactInfo.objects.get_or_create(user=request.user)
-            contact_form = ContactInfoForm(request.POST, instance=contact_info)
-            if contact_form.is_valid():
-                contact_form.save()
 
             # Handle Artwork uploads
             for i in range(1, 7):
@@ -239,41 +348,38 @@ def handle_portfolio(request, user_id=None, id=None, template_name='MyApp/portfo
     else:
         form = PortfolioForm(instance=portfolio)
 
-    contact_info = ContactInfo.objects.filter(user=request.user).first()
     artworks = Artwork.objects.filter(user=request.user)
 
     context = {
         'form': form,
-        'contact_info': contact_info,
         'artworks': artworks,
     }
     return render(request, template_name, context)
 
-# Define the portfolio views to use the `handle_portfolio` function
 @login_required
-def portfolio1(request, user_id=None, id=None):
-    return handle_portfolio(request, user_id, id, 'MyApp/portfolio1.html')
+def portfolio_view(request, user_id):
+    portfolio = get_object_or_404(Portfolio, user__id=user_id)
+    return render(request, 'MyApp/portfolio_view.html', {'portfolio': portfolio})
 
 @login_required
-def portfolio2(request, user_id=None, id=None):
-    return handle_portfolio(request, user_id, id, 'MyApp/portfolio2.html')
+def portfolio1(request, user_id):
+    return handle_portfolio(request, user_id, template_name='MyApp/portfolio1.html')
 
 @login_required
-def portfolio3(request, user_id=None, id=None):
-    return handle_portfolio(request, user_id, id, 'MyApp/portfolio3.html')
+def portfolio2(request, user_id):
+    return handle_portfolio(request, user_id, template_name='MyApp/portfolio2.html')
 
 @login_required
-def portfolio4(request, user_id=None, id=None):
-    return handle_portfolio(request, user_id, id, 'MyApp/portfolio4.html')
+def portfolio3(request, user_id):
+    return handle_portfolio(request, user_id, template_name='MyApp/portfolio3.html')
 
 @login_required
-def portfolio5(request, user_id=None, id=None):
-    return handle_portfolio(request, user_id, id, 'MyApp/portfolio5.html')
+def portfolio4(request, user_id):
+    return handle_portfolio(request, user_id, template_name='MyApp/portfolio4.html')
 
 @login_required
-def portfolio6(request, user_id=None, id=None):
-    return handle_portfolio(request, user_id, id, 'MyApp/portfolio6.html')
-
+def portfolio5(request, user_id):
+    return handle_portfolio(request, user_id, template_name='MyApp/portfolio5.html')
 
 def portfolio_upload(request, user_id):
     if request.method == 'POST':
@@ -291,3 +397,17 @@ def portfolio_upload(request, user_id):
 def portfolio_list(request, user_id):
     portfolios = Portfolio.objects.filter(user_id=user_id)
     return render(request, 'MyApp/portfolio_list.html', {'portfolios': portfolios})
+
+def view_my_portfolio(request, user_id):
+    portfolio = Portfolio.objects.filter(user_id=user_id).first()
+    
+    if not portfolio:
+        return HttpResponse("포트폴리오가 없습니다.", status=404)
+
+    if portfolio.template_number:
+        return redirect(f'portfolio_detail{portfolio.template_number}', user_id=user_id, portfolio_id=portfolio.id)
+
+    return HttpResponse("포트폴리오를 찾을 수 없습니다.", status=404)
+
+def popup(request):
+    return render(request, 'MyApp/popup.html')

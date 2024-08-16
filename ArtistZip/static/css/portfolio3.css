@@ -31,7 +31,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: none; /* 업로드 전에는 이미지 숨김 */
+    
 }
 
 .image1 {
@@ -361,4 +361,16 @@ body {
     font-family: 'Knewave', cursive;
     font-weight: 400;
     word-wrap: break-word;
+}
+
+.unstyled-link {
+    color: inherit; /* 기존 색상 유지 */
+    text-decoration: none; /* 밑줄 제거 */
+    font-weight: bold; /* 볼드체 유지 */
+}
+
+.unstyled-link:hover,
+.unstyled-link:focus {
+    text-decoration: none; /* 호버 및 포커스 시에도 밑줄 제거 */
+    color: inherit; /* 호버 및 포커스 시에도 색상 유지 */
 }

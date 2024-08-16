@@ -4,11 +4,7 @@
 <div class="myprofile-container">
     <div class="myprofile-header">
         <div class="myprofile-info">
-            {% if user.profile_picture %}
-                <img src="{{ user.profile_picture.url }}" alt="프로필 이미지" class="myprofile-image" />
-            {% else %}
-                <div class="myprofile-image avatar-placeholder"></div>
-            {% endif %}
+            <img src="{% static 'images/my-avatar.png' %}" alt="프로필 이미지" class="myprofile-image" />
             <span class="myprofile-name">{{ user.username }}님</span>
             <a href="{% url 'edit_profile' %}">
                 <button class="myprofile-action-btn">내 정보 수정하기</button>
@@ -46,14 +42,19 @@
 {% endif %}
 
     <div class="myprofile-actions">
-        <button class="myprofile-action-btn" id="myprofilePreviewBtn" onclick="openModal()">템플릿 미리보기</button>
+        <button class="myprofile-action-btn" id="myprofilePreviewBtn" onclick="openModal()">템플릿 고르기</button>
         <a href="{% url 'template' user.id %}">
             <button class="myprofile-action-btn">작품 업로드</button>
         </a>
-        <a href="{% url 'portfolio_upload' user.id %}">
-            <button class="myprofile-action-btn">포트폴리오 업로드</button>
-        </a>
-        <a href="{% url 'portfolio_list' user.id %}">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <a href="{% url 'view_my_portfolio' user.id %}">
             <button class="myprofile-action-btn">내 포트폴리오 보기</button>
         </a>
     </div>
@@ -129,12 +130,12 @@
     ];
 
     const templateUrls = [
-        "{% url 'portfolio1' user.id %}",
-        "{% url 'portfolio2' user.id %}",
-        "{% url 'portfolio3' user.id %}",
-        "{% url 'portfolio4' user.id %}",
-        "{% url 'portfolio5' user.id %}",
-        "{% url 'portfolio6' user.id %}"
+        "{% url 'create_portfolio1' user.id %}",
+        "{% url 'create_portfolio2' user.id %}",
+        "{% url 'create_portfolio3' user.id %}",
+        "{% url 'create_portfolio4' user.id %}",
+        "{% url 'create_portfolio5' user.id %}",
+        "{% url 'create_portfolio6' user.id %}"
     ];
 
     let currentTemplateIndex = 0;

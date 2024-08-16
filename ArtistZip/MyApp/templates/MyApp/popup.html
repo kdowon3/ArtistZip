@@ -1,0 +1,25 @@
+{% extends 'MyApp/base.html' %}
+{% load static %}
+{% block title %}작전명: 나를 표현하라!{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <div class="instagram-preview" style="width: 100%; height: 100%; text-align: center;">
+        <img src="{% static 'images/popup.png' %}" alt="Instagram Preview" style="width: 100%; height: 100%; object-fit: contain; display: block; margin: 0 auto;" />
+    </div>
+</div>
+
+<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C-b6VqRpAV0/?img_index=1" data-instgrm-version="14"></blockquote>
+{% endblock %}
+
+{% block extra_js %}
+<script async src="//www.instagram.com/embed.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const targetElement = document.querySelector('.instagram-media');
+        if (targetElement) {
+            targetElement.scrollIntoView();
+        }
+    });
+</script>
+{% endblock %}

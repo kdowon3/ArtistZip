@@ -1,0 +1,144 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{ portfolio.author_name }}'s Portfolio</title>
+        <link rel="stylesheet" href="{% static 'css/portfolio1.css' %}" />
+        <style>
+            .container {
+                width: 1920px;
+                height: 8359px;
+                position: relative;
+                background-color: {{ portfolio.background_color }};
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="box box1"></div>
+            <div class="box box2"></div>
+            <div class="box box3"></div>
+            
+            <!-- Image Previews -->
+            <div id="image1Preview" class="image-preview image1">
+                {% if portfolio.photo1 %}
+                    <img src="{{ portfolio.photo1.url }}" alt="Image 1" />
+                {% else %}
+                    <div class="placeholder-text">
+                        547 x 734
+                    </div>
+                {% endif %}     
+            </div>            
+            <div id="image2Preview" class="image-preview image2">
+                {% if portfolio.photo2 %}
+                <img class="image" src="{{ portfolio.photo2.url }}" alt="Image 2"/>
+                {% else %}
+                <div class="placeholder-text" style="{% if portfolio.photo2 %}display: none{% endif %}">
+                    1744 x 734
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Author Name -->
+            <div id="author-name" class="author-name">
+                {{ portfolio.author_name }}
+            </div>
+            
+            <div class="author-title">작가</div>
+            <div class="view-representative-works">대표 작품 보기</div>
+            <div class="author-intro">작가 소개</div>
+            <div class="art-gallery">작품 갤러리</div>
+            <div class="site-title">Artist Zip</div>
+
+            <!-- Author Info -->
+            <div id="author-info" class="author-info">
+                {{ portfolio.author_name }}
+            </div>
+
+            <!-- Additional Images and Descriptions -->
+            <div class="line line1"></div>
+
+            <div id="image3Preview" class="image-preview image3">
+                {% if portfolio.photo3 %}
+                <img class="image" src="{{ portfolio.photo3.url }}" alt="Image 3"/>
+                {% endif %}
+                <div class="placeholder-text" style="{% if portfolio.photo3 %}display: none{% endif %}">
+                    547 x 734
+                </div>
+            </div>
+
+            <div id="image4Preview" class="image-preview image4">
+                {% if portfolio.photo4 %}
+                <img class="image" src="{{ portfolio.photo4.url }}" alt="Image 4"/>
+                {% endif %}
+                <div class="placeholder-text" style="{% if portfolio.photo4 %}display: none{% endif %}">
+                    1744 x 734
+                </div>
+            </div>
+
+            <div id="image5Preview" class="image-preview image5">
+                {% if portfolio.photo5 %}
+                <img class="image" src="{{ portfolio.photo5.url }}" alt="Image 5"/>
+                {% endif %}
+                <div class="placeholder-text" style="{% if portfolio.photo5 %}display: none{% endif %}">
+                    547 x 734
+                </div>
+            </div>
+
+            <div id="image6Preview" class="image-preview image6">
+                {% if portfolio.photo6 %}
+                <img class="image" src="{{ portfolio.photo6.url }}" alt="Image 6"/>
+                {% endif %}
+                <div class="placeholder-text" style="{% if portfolio.photo6 %}display: none{% endif %}">
+                    1744 x 734
+                </div>
+            </div>
+
+            <!-- Intro Text -->
+            <div id="intro-text" class="intro-text">
+                {{ portfolio.intro }}</br>
+                {{ portfolio.career }}
+            </div>
+            
+            <div class="line line2"></div>
+            <div class="line line3"></div>
+            <div class="line line4"></div>
+
+            <!-- Art Titles -->
+            <div id="art-title1" class="art-title art-title1">
+                {{ portfolio.description1 }}
+            </div>
+            <div id="art-title2" class="art-title art-title2">
+                {{ portfolio.description2 }}
+            </div>
+            <div id="art-title3" class="art-title art-title3">
+                {{ portfolio.description3 }}
+            </div>
+
+            <div class="thick-line thick-line1"></div>
+            <div class="thick-line thick-line2"></div>
+            <div class="thick-line thick-line3"></div>
+
+            <!-- Contact Information -->
+            <div class="contact-title">컨택트</div>
+            {% if portfolio.instagram %}
+            <div class="contact-info instagram">
+                인스타그램: <a href="{{ portfolio.instagram }}" target="_blank">{{ portfolio.instagram }}</a>
+            </div>
+            {% endif %}
+            {% if portfolio.email %}
+            <div class="contact-info email">
+                이메일: <a href="mailto:{{ portfolio.email }}">{{ portfolio.email }}</a>
+            </div>
+            {% endif %}
+            {% if portfolio.website %}
+            <div class="contact-info homepage">
+                홈페이지: <a href="{{ portfolio.website }}" target="_blank">{{ portfolio.website }}</a>
+            </div>
+            {% endif %}
+        </div>
+    </body>
+</html>

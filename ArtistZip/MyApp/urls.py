@@ -22,16 +22,23 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),  # django-allauth URLs 추가
     path('auth/', include('Auth.urls')),
     path('chat/', include('Chat.urls')),# auth 앱의 URLs 추가
-    path('portfolio1/<int:user_id>/', views.portfolio1, name='portfolio1'),
-    path('portfolio2/<int:user_id>/', views.portfolio2, name='portfolio2'),
-    path('portfolio3/<int:user_id>/', views.portfolio3, name='portfolio3'),
-    path('portfolio4/<int:user_id>/', views.portfolio4, name='portfolio4'),
-    path('portfolio5/<int:user_id>/', views.portfolio5, name='portfolio5'),
-    path('portfolio6/<int:user_id>/', views.portfolio6, name='portfolio6'),
-    path('edit-contact-info/', views.edit_contact_info, name='edit_contact_info'),
-    path('portfolio_upload/<int:user_id>/', views.portfolio_upload, name='portfolio_upload'),
-    path('portfolio_list/<int:user_id>/', views.portfolio_list, name='portfolio_list'),
+    # Create portfolio views
+    path('create_portfolio1/<int:user_id>/', views.create_portfolio1, name='create_portfolio1'),
+    path('create_portfolio2/<int:user_id>/', views.create_portfolio2, name='create_portfolio2'),
+    path('create_portfolio3/<int:user_id>/', views.create_portfolio3, name='create_portfolio3'),
+    path('create_portfolio4/<int:user_id>/', views.create_portfolio4, name='create_portfolio4'),
+    path('create_portfolio5/<int:user_id>/', views.create_portfolio5, name='create_portfolio5'),
+    path('create_portfolio6/<int:user_id>/', views.create_portfolio6, name='create_portfolio6'),
 
+    # Portfolio detail views
+    path('portfolio_detail1/<int:user_id>/<int:portfolio_id>/', views.portfolio_detail1, name='portfolio_detail1'),
+    path('portfolio_detail2/<int:user_id>/<int:portfolio_id>/', views.portfolio_detail2, name='portfolio_detail2'),
+    path('portfolio_detail3/<int:user_id>/<int:portfolio_id>/', views.portfolio_detail3, name='portfolio_detail3'),
+    path('portfolio_detail4/<int:user_id>/<int:portfolio_id>/', views.portfolio_detail4, name='portfolio_detail4'),
+    path('portfolio_detail5/<int:user_id>/<int:portfolio_id>/', views.portfolio_detail5, name='portfolio_detail5'),
+    path('portfolio_detail6/<int:user_id>/<int:portfolio_id>/', views.portfolio_detail6, name='portfolio_detail6'),
+    path('view_my_portfolio/<int:user_id>/', views.view_my_portfolio, name='view_my_portfolio'),
+    path('popup/',views.popup, name='popup'),
 ]
 
 if settings.DEBUG:

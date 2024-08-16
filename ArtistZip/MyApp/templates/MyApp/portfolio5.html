@@ -15,154 +15,139 @@
                 id="portfolio-form"
                 method="post"
                 enctype="multipart/form-data"
-                action="{% url 'portfolio5' user.id %}"
+                action="{% url 'create_portfolio5' user.id %}"
             >
                 {% csrf_token %}
 
-                <div id="image1-preview" class="image-preview image1" ondblclick="triggerFileInput('fileInput1')">
-                    <img class="image" src="https://via.placeholder.com/1766x659" alt="Image 1" />
-                    <div class="placeholder-text" style="display: none">1766 x 659</div>
-                </div>
-                <input
-                    type="file"
+                <div id="image1-preview" class="image-preview image1" >
+                    <img
+                    class="image"
+                    src="{% if portfolio and portfolio.photo1 %}{{ portfolio.photo1.url }}{% endif %}"
+                    alt="Image 1"
+                    />
+                    <input type="file"
                     id="fileInput1"
-                    name="image1"
-                    style="display: none"
+                    name="photo1"
                     accept="image/*"
-                    onchange="handleFileSelect(event, 'image1-preview')"
-                />
-
-                <div id="image2-preview" class="image-preview image2" ondblclick="triggerFileInput('fileInput2')">
-                    <img class="image" src="https://via.placeholder.com/1920x1010" alt="Image 2" />
-                    <div class="placeholder-text" style="display: none">1920 x 1010</div>
+                    />
+                    <div class="placeholder-text" style="{% if portfolio and portfolio.photo1.url %}display: none{% endif %}">1766 x 659</div>
                 </div>
-                <input
-                    type="file"
+                <div id="image2-preview" class="image-preview image2" >
+                    <img
+                    class="image"
+                    src="{% if portfolio and portfolio.photo2 %}{{ portfolio.photo2.url }}{% endif %}"
+                    alt="Image 2"
+                    />
+                    <input type="file"
                     id="fileInput2"
-                    name="image2"
-                    style="display: none"
+                    name="photo2"
                     accept="image/*"
-                    onchange="handleFileSelect(event, 'image2-preview')"
-                />
-
-                <div id="image3-preview" class="image-preview image3" ondblclick="triggerFileInput('fileInput3')">
-                    <img class="image" src="https://via.placeholder.com/1920x1010" alt="Image 3" />
-                    <div class="placeholder-text" style="display: none">1920 x 1010</div>
+                    />
+                    <div class="placeholder-text" style="{% if portfolio and portfolio.photo2.url %}display: none{% endif %}">1920 x 1010</div>
                 </div>
-                <input
-                    type="file"
+
+                <div id="image3-preview" class="image-preview image3" >
+                    <img
+                    class="image"
+                    src="{% if portfolio and portfolio.photo3 %}{{ portfolio.photo3.url }}{% endif %}"
+                    alt="Image 3"
+                    />
+                    <input type="file"
                     id="fileInput3"
-                    name="image3"
-                    style="display: none"
+                    name="photo3"
                     accept="image/*"
-                    onchange="handleFileSelect(event, 'image3-preview')"
-                />
-
-                <div id="image4-preview" class="image-preview image4" ondblclick="triggerFileInput('fileInput4')">
-                    <img class="image" src="https://via.placeholder.com/1920x1010" alt="Image 4" />
-                    <div class="placeholder-text" style="display: none">1920 x 1010</div>
+                    />
+                    <div class="placeholder-text" style="{% if portfolio and portfolio.photo3.url %}display: none{% endif %}">1920 x 1010</div>
                 </div>
-                <input
-                    type="file"
+
+                <div id="image4-preview" class="image-preview image4" >
+                    <img
+                    class="image"
+                    src="{% if portfolio and portfolio.photo4 %}{{ portfolio.photo4.url }}{% endif %}"
+                    alt="Image 4"
+                    />
+                    <input type="file"
                     id="fileInput4"
-                    name="image4"
-                    style="display: none"
+                    name="photo4"
                     accept="image/*"
-                    onchange="handleFileSelect(event, 'image4-preview')"
-                />
+                    />
+                    <div class="placeholder-text" style="{% if portfolio and portfolio.photo4.url %}display: none{% endif %}">1920 x 1010</div>
+                </div>
 
                 <div class="site-title">Artist Zip</div>
                 <div
                     id="author-info"
                     class="author-info"
-                    ondblclick="enableEditing(this)"
-                    onblur="disableEditing(this)"
-                    data-input-id="author-info-input"
                 >
-                    NAME 작가
+                <input
+                type='text'
+                id="author-name-input"
+                name="author_name"
+                value="{{ form.author_name.value|default_if_none:'' }}">
+                </input>
                 </div>
-                <input type="hidden" id="author-info-input" name="author_info" value="문희재 작가" />
 
                 <div class="line line1"></div>
 
                 <div
                     id="author-name"
                     class="author-name"
-                    ondblclick="enableEditing(this)"
-                    onblur="disableEditing(this)"
-                    data-input-id="author-name-input"
                 >
-                    NAME
+                <input
+                    type='text'
+                    id="author-name-input"
+                    name="author_name"
+                    value="{{ form.author_name.value|default_if_none:'' }}">
+                </input>
                 </div>
-                <input type="hidden" id="author-name-input" name="author_name" value="HEEJAE" />
 
                 <div
                     id="text1"
                     class="text text1"
-                    ondblclick="enableEditing(this)"
-                    onblur="disableEditing(this)"
-                    data-input-id="text1-input"
                 >
-                    project name
+                    <input type="text" name="description1" id="art-title1" class="form-control" value="{{ form.description1.value|default_if_none:'' }}" placeholder="Description for Photo 1">
+
                 </div>
-                <input type="hidden" id="text1-input" name="text1" value="프로젝트 이름 1" />
 
                 <div
                     id="text2"
                     class="text text2"
-                    ondblclick="enableEditing(this)"
-                    onblur="disableEditing(this)"
-                    data-input-id="text2-input"
                 >
-                    project name
+                    <input type="text" name="description2" id="art-title2" class="form-control" value="{{ form.description2.value|default_if_none:'' }}" placeholder="Description for Photo 2">
                 </div>
-                <input type="hidden" id="text2-input" name="text2" value="프로젝트 이름 2" />
 
                 <div
                     id="text3"
                     class="text text3"
-                    ondblclick="enableEditing(this)"
-                    onblur="disableEditing(this)"
-                    data-input-id="text3-input"
                 >
-                    project name
+                    <input type="text" name="description3" id="art-title3" class="form-control" value="{{ form.description3.value|default_if_none:'' }}" placeholder="Description for Photo 3">
                 </div>
-                <input type="hidden" id="text3-input" name="text3" value="프로젝트 이름 3" />
 
                 <div
                     id="intro-title"
                     class="intro-title"
-                    ondblclick="enableEditing(this)"
-                    onblur="disableEditing(this)"
-                    data-input-id="intro-title-input"
                 >
-                    Appealing Description
+                    <input type="text" name="intro" id="main-title" value="{{ form.intro.value|default_if_none:'' }}">
                 </div>
-                <input type="hidden" id="intro-title-input" name="intro_title" value="이 시대 가장 주목 받는 예술인" />
 
                 <div
                     id="intro-text"
                     class="intro-text"
-                    ondblclick="enableEditing(this)"
-                    onblur="disableEditing(this)"
-                    data-input-id="intro-text-input"
                 >
-                    CAREER
+                    <input type="textarea" id="intro-text-input" name="career" value="{{ form.career.value|default_if_none:'' }}">
                 </div>
-                <input
-                    type="hidden"
-                    id="intro-text-input"
-                    name="intro_text"
-                    value="이 시대 가장 주목 받는 예술인 이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인이 시대 가장 주목 받는 예술인"
-                />
+                
 
                 <div class="contact-section contact-section1"></div>
                 <div class="contact-section contact-section2"></div>
                 <div class="contact-section contact-section3"></div>
                 <div class="contact-title">CONTACT</div>
-                <div class="contact-info contact-info1">INSTA</div>
-                <div class="contact-info contact-info2">E-MAIL</div>
-                <div class="contact-info contact-info3">HOMEPAGE</div>
+                <div class="contact-info contact-info1">INSTA <input type="url" id="instagram-input"
+                    name="instagram" value="{{ form.instagram.value|default_if_none:'' }}"/></div>
+                <div class="contact-info contact-info2">E-MAIL <input type="email" id="email-input"
+                    name="email"  value="{{ form.email.value|default_if_none:'' }}"/></div>
+                <div class="contact-info contact-info3">HOMEPAGE <input type="url" id="homepage-input"
+                    name="website"  value="{{ form.website.value|default_if_none:'' }}"/></div>
                 <div class="footer">
                     <div class="footer-bg"></div>
                     <div class="footer-text footer-text1">Gallery</div>
@@ -170,7 +155,7 @@
                     <div class="footer-text footer-text3">My page</div>
                     <div class="footer-text footer-text4">Home</div>
                     <div class="footer-text footer-text5">e-mail</div>
-                    <div class="footer-text footer-text6">moon3453@naver.com</div>
+                    <div class="footer-text footer-text6">your e-mail</div>
                     <div class="footer-line"></div>
                     <img class="footer-img" src="https://via.placeholder.com/1342x243" alt="Footer Image" />
                     <div class="footer-title">Artist Zip</div>
@@ -179,6 +164,9 @@
                     <div class="cta-bg"></div>
                     <div class="cta-text">아티스트집이 궁금하다면?</div>
                     <div class="cta-line"></div>
+                </div>
+                <div class="form-group" style="position: absolute; top: 10px; left: 10px; z-index: 1000;" >
+                    <button type="submit" class="btn btn-primary" >Save Portfolio</button>
                 </div>
             </form>
         </div>

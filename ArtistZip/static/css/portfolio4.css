@@ -48,7 +48,6 @@ body {
 
 .image {
     border-radius: 10px;
-    display: none; /* 이미지가 업로드되기 전에는 숨깁니다 */
 }
 
 .image-preview {
@@ -65,16 +64,13 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: none; /* 업로드 전에는 이미지 숨김 */
 }
 .thumbnail {
     position: relative;
-    display: inline-block;
 }
 
 .thumbnail img {
     border-radius: 10px;
-    display: none; /* 이미지가 업로드되기 전에는 숨깁니다 */
 }
 
 .thumbnail .image-preview {
@@ -96,7 +92,6 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: none; /* 업로드 전에는 이미지 숨김 */
 }
 
 .thumbnail .placeholder-text {
@@ -409,4 +404,16 @@ body {
     top: 36px;
     position: absolute;
     border: 2px white solid;
+}
+
+.unstyled-link {
+    color: inherit; /* 기존 색상 유지 */
+    text-decoration: none; /* 밑줄 제거 */
+    font-weight: bold; /* 볼드체 유지 */
+}
+
+.unstyled-link:hover,
+.unstyled-link:focus {
+    text-decoration: none; /* 호버 및 포커스 시에도 밑줄 제거 */
+    color: inherit; /* 호버 및 포커스 시에도 색상 유지 */
 }

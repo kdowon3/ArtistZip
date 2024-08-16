@@ -547,8 +547,57 @@ body.modal-open {
         display: none;
     }
 }
-
-@media (max-width: 768px) {
+@media (max-width: 480px) {
+    .search-bar {
+        display: flex;
+        /* flex-direction: column; */
+        /* justify-content: space-between; */
+        position: absolute;
+    }
+    .search-bar input {
+        width: 150%;
+        padding: 13px;
+        border: 1px solid #ccc;
+        border-radius: 5px 0 0 5px;
+        font-size: 12px;
+    }
+    .search-bar button {
+        display: flex;
+        position: relative;
+        left: 160%;
+        bottom: 41.5px;
+        border: 1px solid #ccc;
+        /* border-left: none; */
+        border-radius: 0 5px 5px 0;
+        background-color: #fff;
+        cursor: pointer;
+        padding: 4px 4px !important;
+    }
+    .search-bar button img {
+        width: 12px;
+        height: 12px;
+    }
+    .home-second-detail {
+        width: 100% !important;
+        padding: 70px !important;
+        display: flex;
+        justify-content: center;
+    }
+    .home-second-art {
+        width: 100% !important;
+    }
+    .home-second-detail .items .item {
+        width: 90px;
+    }
+    .home-second-top .top .top-right {
+        width: 100% !important;
+    }
+    .home-second-top .top .top-left {
+        width: 100% !important;
+    }
+    .home-second-top .top {
+        flex-direction: column !important;
+    }
     .chat-container {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto 1fr;
@@ -586,54 +635,84 @@ body.modal-open {
         display: none;
     }
     .navbar {
+        display: block !important;
+        padding: 20px;
+    }
+    .navbar .left {
+        align-items: flex-start;
+        display: flex;
         flex-direction: column;
-        align-items: center;
+        margin-bottom: 10px;
     }
-    .navbar a {
-        margin: 10px 0;
+
+    .navbar .right {
+        display: flex;
+        position: relative;
+        justify-content: flex-end;
+        bottom: 58px;
     }
-    .main-content {
-        margin-top: 50px;
-    }
-    .gallery-header {
-        flex-direction: column;
-        align-items: center;
-    }
-    .gallery-content {
-        flex-direction: column;
-        gap: 10px;
-    }
-    .gallery-column {
-        width: 100%;
-    }
-    .gallery-item {
-        width: 100%;
-    }
-    .gallery-image {
-        height: auto;
-    }
-    .header-item img {
-        max-width: 100%;
+    .navbar .center {
+        display: flex;
+        justify-content: space-around;
     }
 }
-
-@media (max-width: 480px) {
-    .chat-actions span {
-        display: none;
-    }
-    .message-content {
-        max-width: 90%;
-    }
-    .main-content button {
-        font-size: 16px;
-        padding: 8px 16px;
-    }
-    .main-content img {
-        width: 80px;
-        margin: 10px;
-    }
+.navbar .center a,
+.navbar .right a {
+    margin-left: 0;
+    margin-right: 10px;
+    font-size: 12px;
+}
+.main-content {
+    margin-top: 50px;
+}
+.gallery-header {
+    flex-direction: column;
+    align-items: center;
+}
+.gallery-content {
+    flex-direction: column;
+    gap: 10px;
+}
+.gallery-column {
+    width: 100%;
+}
+.gallery-item {
+    width: 100%;
+}
+.gallery-image {
+    height: auto;
+}
+.header-item img {
+    max-width: 100%;
+}
+.chat-actions span {
+    display: none;
+}
+.message-content {
+    max-width: 90%;
+}
+.main-content button {
+    font-size: 16px;
+    padding: 8px 16px;
+}
+.main-content img {
+    margin: 10px;
+}
+.artist-signup-container {
+    flex-direction: column;
 }
 
+.artist-signup-left {
+    display: none;
+}
+
+.artist-signup-right {
+    padding: 30px;
+}
+.artist-signup-submit {
+    bottom: 20px;
+    right: 10px; /* 현재 값 */
+}
 .artist-signup-left {
     flex: 1;
     overflow: hidden;
@@ -798,20 +877,6 @@ body.modal-open {
     transform: translateX(10px);
 }
 
-@media (max-width: 768px) {
-    .artist-signup-container {
-        flex-direction: column;
-    }
-
-    .artist-signup-left {
-        display: none;
-    }
-
-    .artist-signup-right {
-        padding: 30px;
-    }
-}
-
 .artist-signup-label {
     display: block;
     margin-bottom: 5px;
@@ -927,13 +992,6 @@ body.modal-open {
     right: -100px; /* 현재 값 */
 }
 
-@media (max-width: 768px) {
-    .artist-signup-submit {
-        bottom: 20px;
-        right: 10px; /* 현재 값 */
-    }
-}
-
 .red {
     color: rgb(255, 89, 0);
 }
@@ -950,7 +1008,6 @@ body.modal-open {
 .artists-gallery img:hover {
     width: 200px; /* 호버 시 확대 크기를 원래 크기로 유지 */
 }
-
 
 .artist-image-container {
     width: 200px;
@@ -1000,6 +1057,15 @@ body.modal-open {
     align-items: center;
     height: 100%;
     position: relative;
+
+    .artist-card {
+        position: relative;
+        width: 508px;
+        height: 631px;
+        background: linear-gradient(0deg, #dadada 0%, #dadada 100%);
+        border-radius: 30px;
+        overflow: hidden;
+    }
 }
 
 .artist-image-container {
@@ -1431,14 +1497,15 @@ canvas {
 }
 
 .unstyled-link {
-    color: inherit;  /* 기존 색상 유지 */
-    text-decoration: none;  /* 밑줄 제거 */
-    font-weight: bold;  /* 볼드체 유지 */
+    color: inherit; /* 기존 색상 유지 */
+    text-decoration: none; /* 밑줄 제거 */
+    font-weight: bold; /* 볼드체 유지 */
 }
 
-.unstyled-link:hover, .unstyled-link:focus {
-    text-decoration: none;  /* 호버 및 포커스 시에도 밑줄 제거 */
-    color: inherit;  /* 호버 및 포커스 시에도 색상 유지 */
+.unstyled-link:hover,
+.unstyled-link:focus {
+    text-decoration: none; /* 호버 및 포커스 시에도 밑줄 제거 */
+    color: inherit; /* 호버 및 포커스 시에도 색상 유지 */
 }
 
 /* template css */

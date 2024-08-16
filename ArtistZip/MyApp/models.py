@@ -1,7 +1,6 @@
-# myapp/models.py
-
 from django.db import models
 from django.conf import settings
+from Auth.models import CustomUser
 
 class Artwork(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -13,18 +12,33 @@ class Artwork(models.Model):
         return self.artwork_title
 
 class Portfolio(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='portfolios')
-    image = models.ImageField(upload_to='portfolios/', null=True, blank=True)  # 완성본 이미지 파일
-    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='portfolios')
+    background_color = models.CharField(max_length=7, null=True, blank=True)
+    author_name = models.CharField(max_length=100, default="Name")
+    intro = models.CharField(max_length=200, null=True, blank=True, default="Appealing Description")
+    career = models.TextField(max_length=200, null=True, blank=True, default="Career")
+    photo1 = models.ImageField(upload_to='portfolio_images/', null=True, blank=True)
+    description1 = models.CharField(max_length=100, null=True, blank=True, default="Project Name")
+    photo2 = models.ImageField(upload_to='portfolio_images/', null=True, blank=True)
+    description2 = models.CharField(max_length=100, null=True, blank=True, default="Project Name")
+    photo3 = models.ImageField(upload_to='portfolio_images/', null=True, blank=True)
+    description3 = models.CharField(max_length=100, null=True, blank=True, default="Project Name")
+    photo4 = models.ImageField(upload_to='portfolio_images/', null=True, blank=True)
+    description4 = models.CharField(max_length=100, null=True, blank=True, default="Project Name")
+    photo5 = models.ImageField(upload_to='portfolio_images/', null=True, blank=True)
+    description5 = models.CharField(max_length=100, null=True, blank=True, default="Project Name")
+    photo6 = models.ImageField(upload_to='portfolio_images/', null=True, blank=True)
+    description6 = models.CharField(max_length=100, null=True, blank=True, default="Project Name")
+    photo7 = models.ImageField(upload_to='portfolio_images/', null=True, blank=True)
+    description7 = models.CharField(max_length=100, null=True, blank=True, default="Project Name")
+    photo8 = models.ImageField(upload_to='portfolio_images/', null=True, blank=True)
+    description8 = models.CharField(max_length=100, null=True, blank=True, default="Project Name")
+    photo9 = models.ImageField(upload_to='portfolio_images/', null=True, blank=True)
+    description9 = models.CharField(max_length=100, null=True, blank=True, default="Project Name")
+    instagram = models.URLField(blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    website = models.URLField(blank=True, null=True)
+    template_number = models.IntegerField(null=True, blank=True) 
 
     def __str__(self):
-        return f"Portfolio of {self.user.username}"
-
-class ContactInfo(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    instagram = models.URLField(blank=True, verbose_name='Instagram')
-    email = models.EmailField(blank=True, verbose_name='이메일')
-    homepage = models.URLField(blank=True, verbose_name='홈페이지')
-
-    def __str__(self):
-        return f"{self.user.username}'s Contact Info"
+        return self.author_name
