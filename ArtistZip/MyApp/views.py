@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Artwork, Portfolio
-from .forms import ArtworkForm, PortfolioForm
+from .models import Artwork, Portfolio, Special_Portfolio
+from .forms import ArtworkForm, PortfolioForm, SpecialPortfolioForm
 from Auth.models import CustomUser, Subscription
 from Chat.models import ChatRoom, Message
 from django.contrib.auth import get_user_model
@@ -383,19 +383,19 @@ def portfolio5(request, user_id):
 
 def portfolio_upload(request, user_id):
     if request.method == 'POST':
-        form = PortfolioForm(request.POST, request.FILES)
+        form = SpecialPortfolioForm(request.POST, request.FILES)
         if form.is_valid():
-            portfolio = form.save(commit=False)
-            portfolio.user_id = user_id
-            portfolio.save()
-            return redirect('myprofile', user_id=user_id)
+            special_portfolio = form.save(commit=False)
+            special_portfolio.user_id = user_id
+            special_portfolio.save()
+            return redirect('portfolio_list', user_id=user_id)
     else:
-        form = PortfolioForm()
-    
-    return render(request, 'MyApp/portfolio_upload.html', {'form': form})
+        form = SpecialPortfolioForm()
+
+    return render(request, 'MyApp/create_portfolio.html', {'form': form})
 
 def portfolio_list(request, user_id):
-    portfolios = Portfolio.objects.filter(user_id=user_id)
+    portfolios = Special_Portfolio.objects.filter(user_id=user_id)
     return render(request, 'MyApp/portfolio_list.html', {'portfolios': portfolios})
 
 def view_my_portfolio(request, user_id):

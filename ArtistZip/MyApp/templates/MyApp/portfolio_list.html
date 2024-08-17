@@ -1,28 +1,27 @@
+<!DOCTYPE html>
 {% load static %}
-{% block content %}
-<div class="container">
-    {% if portfolios.exists %}
-    <div class="gallery-content">
-        {% for portfolio in portfolios %}
-        <div class="gallery-column">
-            <div class="gallery-item">
-                {% if portfolio.image %}
-                <img
-                    src="{{ portfolio.image.url }}"
-                    alt="포트폴리오 이미지"
-                    class="gallery-image"
-                />
-                {% else %}
-                <p>포트폴리오가 없습니다.</p>
-                {% endif %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Portfolio List</title>
+</head>
+<body>
+    <div class="container">
+        <h1>스페셜 포트폴리오 목록</h1>
+        {% if portfolios %}
+            <div class="portfolio-grid">
+                {% for portfolio in portfolios %}
+                    <div class="portfolio-item">
+                        <img src="{{ portfolio.photo.url }}" alt="포트폴리오 이미지">
+                        <p>{{ portfolio.user.username }}</p>
+                    </div>
+                {% endfor %}
             </div>
-        </div>
-        {% endfor %}
+        {% else %}
+            <p>포트폴리오가 없습니다.</p>
+        {% endif %}
     </div>
-    {% else %}
-    <p>포트폴리오가 없습니다.</p>
-    {% endif %}
-</div>
 <style>
     .container {
         display: flex;
@@ -51,4 +50,4 @@
     }
 </style>
 
-{% endblock %}
+

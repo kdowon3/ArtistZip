@@ -256,24 +256,27 @@ body.modal-open {
 
 .gallery-content {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
 
+
 .gallery-item {
-    margin-bottom: 40px;
+    width: calc(33.333% - 2rem);
+    margin-bottom: 2rem;
+    position: relative;
 }
 
 .gallery-image {
     width: 100%;
-    height: 300px;
-    background-color: #ddd;
+    height: auto;
+    border-radius: 1rem;
+    object-fit: cover;
 }
 
 .gallery-text {
-    margin-top: 10px;
-    font-size: 14px;
+    margin-top: 1rem;
     text-align: left;
 }
 
@@ -1189,15 +1192,17 @@ body.modal-open {
 }
 
 .myprofile-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    max-width: 80rem;
+    margin: 2rem auto;
+    padding: 2rem;
+    text-align: center;
 }
 
 .myprofile-header {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 4rem;
 }
 
 .myprofile-info {
@@ -1206,15 +1211,17 @@ body.modal-open {
 }
 
 .myprofile-image {
-    width: 50px;
-    height: 50px;
+    width: 5rem;
+    height: 5rem;
     border-radius: 50%;
-    margin-right: 15px;
+    background-color: #ddd; /* 아바타의 기본 배경색 */
+    margin-bottom: 1rem;
 }
 
 .myprofile-name {
-    font-size: 18px;
+    font-size: 2rem;
     font-weight: bold;
+    margin-bottom: 1rem;
 }
 
 .myprofile-gallery {
@@ -1241,21 +1248,23 @@ body.modal-open {
 
 .myprofile-actions {
     display: flex;
-    justify-content: flex-end;
-    gap: 10px;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 6rem;
 }
 
 .myprofile-action-btn {
-    padding: 10px 20px;
-    border: 1px solid #ccc;
-    background-color: white;
-    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    font-size: 1.4rem;
     cursor: pointer;
-    font-size: 16px;
 }
 
 .myprofile-action-btn:hover {
-    background-color: #f0f0f0;
+    background-color: #0056b3;
 }
 
 body.modal-open {

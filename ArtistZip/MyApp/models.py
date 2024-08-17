@@ -42,3 +42,12 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return self.author_name
+    
+    
+    
+class Special_Portfolio(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='special_portfolios')
+    photo = models.ImageField(upload_to='special_portfolio_images/', verbose_name='스페셜 포트폴리오 이미지')
+
+    def __str__(self):
+        return f"{self.user.username}'s Special Portfolio"

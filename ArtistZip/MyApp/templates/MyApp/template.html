@@ -4,10 +4,7 @@
 <div class="template-container">
     <h1>작품 정보 입력</h1>
     
-    <!-- 문구 추가 -->
-    <p>최초 작품 업로드 시 희망하시는 포트폴리오 템플릿 번호(1~6)를 작품 설명에 작성해주세요.</p>
-    
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" style="font-family: Kanit;">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">저장</button>

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import reverse, NoReverseMatch
 from django.utils.html import format_html
-from .models import Portfolio
+from .models import Portfolio, Special_Portfolio
 
 class PortfolioAdmin(admin.ModelAdmin):
     list_display = ('author_name', 'template_link', 'email', 'instagram', 'website', 'background_color')
@@ -26,3 +26,10 @@ class PortfolioAdmin(admin.ModelAdmin):
     background_color_display.short_description = 'Background Color'
 
 admin.site.register(Portfolio, PortfolioAdmin)
+
+
+@admin.register(Special_Portfolio)
+class SpecialPortfolioAdmin(admin.ModelAdmin):
+    list_display = ('user', 'photo')
+    search_fields = ('user__username',)
+    list_filter = ('user',)

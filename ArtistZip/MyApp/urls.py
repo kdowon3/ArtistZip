@@ -39,6 +39,9 @@ urlpatterns = [
     path('portfolio_detail6/<int:user_id>/<int:portfolio_id>/', views.portfolio_detail6, name='portfolio_detail6'),
     path('view_my_portfolio/<int:user_id>/', views.view_my_portfolio, name='view_my_portfolio'),
     path('popup/',views.popup, name='popup'),
+    
+    path('portfolio_upload/<int:user_id>/', views.portfolio_upload, name='portfolio_upload'),
+    path('portfolio_list/<int:user_id>/', views.portfolio_list, name='portfolio_list'),
 ]
 
 if settings.DEBUG:
